@@ -1,0 +1,108 @@
+{
+  "app": {
+    "name": "Lauk",
+    "tagline": "Tap the plate you already bought."
+  },
+  "pillars": {
+    "filling": {
+      "name": "filling",
+      "hint": "you stop thinking about food for a while"
+    },
+    "fresh": {
+      "name": "fresh",
+      "hint": "something raw or green on the plate"
+    },
+    "rich": {
+      "name": "rich",
+      "hint": "something fried, creamy or savoury"
+    },
+    "bright": {
+      "name": "bright",
+      "hint": "something sour, spicy or sharp"
+    },
+    "crunch": {
+      "name": "crunch",
+      "hint": "something that makes a noise"
+    }
+  },
+  "decks": {
+    "counter": "Counter",
+    "instant": "Instant",
+    "delivery": "Delivery",
+    "cafeteria": "Cafeteria"
+  },
+  "onboarding": {
+    "title": "Where do you mostly eat?",
+    "student": "Student housing",
+    "office": "An office",
+    "road": "On the road",
+    "footer": "Lauk never counts. It asks how satisfying the plate is."
+  },
+  "plates": {
+    "title": "What is in front of you?",
+    "checksToday": "Checks today",
+    "unlimited": "Unlimited",
+    "locked": "Locked",
+    "settings": "Settings"
+  },
+  "ceiling": {
+    "title": "How much more would you spend?",
+    "tiers": {
+      "0": "Free",
+      "1": "Small",
+      "2": "Medium",
+      "3": "Treat"
+    }
+  },
+  "result": {
+    "title": "One add that would help",
+    "ateAsIs": "I ate it as it was",
+    "raises": "lifts",
+    "litOf": "of 5 lit"
+  },
+  "cue": {
+    "line": "Eat until satisfied, not until empty.",
+    "skip": "tap anywhere to continue"
+  },
+  "faces": {
+    "title": "After the meal — how was it?",
+    "hungry": "still hungry",
+    "fine": "fine",
+    "satisfied": "satisfied",
+    "week": "This week",
+    "later": "Ask me later"
+  },
+  "decksShelf": {
+    "title": "Decks",
+    "buy": "Open",
+    "once": "once",
+    "unlimitedTitle": "Unlimited",
+    "unlimitedBody": "Every deck, no daily limit. 7 days free.",
+    "restore": "Restore purchases",
+    "manage": "Manage subscription",
+    "owned": "Open"
+  },
+  "settings": {
+    "title": "Settings",
+    "context": "Where you mostly eat",
+    "learned": "What Lauk has learned you value",
+    "reset": "Reset",
+    "never": "What Lauk never does",
+    "about": "About",
+    "content": "Content",
+    "version": "Version"
+  },
+  "never": {
+    "title": "What Lauk never does",
+    "line": "None of these words appear anywhere in Lauk. A test fails if one ever does.",
+    "also": "No streaks. No misses. No red days. No camera. No account. No cloud."
+  },
+  "cap": {
+    "reached": "That was today’s check.",
+    "more": "Unlimited opens every deck with no daily limit — 7 days free."
+  },
+  "paywall": {
+    "deckHeadline": "Open the {deck} deck",
+    "deckSub": "Three plates, every add that fits them — yours once, forever."
+  }
+}

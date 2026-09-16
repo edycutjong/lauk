@@ -1,0 +1,158 @@
+[
+  {
+    "id": "rice_side",
+    "deck": "counter",
+    "name": "Rice plate + one side",
+    "local": "nasi + 1 lauk",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 0
+    }
+  },
+  {
+    "id": "fried_rice",
+    "deck": "counter",
+    "name": "Fried rice",
+    "local": "nasi goreng",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 2,
+      "bright": 0,
+      "crunch": 1
+    }
+  },
+  {
+    "id": "noodle_soup",
+    "deck": "counter",
+    "name": "Noodle soup",
+    "local": "soto · mie ayam · pho",
+    "levels": {
+      "filling": 1,
+      "fresh": 1,
+      "rich": 1,
+      "bright": 1,
+      "crunch": 0
+    }
+  },
+  {
+    "id": "instant_noodles",
+    "deck": "instant",
+    "name": "Instant noodles",
+    "local": "mie instan",
+    "levels": {
+      "filling": 1,
+      "fresh": 0,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 0
+    }
+  },
+  {
+    "id": "bread_spread",
+    "deck": "instant",
+    "name": "Bread + spread",
+    "local": "roti + selai / kaya",
+    "levels": {
+      "filling": 1,
+      "fresh": 0,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 1
+    }
+  },
+  {
+    "id": "packet_meal",
+    "deck": "instant",
+    "name": "Ready meal (packet)",
+    "local": "microwave rice + sachet",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 0
+    }
+  },
+  {
+    "id": "fried_chicken_rice",
+    "deck": "delivery",
+    "name": "Fried chicken + rice",
+    "local": "ayam goreng + nasi",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 2,
+      "bright": 0,
+      "crunch": 2
+    }
+  },
+  {
+    "id": "burger_fries",
+    "deck": "delivery",
+    "name": "Burger + fries",
+    "local": "",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 2,
+      "bright": 0,
+      "crunch": 1
+    }
+  },
+  {
+    "id": "pizza",
+    "deck": "delivery",
+    "name": "Pizza slices",
+    "local": "",
+    "levels": {
+      "filling": 2,
+      "fresh": 0,
+      "rich": 2,
+      "bright": 0,
+      "crunch": 1
+    }
+  },
+  {
+    "id": "tray",
+    "deck": "cafeteria",
+    "name": "Cafeteria tray",
+    "local": "rice + meat or egg + cooked veg",
+    "levels": {
+      "filling": 2,
+      "fresh": 1,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 0
+    }
+  },
+  {
+    "id": "sandwich_chips",
+    "deck": "cafeteria",
+    "name": "Sandwich + chips",
+    "local": "",
+    "levels": {
+      "filling": 1,
+      "fresh": 1,
+      "rich": 1,
+      "bright": 0,
+      "crunch": 2
+    }
+  },
+  {
+    "id": "salad_bowl",
+    "deck": "cafeteria",
+    "name": "Salad / grain bowl",
+    "local": "",
+    "levels": {
+      "filling": 0,
+      "fresh": 2,
+      "rich": 0,
+      "bright": 1,
+      "crunch": 1
+    }
+  }
+]

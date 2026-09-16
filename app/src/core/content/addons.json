@@ -1,0 +1,602 @@
+[
+  {
+    "id": "lime_wedge",
+    "name": "Lime wedge",
+    "local": "jeruk nipis",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "bright"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "extra_chili",
+    "name": "Extra chili / hot sauce",
+    "local": "sambal, chili flakes",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "bright"
+    ],
+    "where": "all"
+  },
+  {
+    "id": "free_raw_veg",
+    "name": "Extra raw veg (if the stall gives it)",
+    "local": "lalapan",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "fresh"
+    ],
+    "where": [
+      "counter"
+    ]
+  },
+  {
+    "id": "pickles",
+    "name": "Pickles / relish",
+    "local": "acar",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "bright",
+      "crunch"
+    ],
+    "where": [
+      "delivery",
+      "cafeteria"
+    ],
+    "plates": [
+      "fried_rice"
+    ]
+  },
+  {
+    "id": "extra_broth",
+    "name": "Extra broth ladle",
+    "local": "kuah",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "filling"
+    ],
+    "where": [
+      "counter"
+    ],
+    "plates": [
+      "noodle_soup"
+    ]
+  },
+  {
+    "id": "fried_shallots",
+    "name": "Fried shallots / crispy bits",
+    "local": "bawang goreng",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "crunch"
+    ],
+    "where": [
+      "counter",
+      "instant"
+    ]
+  },
+  {
+    "id": "extra_lettuce",
+    "name": "Extra lettuce + tomato (ask)",
+    "local": "",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "fresh"
+    ],
+    "where": [
+      "delivery",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "extra_gravy",
+    "name": "Extra sauce / gravy",
+    "local": "kuah, saus",
+    "tier": 0,
+    "idr": 0,
+    "raises": [
+      "rich"
+    ],
+    "where": [
+      "counter"
+    ],
+    "plates": [
+      "rice_side",
+      "tray",
+      "packet_meal"
+    ]
+  },
+  {
+    "id": "crackers",
+    "name": "Crackers",
+    "local": "kerupuk",
+    "tier": 1,
+    "idr": 1000,
+    "raises": [
+      "crunch"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "raw_veg_chili",
+    "name": "Raw veg + chili",
+    "local": "lalapan + sambal",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "fresh",
+      "bright"
+    ],
+    "where": [
+      "counter"
+    ]
+  },
+  {
+    "id": "cucumber_tomato",
+    "name": "Sliced cucumber / tomato",
+    "local": "timun, tomat",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "fresh"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "delivery"
+    ]
+  },
+  {
+    "id": "boiled_egg",
+    "name": "Boiled egg",
+    "local": "telur rebus",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "filling",
+      "rich"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "peanuts",
+    "name": "Handful of peanuts",
+    "local": "kacang",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "crunch",
+      "rich"
+    ],
+    "where": [
+      "instant",
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "banana",
+    "name": "Banana",
+    "local": "pisang",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "fresh",
+      "filling"
+    ],
+    "where": "all"
+  },
+  {
+    "id": "fried_tofu_tempe",
+    "name": "Fried tofu / tempe piece",
+    "local": "tahu / tempe goreng",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "filling",
+      "rich"
+    ],
+    "where": [
+      "counter"
+    ]
+  },
+  {
+    "id": "extra_rice",
+    "name": "Extra rice",
+    "local": "nasi tambah",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "filling"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "chili_soy",
+    "name": "Sliced chili + soy",
+    "local": "sambal kecap",
+    "tier": 1,
+    "idr": 1000,
+    "raises": [
+      "bright"
+    ],
+    "where": [
+      "counter",
+      "instant"
+    ]
+  },
+  {
+    "id": "chips_sachet",
+    "name": "Chips sachet",
+    "local": "keripik",
+    "tier": 1,
+    "idr": 2000,
+    "raises": [
+      "crunch"
+    ],
+    "where": [
+      "instant",
+      "delivery"
+    ]
+  },
+  {
+    "id": "fried_egg",
+    "name": "Fried egg",
+    "local": "telur dadar / ceplok",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "rich",
+      "filling"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "veg_side",
+    "name": "Vegetable side",
+    "local": "sayur, tumis",
+    "tier": 2,
+    "idr": 3000,
+    "raises": [
+      "fresh",
+      "filling"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "fruit_cup",
+    "name": "Fruit cup / sliced fruit",
+    "local": "buah potong",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "fresh",
+      "bright"
+    ],
+    "where": "all"
+  },
+  {
+    "id": "side_salad",
+    "name": "Side salad",
+    "local": "",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "fresh",
+      "crunch"
+    ],
+    "where": [
+      "delivery",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "yogurt",
+    "name": "Yogurt cup",
+    "local": "",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "rich",
+      "bright"
+    ],
+    "where": [
+      "instant",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "soup_cup",
+    "name": "Soup cup",
+    "local": "sup",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "filling",
+      "fresh"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "cheese",
+    "name": "Cheese slice / extra cheese",
+    "local": "keju",
+    "tier": 2,
+    "idr": 3000,
+    "raises": [
+      "rich"
+    ],
+    "where": [
+      "delivery",
+      "instant"
+    ]
+  },
+  {
+    "id": "pickled_veg_cup",
+    "name": "Pickled veg / kimchi cup",
+    "local": "acar, kimchi",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "bright",
+      "fresh",
+      "crunch"
+    ],
+    "where": [
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "corn",
+    "name": "Corn cup / cob",
+    "local": "jagung",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "filling",
+      "bright"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "nuts_seeds",
+    "name": "Nuts + seeds mix",
+    "local": "",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "crunch",
+      "rich",
+      "filling"
+    ],
+    "where": [
+      "instant",
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "sausage_meatball",
+    "name": "Sausage / meatball skewer",
+    "local": "sosis, bakso tusuk",
+    "tier": 2,
+    "idr": 3000,
+    "raises": [
+      "rich",
+      "filling"
+    ],
+    "where": [
+      "counter",
+      "instant"
+    ]
+  },
+  {
+    "id": "avocado",
+    "name": "Half an avocado",
+    "local": "alpukat",
+    "tier": 2,
+    "idr": 5000,
+    "raises": [
+      "rich",
+      "fresh"
+    ],
+    "where": [
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "grilled_chicken",
+    "name": "Grilled chicken piece",
+    "local": "ayam bakar",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "filling",
+      "rich"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "fresh_juice",
+    "name": "Fresh juice",
+    "local": "jus",
+    "tier": 3,
+    "idr": 8000,
+    "raises": [
+      "bright",
+      "fresh"
+    ],
+    "where": [
+      "counter",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "roast_veg",
+    "name": "Grilled / roasted veg plate",
+    "local": "",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "fresh",
+      "filling",
+      "rich"
+    ],
+    "where": [
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "veg_dip",
+    "name": "Veg sticks + dip",
+    "local": "",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "fresh",
+      "crunch",
+      "rich"
+    ],
+    "where": [
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "coleslaw",
+    "name": "Coleslaw",
+    "local": "",
+    "tier": 3,
+    "idr": 8000,
+    "raises": [
+      "fresh",
+      "crunch",
+      "bright"
+    ],
+    "where": [
+      "delivery"
+    ]
+  },
+  {
+    "id": "extra_side",
+    "name": "Extra side (wedges / fries)",
+    "local": "",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "filling",
+      "crunch",
+      "rich"
+    ],
+    "where": [
+      "delivery"
+    ]
+  },
+  {
+    "id": "big_fruit",
+    "name": "Big fruit box",
+    "local": "mangga, pepaya",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "fresh",
+      "bright",
+      "filling"
+    ],
+    "where": [
+      "counter",
+      "instant",
+      "cafeteria"
+    ]
+  },
+  {
+    "id": "tempe_stirfry",
+    "name": "Tempe stir-fry serving",
+    "local": "orek tempe",
+    "tier": 3,
+    "idr": 7000,
+    "raises": [
+      "filling",
+      "rich",
+      "crunch"
+    ],
+    "where": [
+      "counter",
+      "instant"
+    ]
+  },
+  {
+    "id": "smoothie",
+    "name": "Smoothie / lassi",
+    "local": "",
+    "tier": 3,
+    "idr": 10000,
+    "raises": [
+      "filling",
+      "rich",
+      "bright"
+    ],
+    "where": [
+      "cafeteria",
+      "delivery"
+    ]
+  },
+  {
+    "id": "grilled_corn",
+    "name": "Grilled corn + butter",
+    "local": "jagung bakar",
+    "tier": 3,
+    "idr": 8000,
+    "raises": [
+      "filling",
+      "rich",
+      "bright"
+    ],
+    "where": [
+      "counter"
+    ]
+  }
+]
