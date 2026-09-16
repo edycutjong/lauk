@@ -10,7 +10,7 @@
 
 [For the judge → JUDGE.md](JUDGE.md) · [The demo query](#-the-ten-second-flow) · [Run the tests](#-run-it-without-credentials) · [RevenueCat integration](#-revenuecat-is-the-engine)
 
-![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-70_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml)
+![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-73_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml)
 
 </div>
 
@@ -65,7 +65,7 @@ Remove RevenueCat and every deck but Counter is permanently locked, the second c
 
 ```bash
 npm install --legacy-peer-deps
-npm test                      # 70 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
+npm test                      # 73 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
 npm run check -- rice_side 2  # the demo query, in your terminal
 npm run check -- --list       # every plate id
 npm run bench                 # p50/p95 over 12 plates × 4 ceilings × 3 weighting profiles + invariants + content hash
@@ -104,7 +104,7 @@ The RevenueCat project needs: entitlements `deck_instant`, `deck_delivery`, `dec
 ```bash
 npm run ci             # prettier · eslint · tsc ×2 · vitest + coverage · bench · readiness
 npm run bundle:check   # expo export + assert the RC calls and the content are in the Hermes bundle
-npm run test:coverage  # 99.3 % lines over the pure core
+npm run test:coverage  # 100 % lines over the pure core
 npm run audit          # npm audit, root + app
 npm run secrets        # gitleaks over the tree (CI runs it over full history)
 ```
@@ -112,7 +112,7 @@ npm run secrets        # gitleaks over the tree (CI runs it over full history)
 | Layer                                       | Tool                                                                                   | Status                         |
 | ------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------ |
 | Code quality                                | Prettier · ESLint 9 (flat) · tsc against both tsconfigs                                | ✅                             |
-| Unit tests                                  | vitest — 70 tests, 99.3 % lines on `core/` + `rc/access.ts`                            | ✅                             |
+| Unit tests                                  | vitest — 73 tests, 100 % lines on `core/` + `rc/access.ts`                             | ✅                             |
 | High-signal tests                           | 150,000-case exhaustive · 6 defect-named regressions · entitlement boundary            | ✅                             |
 | Build verification                          | Metro export + bundle assertions; Android `assembleDebug` + manifest inspection (main) | ✅                             |
 | Security (SAST / SCA)                       | CodeQL · Dependabot (root, app, actions; grouped, no majors) · npm audit               | ✅                             |
@@ -130,7 +130,7 @@ app/src/rc/        purchases.ts (the 12 SDK calls) · access.ts (entitlement mat
 app/src/store/     AsyncStorage: prefs · weights · log (≤ 3 rows/day)
 app/src/screens/   Onboarding · Plates · Ceiling · Result (ring + cards + cue) · Faces · Settings · NeverDoes
 scripts/           seed · check (CLI) · bench · check-submission-readiness
-tests/             70 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
+tests/             73 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
 docs/              RANKER.md · paywall-copy.md · proof/ · assets/
 ```
 

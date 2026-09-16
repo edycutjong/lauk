@@ -16,9 +16,9 @@ Without a phone: `npm install --legacy-peer-deps && npm run check -- rice_side 2
 
 |                                              | Value                                                                                                                   | How to verify              |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| Tests                                        | **70**, < 1 s, no device, no key                                                                                        | `npm test`                 |
+| Tests                                        | **73**, < 1 s, no device, no key                                                                                        | `npm test`                 |
 | Exhaustive verification                      | **150,000** (plate, ceiling, weighting) queries — every card affordable, useful, distinct, cheapest-first; 0 violations | `tests/exhaustive.test.ts` |
-| Coverage of the pure core                    | 99.3 % lines                                                                                                            | `npm run test:coverage`    |
+| Coverage of the pure core                    | 100 % lines                                                                                                             | `npm run test:coverage`    |
 | Ranker                                       | p50 1.8 µs · p95 4.8 µs (budget 1 ms)                                                                                   | `npm run bench`            |
 | Copy-lint                                    | 22 banned words · 0 hits across content, UI strings and the paywall copy                                                | `tests/lint.test.ts`       |
 | Entitlement boundary                         | expired / purchase-record / sibling-deck / look-alike id → all locked                                                   | `tests/boundary.test.ts`   |

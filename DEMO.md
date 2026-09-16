@@ -13,7 +13,7 @@ npm run check -- rice_side 2
 npm run bench
 ```
 
-Expected: `Tests 70 passed`, the three-card output shown in the README, and
+Expected: `Tests 73 passed`, the three-card output shown in the README, and
 
 ```
 lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 28800 queries
@@ -42,7 +42,7 @@ lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 2
 | Receipt                                                                              | Status                                                                                                                  |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | Bench p50/p95 + invariants + content hash                                            | ✅ `npm run bench` (section 1)                                                                                          |
-| 70 tests including the copy-lint gate and a 150,000-query exhaustive verification    | ✅ `npm test`                                                                                                           |
+| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification    | ✅ `npm test`                                                                                                           |
 | Metro bundle contains every RevenueCat call + the content                            | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                          |
 | Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log) | **pending — build day 1, 2026-09-18**, screenshot → `docs/proof/day1-targeting.png`                                     |
 | Cold-start entitlement read-back + RevenueCat customer page                          | **pending — build day 4, 2026-09-21**, screenshots → `docs/proof/`                                                      |
