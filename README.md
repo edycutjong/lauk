@@ -8,9 +8,9 @@
 
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands." />
 
-[Try the demo query](#the-ten-second-flow) · [Run the tests](#run-it-without-credentials) · [RevenueCat integration](#revenuecat-is-the-engine)
+[For the judge → JUDGE.md](JUDGE.md) · [The demo query](#-the-ten-second-flow) · [Run the tests](#-run-it-without-credentials) · [RevenueCat integration](#-revenuecat-is-the-engine)
 
-![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-58_passing-2ea44f)
+![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-69_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml)
 
 </div>
 
@@ -65,7 +65,7 @@ Remove RevenueCat and every deck but Counter is permanently locked, the second c
 
 ```bash
 npm install --legacy-peer-deps
-npm test                      # 58 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
+npm test                      # 69 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
 npm run check -- rice_side 2  # the demo query, in your terminal
 npm run check -- --list       # every plate id
 npm run bench                 # p50/p95 over 12 plates × 4 ceilings × 3 weighting profiles + invariants + content hash
@@ -86,15 +86,41 @@ The RevenueCat project needs: entitlements `deck_instant`, `deck_delivery`, `dec
 
 ## 🔍 Tests as the spec
 
-| Invariant                                                                                                                                     | Test                                      |
-| --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| Every (plate, ceiling) pair returns ≥ 1 card; every add lifts a hollow pillar on ≥ 1 plate it is available for                                | `tests/content.test.ts`                   |
-| The three reference queries return exactly their triples; the ranker is deterministic over 1,000 runs                                         | `tests/rank.test.ts`                      |
-| **No banned word in any content string, UI string, or the dashboard paywall copy** — the compassionate-flexibility criterion, machine-checked | `tests/lint.test.ts`                      |
-| Faces move pillar weightings by η = 0.15 and never leave [0.5, 1.5]                                                                           | `tests/weights.test.ts`                   |
-| Tier labels exist for 10 currencies and fall back to USD                                                                                      | `tests/tiers.test.ts`                     |
-| `canUseDeck` / `dailyCap` truth table over every subset of the four entitlements                                                              | `tests/access.test.ts`                    |
-| `CONTENT_HASH` equals sha256 of the JSON on disk (shown in Settings → About)                                                                  | `tests/content.test.ts` + `npm run bench` |
+| Invariant                                                                                                                                       | Test                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| **150,000 (plate, ceiling, weighting) queries** — every card affordable, useful, distinct, cheapest-first; 0 violations                         | `tests/exhaustive.test.ts`                        |
+| Every (plate, ceiling) pair returns ≥ 1 card; every add lifts a hollow pillar on ≥ 1 plate it is available for                                  | `tests/content.test.ts`                           |
+| The three reference queries return exactly their triples; the ranker is deterministic over 1,000 runs                                           | `tests/rank.test.ts`                              |
+| **No banned word in any content string, UI string, or the dashboard paywall copy** — the compassionate-flexibility criterion, machine-checked   | `tests/lint.test.ts`                              |
+| Faces move pillar weightings by η = 0.15 and never leave [0.5, 1.5]                                                                             | `tests/weights.test.ts`                           |
+| `canUseDeck` / `dailyCap` over all 16 entitlement subsets; expired entitlements, purchase records, sibling decks and look-alike ids stay locked | `tests/access.test.ts` · `tests/boundary.test.ts` |
+| 5 regression tests, each named after the defect it pins (e.g. `tiersFor_treat_ceiling_kept_tier_3_after_truncating_before_filtering`)           | `tests/regressions.test.ts`                       |
+| `CONTENT_HASH` equals sha256 of the JSON on disk; `npm run seed` is reproducible                                                                | `tests/content.test.ts` · CI Stage 1              |
+
+## 🛠️ Engineering harness
+
+**Pipeline:** Quality → Security → Metro bundle → Android native build → Bench → Deploy gate (`.github/workflows/ci.yml`)
+
+```bash
+npm run ci             # prettier · eslint · tsc ×2 · vitest + coverage · bench · readiness
+npm run bundle:check   # expo export + assert the RC calls and the content are in the Hermes bundle
+npm run test:coverage  # 99.3 % lines over the pure core
+npm run audit          # npm audit, root + app
+npm run secrets        # gitleaks over the tree (CI runs it over full history)
+```
+
+| Layer                                       | Tool                                                                                   | Status                         |
+| ------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------ |
+| Code quality                                | Prettier · ESLint 9 (flat) · tsc against both tsconfigs                                | ✅                             |
+| Unit tests                                  | vitest — 69 tests, 99.3 % lines on `core/` + `rc/access.ts`                            | ✅                             |
+| High-signal tests                           | 150,000-case exhaustive · 5 defect-named regressions · entitlement boundary            | ✅                             |
+| Build verification                          | Metro export + bundle assertions; Android `assembleDebug` + manifest inspection (main) | ✅                             |
+| Security (SAST / SCA)                       | CodeQL · Dependabot (root, app, actions; grouped, no majors) · npm audit               | ✅                             |
+| Secret scanning                             | gitleaks (full history) · TruffleHog (verified)                                        | ✅                             |
+| Performance                                 | ranker bench, p95 budget 1 ms, fails on content-hash drift                             | ✅                             |
+| Release                                     | semantic version from Angular commits (`release.yml`)                                  | ✅                             |
+| Community                                   | CoC · Contributing · Security policy · issue & PR templates · MIT                      | ✅                             |
+| **Device run · real purchase · stall test** | —                                                                                      | ⏳ pending, dated in `DEMO.md` |
 
 ## 📦 Repository
 
@@ -104,7 +130,7 @@ app/src/rc/        purchases.ts (the 12 SDK calls) · access.ts (entitlement mat
 app/src/store/     AsyncStorage: prefs · weights · log (≤ 3 rows/day)
 app/src/screens/   Onboarding · Plates · Ceiling · Result (ring + cards + cue) · Faces · Settings · NeverDoes
 scripts/           seed · check (CLI) · bench · check-submission-readiness
-tests/             58 tests, vitest, < 1 s
+tests/             69 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
 docs/              RANKER.md · paywall-copy.md · proof/ · assets/
 ```
 
