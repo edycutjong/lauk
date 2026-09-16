@@ -39,17 +39,18 @@ lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 2
 
 ## 3. Receipts
 
-| Receipt                                                                              | Status                                                                                                                  |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| Bench p50/p95 + invariants + content hash                                            | ✅ `npm run bench` (section 1)                                                                                          |
-| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification    | ✅ `npm test`                                                                                                           |
-| Metro bundle contains every RevenueCat call + the content                            | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                          |
-| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log) | **pending — build day 1, 2026-09-18**, screenshot → `docs/proof/day1-targeting.png`                                     |
-| Cold-start entitlement read-back + RevenueCat customer page                          | **pending — build day 4, 2026-09-21**, screenshots → `docs/proof/`                                                      |
-| Play Billing sandbox purchase (license tester)                                       | **pending — build day 4**                                                                                               |
-| One real-money purchase, labelled who paid                                           | **pending — build day 5, 2026-09-22** (fallback: builder's second Google account, labelled "self-purchase, real money") |
-| Play production submission                                                           | **pending — 2026-09-23**                                                                                                |
-| Demo video (≤ 2 min, handheld, real table, real plate)                               | **pending — 2026-09-23 afternoon**                                                                                      |
+| Receipt                                                                                             | Status                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bench p50/p95 + invariants + content hash                                                           | ✅ `npm run bench` (section 1)                                                                                                                  |
+| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                   |
+| Signed release AAB (`bundleRelease`, upload key in `~/.config/lauk/`, signer = keystore, not debug) | ✅ 52 MB, 2026-09-16 — built with empty RC keys: proves the store-signable pipeline; the shippable one is rebuilt once the dashboard keys exist |
+| Metro bundle contains every RevenueCat call + the content                                           | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                                                  |
+| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — build day 1, 2026-09-18**, screenshot → `docs/proof/day1-targeting.png`                                                             |
+| Cold-start entitlement read-back + RevenueCat customer page                                         | **pending — build day 4, 2026-09-21**, screenshots → `docs/proof/`                                                                              |
+| Play Billing sandbox purchase (license tester)                                                      | **pending — build day 4**                                                                                                                       |
+| One real-money purchase, labelled who paid                                                          | **pending — build day 5, 2026-09-22** (fallback: builder's second Google account, labelled "self-purchase, real money")                         |
+| Play production submission                                                                          | **pending — 2026-09-23**                                                                                                                        |
+| Demo video (≤ 2 min, handheld, real table, real plate)                                              | **pending — 2026-09-23 afternoon**                                                                                                              |
 
 ## 4. The stall test (the killer number)
 
