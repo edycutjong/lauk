@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands.">
+<!-- STORYBOARD (dur 6s — must equal this file's single master dur)
+  0-8%    steady state: charcoal plate, terracotta plate disc, ring with filling + rich lit amber; fresh, bright, crunch drawn as terracotta outlines (poster rule: brand layer complete at t=0)
+  8-24%   trigger:      the add-chip appears inside the plate at the right, flies in through the gap between filling and fresh, lands on the plate      data-story="beat-2"
+  24-52%  mechanism:    The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands.                            data-story="beat-3"
+                        (landing ripple 24-36% · fresh sweeps amber 26-38% · bright sweeps amber 30-42% · each outline blends to amber as its sweep completes)
+  52-84%  resolution:   four of five stay lit; a glow breath rises and falls under the lit ring                                                       data-story="beat-4"
+  84-100% breathe + seam fade: chip, ripple, new fills and glow fade out 90-97% (fully out before dur minus 100ms); outlines blend back to terracotta; loop restarts on the poster
+-->
+  <defs>
+    <filter id="ia-glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+  <style>
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+  <!-- the icon's own charcoal plate: survives GitHub light mode (amber on white is 1.85:1) -->
+  <rect width="512" height="512" rx="112" fill="#1B1917"/>
+  <rect x="1" y="1" width="510" height="510" rx="111" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+
+  <g transform="translate(256 256)">
+    <!-- beat 4: glow breath under the four lit segments -->
+    <g data-story="beat-4" opacity="0" filter="url(#ia-glow)" fill="#F2B441">
+      <animate attributeName="opacity" values="0;0;0.55;0.2;0.5;0;0" keyTimes="0;0.52;0.62;0.72;0.82;0.90;1" dur="6s" repeatCount="indefinite"/>
+      <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"/>
+      <path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"/>
+      <path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"/>
+      <path d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"/>
+    </g>
+
+    <!-- the plate as bought -->
+    <circle r="118" fill="#C8553D"/>
+
+    <!-- pillar ring, clockwise from the top: filling (lit) · fresh (hollow → fills) · rich (lit) · bright (hollow → fills) · crunch (hollow) -->
+    <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+      <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.36;0.38;0.90;0.97;1" dur="6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+      <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.40;0.42;0.90;0.97;1" dur="6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- beat 3: the two hollow pillars the add raises sweep amber (draw-in on a thick arc, pathLength 100) -->
+    <path data-story="beat-3" d="M173.9 -46.6 A180 180 0 0 1 113.3 139.9" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+      <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.26;0.38;0.97;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="6s" repeatCount="indefinite"/>
+    </path>
+    <path data-story="beat-3" d="M-113.3 139.9 A180 180 0 0 1 -173.9 -46.6" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+      <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.30;0.42;0.97;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="6s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- beat 3: landing ripple on the plate -->
+    <circle data-story="beat-3" cx="34" cy="36" r="10" fill="none" stroke="#F2B441" stroke-width="4" opacity="0">
+      <animate attributeName="r" values="10;10;80;80" keyTimes="0;0.24;0.36;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.24;0.25;0.36;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- beat 2: the add-chip flies in through the gap and lands on the plate -->
+    <g data-story="beat-2" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;1;0;0" keyTimes="0;0.08;0.10;0.24;0.90;0.97;1" dur="6s" repeatCount="indefinite"/>
+      <animateMotion path="M245 -80 C 200 -66, 110 -30, 34 36" keyPoints="0;0;1;1;1" keyTimes="0;0.08;0.24;0.97;1" calcMode="linear" dur="6s" repeatCount="indefinite"/>
+      <circle r="24" fill="#F2B441" stroke="#1B1917" stroke-width="5"/>
+      <rect x="-10" y="-2.5" width="20" height="5" rx="2.5" fill="#1B1917"/>
+      <rect x="-2.5" y="-10" width="5" height="20" rx="2.5" fill="#1B1917"/>
+    </g>
+  </g>
+</svg>

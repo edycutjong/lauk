@@ -1,0 +1,115 @@
+<div align="center">
+
+<img src="docs/assets/icon-512.png" width="96" alt="Lauk" />
+
+# Lauk
+
+**Tap the plate you already bought. One cheap add makes it satisfying.**
+
+<img src="docs/assets/readme-hero-animated.svg" width="100%" alt="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands." />
+
+[Try the demo query](#the-ten-second-flow) · [Run the tests](#run-it-without-credentials) · [RevenueCat integration](#revenuecat-is-the-engine)
+
+![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-58_passing-2ea44f)
+
+</div>
+
+---
+
+## 🍚 What it is
+
+People who buy every meal — boarding-house students, junior office staff, delivery riders — don't lack nutrition information. They lack a decision they can act on **at the table, with the money they actually have**. Every app answers a counting question or a cooking question; nobody answers _"I already bought this — what is the one cheap thing that would make it satisfying?"_
+
+Lauk is a plate check that takes ten seconds. Tap the meal in front of you (12 universal plates, four decks), tap a spend ceiling (Free / Small / Medium / Treat, in your currency), and Lauk maps the plate onto **five satisfaction pillars — filling · fresh · rich · bright · crunch** — and returns **three one-add upgrades, cheapest first**, from a hand-authored table of 40 adds you can actually get at that kind of counter. Tap one: the ring fills, a haptic lands, one line fades in — _Eat until satisfied, not until empty._
+
+No food database. No camera. No AI. No backend. No account. No streaks, no red days, and none of the 22 words listed on the "What Lauk never does" screen — a test fails if one ever appears in the copy.
+
+> Built for the Shipaton 2026 **Influencer Award — Nutrition & Healthy Eating** brief: _"a flexible nutrition app that helps people make meals more satisfying without calorie counting, macro tracking, or restrictive meal plans."_
+
+## ⚡ The ten-second flow
+
+```
+$ npm run check -- rice_side 2
+
+Rice plate + one side (nasi + 1 lauk) · Medium ≤ Rp 5k
+plate  filling ●  fresh ○  rich ◐  bright ○  crunch ○   2 of 5 lit
+
+1. Lime wedge (jeruk nipis) — Free → lifts bright
+2. Raw veg + chili (lalapan + sambal) — Rp 2.000 → lifts fresh + bright
+   after  filling ●  fresh ◐  rich ◐  bright ◐  crunch ○   4 of 5 lit
+3. Fried egg (telur dadar / ceplok) — Rp 5.000 → lifts rich
+```
+
+That is the whole product: the plate you already have goes from 2 of 5 to 4 of 5 for Rp 2,000, and no number is ever shown to the user. The terminal prints exactly what the app renders — the ranker is one pure function (`app/src/core/rank.ts`, [docs/RANKER.md](docs/RANKER.md)), deterministic across 1,000 runs, p95 under 5 µs.
+
+In the app: **Plates → Ceiling → Ring + 3 cards → tap → cue → three faces → week strip.** The faces are the only tracking — they nudge five pillar weightings (shown as bars in Settings, resettable) so tomorrow's cards lean toward what actually satisfied you.
+
+## 💳 RevenueCat is the engine
+
+Remove RevenueCat and every deck but Counter is permanently locked, the second check of the day dead-ends, the Semester pass never appears, and Restore / Manage vanish — the app collapses to a one-deck, one-check toy. Twelve SDK calls, all in [`app/src/rc/purchases.ts`](app/src/rc/purchases.ts):
+
+| Where in the flow                       | Call                                                                                                                            | Why                                                                                                                                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Launch                                  | `Purchases.configure`                                                                                                           | anonymous customer, no login                                                                                                                                           |
+| Onboarding ("Where do you mostly eat?") | `setAttributes({ eating_context })` → `syncAttributesAndOfferingsIfNeeded()`                                                    | a dashboard **Targeting rule** serves the `decks_student` offering (Semester pass first) at placement `second_deck`                                                    |
+| Plates screen                           | `getOfferings()`                                                                                                                | live price badge on every locked tile                                                                                                                                  |
+| Locked tile tap                         | `getCurrentOfferingForPlacement('second_deck')` → `RevenueCatUI.presentPaywall({ offering, customVariables: { deck, plate } })` | the paywall headline names the plate you tapped                                                                                                                        |
+| Second check of the day (free tier)     | `RevenueCatUI.presentPaywallIfNeeded({ requiredEntitlementIdentifier: 'unlimited' })`                                           | shows nothing if you already have Unlimited                                                                                                                            |
+| Every tile, every check                 | `getCustomerInfo()` + `addCustomerInfoUpdateListener`                                                                           | `entitlements.active` decides the gate — `canUseDeck` / `dailyCap` in [`app/src/rc/access.ts`](app/src/rc/access.ts), unit-tested over all 16 entitlement combinations |
+| Decks shelf                             | `purchasePackage(pkg)`                                                                                                          | one-time deck unlocks + Unlimited monthly (7-day trial) / Semester pass                                                                                                |
+| Settings                                | `restorePurchases()` · `RevenueCatUI.presentCustomerCenter()`                                                                   | reinstall, device swap, cancel                                                                                                                                         |
+
+**Tiers:** Free = Counter deck, 1 check/day · any deck (one-time) = that deck + 3 checks/day · **Unlimited** (monthly, 7-day free trial — the judge path) = every deck, no cap.
+
+## 🧪 Run it without credentials
+
+```bash
+npm install --legacy-peer-deps
+npm test                      # 58 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
+npm run check -- rice_side 2  # the demo query, in your terminal
+npm run check -- --list       # every plate id
+npm run bench                 # p50/p95 over 12 plates × 4 ceilings × 3 weighting profiles + invariants + content hash
+```
+
+No device, no key, no network. The whole core (`app/src/core/`) is pure TypeScript with zero React Native imports; the app, the CLI and the bench import the same modules.
+
+### Run the app (dev build, Android)
+
+```bash
+cd app && npm install --legacy-peer-deps
+cp ../.env.example .env        # paste your RevenueCat Test Store public key
+npx expo prebuild --platform android
+npx expo run:android           # physical device or emulator; RevenueCat needs a dev build, not Expo Go
+```
+
+The RevenueCat project needs: entitlements `deck_instant`, `deck_delivery`, `deck_cafeteria`, `unlimited`; products named after them; offerings `decks` (default) and `decks_student`; placement `second_deck` with the Targeting rule `eating_context is student → decks_student`; two paywalls whose copy is in [docs/paywall-copy.md](docs/paywall-copy.md) (lint-checked before pasting). Without a key the app still runs — every deck but Counter stays locked and the shelf says so.
+
+## 🔍 Tests as the spec
+
+| Invariant                                                                                                                                     | Test                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Every (plate, ceiling) pair returns ≥ 1 card; every add lifts a hollow pillar on ≥ 1 plate it is available for                                | `tests/content.test.ts`                   |
+| The three reference queries return exactly their triples; the ranker is deterministic over 1,000 runs                                         | `tests/rank.test.ts`                      |
+| **No banned word in any content string, UI string, or the dashboard paywall copy** — the compassionate-flexibility criterion, machine-checked | `tests/lint.test.ts`                      |
+| Faces move pillar weightings by η = 0.15 and never leave [0.5, 1.5]                                                                           | `tests/weights.test.ts`                   |
+| Tier labels exist for 10 currencies and fall back to USD                                                                                      | `tests/tiers.test.ts`                     |
+| `canUseDeck` / `dailyCap` truth table over every subset of the four entitlements                                                              | `tests/access.test.ts`                    |
+| `CONTENT_HASH` equals sha256 of the JSON on disk (shown in Settings → About)                                                                  | `tests/content.test.ts` + `npm run bench` |
+
+## 📦 Repository
+
+```
+app/src/core/      pillars · rank · weights · tiers · lint · content/ (generated by scripts/seed.ts)
+app/src/rc/        purchases.ts (the 12 SDK calls) · access.ts (entitlement math)
+app/src/store/     AsyncStorage: prefs · weights · log (≤ 3 rows/day)
+app/src/screens/   Onboarding · Plates · Ceiling · Result (ring + cards + cue) · Faces · Settings · NeverDoes
+scripts/           seed · check (CLI) · bench · check-submission-readiness
+tests/             58 tests, vitest, < 1 s
+docs/              RANKER.md · paywall-copy.md · proof/ · assets/
+```
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) (regenerated from the code) and [DEMO.md](DEMO.md) (judge path, receipts, what is still unfinished).
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE).

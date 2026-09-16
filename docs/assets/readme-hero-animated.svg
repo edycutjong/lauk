@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-label="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands.">
+<!-- STORYBOARD (dur 8s — must equal this file's single master dur)
+  0-10%   steady state: plate, grid, aurora; left: mini mark (filling + rich lit, three terracotta outlines), outlined wordmark Lau + k, tagline, metric line, tech line;
+                        right: tile chip "Rice plate + one side", ceiling chip "≤ Rp 5k", the ring at 2 of 5, three cards cheapest first (poster rule: everything visible at t=0)
+  10-24%  trigger:      a tap ring lands on card 2 (Raw veg + chili, Rp 2,000); its border turns amber; a chip detaches from the card's left edge and flies to the plate, landing below the count     data-story="beat-2"
+  24-52%  mechanism:    The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands.                                     data-story="beat-3"
+                        (landing ripple 26-36% · fresh sweeps 28-38% · bright sweeps 32-42% on the ring AND the mini mark · the count flips 2 of 5 → 4 of 5 at 40-42% · beam crosses 40-52%)
+  52-82%  resolution:   four of five stay lit; the cue "Eat until satisfied, not until empty." fades in under the cards over a breathing bar; glow breath on the ring   data-story="beat-4"
+  82-100% breathe + seam fade: chip, highlight, new fills, count, cue and bar fade out 90-97% (fully out before dur minus 100ms); outlines blend back; loop restarts on the poster
+-->
+  <defs>
+    <clipPath id="h-plate"><rect width="1280" height="320" rx="20"/></clipPath>
+    <clipPath id="h-kclip"><path d="M12.9 0.9Q9.3 0.9 7.4-1.1Q5.6-3 5.6-6.5L5.6-61.2Q5.6-64.8 7.4-66.7Q9.3-68.5 12.9-68.5Q16.3-68.5 18.2-66.7Q20.1-64.8 20.1-61.2L20.1-27.6L20.3-27.6L34.2-43.1Q36.3-45.5 38.1-46.7Q39.8-47.9 42.8-47.9Q45.8-47.9 47.4-46.4Q49-44.8 49-42.7Q49.1-40.5 47.1-38.3L34.8-24.6L48.8-8.5Q50.6-6.3 50.4-4.1Q50.1-1.9 48.4-0.5Q46.7 0.9 44 0.9Q40.7 0.9 38.7-0.4Q36.8-1.6 34.8-4.2L20.3-20.4L20.1-20.4L20.1-6.5Q20.1 0.9 12.9 0.9"/></clipPath>
+    <pattern id="h-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity="0.035"/></pattern>
+    <linearGradient id="h-kgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B441"/><stop offset="1" stop-color="#E39A2E"/></linearGradient>
+    <linearGradient id="h-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <linearGradient id="h-beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F2B441" stop-opacity="0"/><stop offset="0.5" stop-color="#F2B441" stop-opacity="0.35"/><stop offset="1" stop-color="#F2B441" stop-opacity="0"/></linearGradient>
+    <filter id="h-aurora" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="42"/></filter>
+    <filter id="h-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+  <style>
+    .drift-a { animation: drift-a 17s ease-in-out infinite alternate; }
+    .drift-b { animation: drift-b 14s ease-in-out infinite alternate; }
+    .pulse   { animation: pulse 8s ease-in-out infinite; }
+    @keyframes drift-a { from { transform: translate(0, 0); } to { transform: translate(70px, 26px); } }
+    @keyframes drift-b { from { transform: translate(0, 0); } to { transform: translate(-64px, -30px); } }
+    @keyframes pulse   { 0%, 100% { opacity: 0.78; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+  <!-- backdrop: the plate (mandatory — makes the hero self-sufficient on light and dark GitHub) -->
+  <rect width="1280" height="320" rx="20" fill="#1B1917"/>
+  <g clip-path="url(#h-plate)">
+    <rect width="1280" height="320" fill="url(#h-grid)"/>
+    <circle class="drift-a" cx="210" cy="60" r="150" fill="#C8553D" opacity="0.22" filter="url(#h-aurora)"/>
+    <circle class="drift-b" cx="1010" cy="300" r="160" fill="#F2B441" opacity="0.13" filter="url(#h-aurora)"/>
+    <rect data-story="beat-4" x="-300" y="-40" width="160" height="400" fill="url(#h-beam)" opacity="0" transform="skewX(-20)">
+      <animate attributeName="x" values="-300;-300;1500;1500" keyTimes="0;0.40;0.52;1" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.40;0.41;0.51;0.52;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="319" rx="19.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <!-- LEFT: brand — mini animated mark, outlined wordmark, tagline, metric, tech line (all inside x < 520) -->
+  <g transform="translate(88 90) scale(0.1875)">
+      
+      <circle r="118" fill="#C8553D"/>
+      <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+        <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.36;0.38;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+        <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.40;0.42;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round"/>
+      <path data-story="beat-3" d="M173.9 -46.6 A180 180 0 0 1 113.3 139.9" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.28;0.38;0.97;1" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path data-story="beat-3" d="M-113.3 139.9 A180 180 0 0 1 -173.9 -46.6" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.32;0.42;0.97;1" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+  </g>
+  <g transform="translate(150 122)">
+    <path d="M47.4 0L14.4 0Q10.8 0 8.8-2Q6.8-4 6.8-7.6L6.8-60.3Q6.8-64 8.7-66Q10.7-67.9 14.3-67.9Q17.9-67.9 19.8-66Q21.7-64 21.7-60.3L21.7-12.6L47.4-12.6Q50.5-12.6 52.2-10.9Q53.9-9.3 53.9-6.3Q53.9-3.3 52.2-1.6Q50.5 0 47.4 0M76.5 1.1Q71.3 1.1 67.2-1Q63.1-3 60.8-6.4Q58.5-9.9 58.5-14.2Q58.5-19.4 61.2-22.4Q63.8-25.4 69.9-26.7Q75.9-28 85.9-28L89.4-28L89.4-29.7Q89.4-33.9 87.5-35.7Q85.5-37.4 80.9-37.4Q78.3-37.4 75.3-36.8Q72.3-36.2 68.6-34.8Q66.5-33.8 64.9-34.3Q63.3-34.8 62.4-36.2Q61.5-37.6 61.5-39.3Q61.5-41 62.5-42.6Q63.5-44.2 65.7-44.9Q70.2-46.8 74.2-47.4Q78.1-48.1 81.5-48.1Q88.9-48.1 93.6-45.9Q98.4-43.8 100.8-39.3Q103.2-34.8 103.2-27.8L103.2-6.5Q103.2-3 101.5-1.1Q99.7 0.9 96.5 0.9Q93.2 0.9 91.4-1.1Q89.7-3 89.7-6.5L89.7-7Q89-5.3 87.9-3.9Q86-1.5 83.1-0.2Q80.3 1.1 76.5 1.1M89.4-18.6L89.4-20.5L86-20.5Q81.1-20.5 78.1-20Q75.1-19.5 73.8-18.2Q72.5-17 72.5-14.8Q72.5-12.1 74.4-10.4Q76.2-8.6 79.8-8.6Q82.6-8.6 84.7-9.9Q86.9-11.2 88.1-13.5Q89.4-15.7 89.4-18.6M131.4 1.1Q125.5 1.1 121.5-1.2Q117.6-3.4 115.7-7.8Q113.9-12.3 113.9-18.9L113.9-40.6Q113.9-44.3 115.7-46.1Q117.6-47.9 121.1-47.9Q124.5-47.9 126.4-46.1Q128.4-44.3 128.4-40.6L128.4-18.5Q128.4-14.3 130.1-12.2Q131.8-10.2 135.6-10.2Q139.7-10.2 142.3-13.1Q145-16 145-20.8L145-40.6Q145-44.3 146.8-46.1Q148.7-47.9 152.2-47.9Q155.7-47.9 157.6-46.1Q159.5-44.3 159.5-40.6L159.5-6.5Q159.5 0.9 152.4 0.9Q149 0.9 147.2-1.1Q145.3-3 145.3-6.4Q143.5-3.6 140.7-1.6Q136.8 1.1 131.4 1.1" fill="#F5EFE6"/>
+    <g transform="translate(170.1 0)">
+      <path d="M12.9 0.9Q9.3 0.9 7.4-1.1Q5.6-3 5.6-6.5L5.6-61.2Q5.6-64.8 7.4-66.7Q9.3-68.5 12.9-68.5Q16.3-68.5 18.2-66.7Q20.1-64.8 20.1-61.2L20.1-27.6L20.3-27.6L34.2-43.1Q36.3-45.5 38.1-46.7Q39.8-47.9 42.8-47.9Q45.8-47.9 47.4-46.4Q49-44.8 49-42.7Q49.1-40.5 47.1-38.3L34.8-24.6L48.8-8.5Q50.6-6.3 50.4-4.1Q50.1-1.9 48.4-0.5Q46.7 0.9 44 0.9Q40.7 0.9 38.7-0.4Q36.8-1.6 34.8-4.2L20.3-20.4L20.1-20.4L20.1-6.5Q20.1 0.9 12.9 0.9" fill="url(#h-kgrad)"/>
+      <g clip-path="url(#h-kclip)">
+        <rect data-story="beat-3" x="-90" y="-90" width="34" height="120" fill="url(#h-shine)" transform="skewX(-20)">
+          <animate attributeName="x" values="-90;-90;90;90" keyTimes="0;0.30;0.42;1" dur="8s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+  </g>
+  <text x="40" y="176" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="21" font-weight="600" fill="#B8AFA3">One cheap add makes the meal</text>
+  <text x="40" y="202" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="21" font-weight="600" fill="#B8AFA3">you already bought satisfying.</text>
+  <text class="pulse" x="40" y="244" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#F2B441">12 plates · 40 adds · 5 pillars · 0 calories counted</text>
+  <text x="40" y="276" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#B8AFA3">Expo · React Native · TypeScript · RevenueCat · Google Play</text>
+
+  <!-- RIGHT: the plate check — inputs, the ring, three cards, the tap, the landing, the cue -->
+  <rect x="600" y="34" width="170" height="28" rx="14" fill="#26221F" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text x="685" y="53" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#F5EFE6">Rice plate + one side</text>
+  <rect x="782" y="34" width="72" height="28" rx="14" fill="#F2B441"/>
+  <text x="818" y="53" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#1B1917">≤ Rp 5k</text>
+
+  <g transform="translate(726 176) scale(0.43)">
+      <g data-story="beat-4" opacity="0" filter="url(#h-glow)" fill="#F2B441">
+        <animate attributeName="opacity" values="0;0;0.5;0.2;0.5;0;0" keyTimes="0;0.52;0.62;0.72;0.82;0.90;1" dur="8s" repeatCount="indefinite"/>
+        <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"/><path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"/><path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"/><path d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"/>
+      </g>
+      <circle r="118" fill="#C8553D"/>
+      <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+        <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.36;0.38;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z" fill="#F2B441" stroke="#F2B441" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round">
+        <animate attributeName="stroke" values="#C8553D;#C8553D;#F2B441;#F2B441;#C8553D;#C8553D" keyTimes="0;0.40;0.42;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z" fill="none" stroke="#C8553D" stroke-width="6" stroke-linejoin="round"/>
+      <path data-story="beat-3" d="M173.9 -46.6 A180 180 0 0 1 113.3 139.9" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.28;0.38;0.97;1" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+      <path data-story="beat-3" d="M-113.3 139.9 A180 180 0 0 1 -173.9 -46.6" fill="none" stroke="#F2B441" stroke-width="54" stroke-linecap="butt" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+        <animate attributeName="stroke-dashoffset" values="100;100;0;0;0" keyTimes="0;0.32;0.42;0.97;1" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+      </path>
+  </g>
+  <text x="726" y="184" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#F5EFE6">2 of 5
+    <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.40;0.42;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+  </text>
+  <text data-story="beat-3" x="726" y="184" text-anchor="middle" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#F5EFE6" opacity="0">4 of 5
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.40;0.42;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+  </text>
+
+    <rect x="880" y="70" width="350" height="52" rx="12" fill="#26221F" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <text x="896" y="91" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#F5EFE6">Lime wedge</text>
+    <text x="896" y="109" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#B8AFA3">bright</text>
+    <text x="1214" y="102" text-anchor="end" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="800" fill="#F5EFE6">free</text>
+    <rect x="880" y="132" width="350" height="52" rx="12" fill="#26221F" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <text x="896" y="153" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#F5EFE6">Raw veg + chili</text>
+    <text x="896" y="171" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#B8AFA3">fresh · bright</text>
+    <text x="1214" y="164" text-anchor="end" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="800" fill="#F5EFE6">Rp 2,000</text>
+    <rect x="880" y="194" width="350" height="52" rx="12" fill="#26221F" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <text x="896" y="215" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#F5EFE6">Fried egg</text>
+    <text x="896" y="233" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#B8AFA3">rich</text>
+    <text x="1214" y="226" text-anchor="end" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="800" fill="#F5EFE6">Rp 5,000</text>
+
+  <!-- beat 2: the tap on card 2 -->
+  <rect data-story="beat-2" x="880" y="132" width="350" height="52" rx="12" fill="none" stroke="#F2B441" stroke-width="2" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.12;0.14;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+  </rect>
+  <circle data-story="beat-2" cx="1075" cy="158" r="8" fill="none" stroke="#F2B441" stroke-width="3" opacity="0">
+    <animate attributeName="r" values="8;8;30;30" keyTimes="0;0.12;0.22;1" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.12;0.13;0.22;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <g data-story="beat-2" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;1;0;0" keyTimes="0;0.13;0.15;0.26;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+    <animateMotion path="M880 158 C 840 150, 790 150, 744 208" keyPoints="0;0;1;1;1" keyTimes="0;0.14;0.26;0.97;1" calcMode="linear" dur="8s" repeatCount="indefinite"/>
+    <circle r="11" fill="#F2B441" stroke="#1B1917" stroke-width="2"/>
+    <rect x="-5" y="-1.25" width="10" height="2.5" rx="1.25" fill="#1B1917"/>
+    <rect x="-1.25" y="-5" width="2.5" height="10" rx="1.25" fill="#1B1917"/>
+  </g>
+  <!-- beat 3: the landing ripple on the plate -->
+  <circle data-story="beat-3" cx="744" cy="208" r="4" fill="none" stroke="#F2B441" stroke-width="2" opacity="0">
+    <animate attributeName="r" values="4;4;40;40" keyTimes="0;0.26;0.36;1" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.26;0.27;0.36;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- beat 4: the cue and its breathing bar -->
+  <text data-story="beat-4" x="880" y="270" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#B8AFA3" opacity="0">Eat until satisfied, not until empty.
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.52;0.58;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+  </text>
+  <rect data-story="beat-4" x="880" y="280" width="0" height="2" rx="1" fill="#F2B441">
+    <animate attributeName="width" values="0;0;160;120;160;120;160;0;0" keyTimes="0;0.54;0.60;0.68;0.76;0.84;0.90;0.97;1" dur="8s" repeatCount="indefinite"/>
+  </rect>
+</svg>
