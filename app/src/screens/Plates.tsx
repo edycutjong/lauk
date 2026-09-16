@@ -33,16 +33,19 @@ export function PlatesScreen({
       if (busy) return;
       setBusy(true);
       try {
-        if (!canUseDeck(plate.deck, info)) {
+        // Decide on the freshest CustomerInfo, not the closure's: a deck bought on THIS tap
+        // raises the daily cap from 1 to 3, and the cap check below must see that.
+        let current = info;
+        if (!canUseDeck(plate.deck, current)) {
           if (!rcConfigured) return;
           const unlocked = await presentDeckPaywall(plate.deck, plate.name);
-          await refreshInfo();
+          current = (await refreshInfo()) ?? current;
           if (!unlocked) return;
         }
-        if (!canCheck(info, todayCount)) {
+        if (!canCheck(current, todayCount)) {
           if (!rcConfigured) return;
           const ok = await presentCapPaywall();
-          await refreshInfo();
+          current = (await refreshInfo()) ?? current;
           if (!ok) return;
         }
         onPick(plate);

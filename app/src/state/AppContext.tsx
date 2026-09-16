@@ -50,7 +50,8 @@ interface AppState {
   info: CustomerInfo | null;
   offering: PurchasesOffering | null;
   setContext(ctx: EatingContext): Promise<void>;
-  refreshInfo(): Promise<void>;
+  /** Returns the fresh CustomerInfo so a caller mid-tap can decide on it, not on its closure. */
+  refreshInfo(): Promise<CustomerInfo | null>;
   refreshOfferings(): Promise<void>;
   logCheck(plate: string, ceiling: Tier): Promise<number>;
   logAdd(rowTs: number, add: Add | null): Promise<void>;
@@ -73,9 +74,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const refreshInfo = useCallback(async () => {
     try {
-      setInfo(await getCustomerInfo());
+      const fresh = await getCustomerInfo();
+      setInfo(fresh);
+      return fresh;
     } catch {
       /* offline: keep the last known info; the gate treats null as free */
+      return null;
     }
   }, []);
 

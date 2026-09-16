@@ -3,6 +3,8 @@
  * changelog of real bugs found while building — not a coverage exercise.
  */
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { ADDS, PLATES } from '../app/src/core/content';
 import { DEFAULT_WEIGHTS, DECKS, TIERS, isAvailable } from '../app/src/core/pillars';
 import { rankAdds, tiersFor } from '../app/src/core/rank';
@@ -67,5 +69,17 @@ describe('regressions', () => {
         PLATES.find((p) => p.id === 'fried_rice')!,
       ),
     ).toBe(true);
+  });
+
+  it('plates_tap_checked_the_daily_cap_against_pre_purchase_customer_info (2026-09-16 audit)', () => {
+    // After presentDeckPaywall the tap continued with the closure's stale `info`, so a deck bought
+    // on that tap (cap 1 → 3) still hit the cap paywall. The tap now decides on refreshInfo()'s
+    // return value; this pins the wiring at source level.
+    const plates = readFileSync(resolve(__dirname, '../app/src/screens/Plates.tsx'), 'utf8');
+    expect(plates).toMatch(/current = \(await refreshInfo\(\)\) \?\? current/);
+    expect(plates).toMatch(/canCheck\(current, todayCount\)/);
+    expect(plates).not.toMatch(/canCheck\(info, todayCount\)/);
+    const ctx = readFileSync(resolve(__dirname, '../app/src/state/AppContext.tsx'), 'utf8');
+    expect(ctx).toMatch(/refreshInfo\(\): Promise<CustomerInfo \| null>/);
   });
 });

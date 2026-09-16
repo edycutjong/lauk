@@ -10,7 +10,7 @@
 
 [For the judge → JUDGE.md](JUDGE.md) · [The demo query](#-the-ten-second-flow) · [Run the tests](#-run-it-without-credentials) · [RevenueCat integration](#-revenuecat-is-the-engine)
 
-![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-69_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml)
+![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-70_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml)
 
 </div>
 
@@ -65,7 +65,7 @@ Remove RevenueCat and every deck but Counter is permanently locked, the second c
 
 ```bash
 npm install --legacy-peer-deps
-npm test                      # 69 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
+npm test                      # 70 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
 npm run check -- rice_side 2  # the demo query, in your terminal
 npm run check -- --list       # every plate id
 npm run bench                 # p50/p95 over 12 plates × 4 ceilings × 3 weighting profiles + invariants + content hash
@@ -94,7 +94,7 @@ The RevenueCat project needs: entitlements `deck_instant`, `deck_delivery`, `dec
 | **No banned word in any content string, UI string, or the dashboard paywall copy** — the compassionate-flexibility criterion, machine-checked   | `tests/lint.test.ts`                              |
 | Faces move pillar weightings by η = 0.15 and never leave [0.5, 1.5]                                                                             | `tests/weights.test.ts`                           |
 | `canUseDeck` / `dailyCap` over all 16 entitlement subsets; expired entitlements, purchase records, sibling decks and look-alike ids stay locked | `tests/access.test.ts` · `tests/boundary.test.ts` |
-| 5 regression tests, each named after the defect it pins (e.g. `tiersFor_treat_ceiling_kept_tier_3_after_truncating_before_filtering`)           | `tests/regressions.test.ts`                       |
+| 6 regression tests, each named after the defect it pins (e.g. `tiersFor_treat_ceiling_kept_tier_3_after_truncating_before_filtering`)           | `tests/regressions.test.ts`                       |
 | `CONTENT_HASH` equals sha256 of the JSON on disk; `npm run seed` is reproducible                                                                | `tests/content.test.ts` · CI Stage 1              |
 
 ## 🛠️ Engineering harness
@@ -112,8 +112,8 @@ npm run secrets        # gitleaks over the tree (CI runs it over full history)
 | Layer                                       | Tool                                                                                   | Status                         |
 | ------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------ |
 | Code quality                                | Prettier · ESLint 9 (flat) · tsc against both tsconfigs                                | ✅                             |
-| Unit tests                                  | vitest — 69 tests, 99.3 % lines on `core/` + `rc/access.ts`                            | ✅                             |
-| High-signal tests                           | 150,000-case exhaustive · 5 defect-named regressions · entitlement boundary            | ✅                             |
+| Unit tests                                  | vitest — 70 tests, 99.3 % lines on `core/` + `rc/access.ts`                            | ✅                             |
+| High-signal tests                           | 150,000-case exhaustive · 6 defect-named regressions · entitlement boundary            | ✅                             |
 | Build verification                          | Metro export + bundle assertions; Android `assembleDebug` + manifest inspection (main) | ✅                             |
 | Security (SAST / SCA)                       | CodeQL · Dependabot (root, app, actions; grouped, no majors) · npm audit               | ✅                             |
 | Secret scanning                             | gitleaks (full history) · TruffleHog (verified)                                        | ✅                             |
@@ -130,7 +130,7 @@ app/src/rc/        purchases.ts (the 12 SDK calls) · access.ts (entitlement mat
 app/src/store/     AsyncStorage: prefs · weights · log (≤ 3 rows/day)
 app/src/screens/   Onboarding · Plates · Ceiling · Result (ring + cards + cue) · Faces · Settings · NeverDoes
 scripts/           seed · check (CLI) · bench · check-submission-readiness
-tests/             69 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
+tests/             70 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
 docs/              RANKER.md · paywall-copy.md · proof/ · assets/
 ```
 
