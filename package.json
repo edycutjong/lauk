@@ -2,7 +2,7 @@
   "name": "lauk",
   "private": true,
   "type": "module",
-  "description": "Tap the plate you already bought. Lauk ranks one cheap add that makes it satisfying — never a calorie in sight.",
+  "description": "Tap the plate you already bought. Lauk ranks one cheap add that makes it satisfying \u2014 never a calorie in sight.",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
@@ -15,11 +15,16 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit -p tsconfig.json && npm --prefix app run typecheck",
     "bundle:check": "npm --prefix app run bundle:check",
-    "ci": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run bench"
+    "ci": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run bench && npm run readiness",
+    "test:coverage": "vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=lcov --coverage.include='app/src/core/**' --coverage.include='app/src/rc/access.ts' --coverage.include='app/src/store/dates.ts'",
+    "audit": "npm audit --audit-level=high && npm --prefix app audit --audit-level=high",
+    "secrets": "gitleaks detect --source . --no-banner --redact",
+    "ci:full": "npm run ci && npm run bundle:check"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "@types/node": "^22.15.0",
+    "@vitest/coverage-v8": "^4.1.11",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-react": "^7.37.5",
