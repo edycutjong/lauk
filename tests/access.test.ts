@@ -7,6 +7,7 @@ import {
   canUseDeck,
   checksChip,
   dailyCap,
+  hasUnlimited,
 } from '../app/src/rc/access';
 
 const info = (...ids: string[]) => ({
@@ -62,5 +63,14 @@ describe('entitlement truth table — I7', () => {
   it('a malformed CustomerInfo (no entitlements) is treated as free, not as a crash', () => {
     expect(dailyCap({} as never)).toBe(1);
     expect(canUseDeck('delivery', { entitlements: undefined } as never)).toBe(false);
+  });
+
+  it('hasUnlimited is true only when the unlimited entitlement itself is active', () => {
+    expect(hasUnlimited(null)).toBe(false);
+    expect(hasUnlimited(undefined)).toBe(false);
+    expect(hasUnlimited(info())).toBe(false);
+    expect(hasUnlimited(info(DECK_ENTITLEMENT.instant))).toBe(false);
+    expect(hasUnlimited(info(ENT_UNLIMITED))).toBe(true);
+    expect(hasUnlimited(info(ENT_UNLIMITED, DECK_ENTITLEMENT.delivery))).toBe(true);
   });
 });

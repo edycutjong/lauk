@@ -9,5 +9,17 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     environment: 'node',
     reporters: ['default'],
+    // Only bites on `npm run test:coverage` (which passes --coverage.enabled);
+    // plain `npm test` never turns coverage collection on, so this block is
+    // inert there. The include set itself is passed via that script's CLI
+    // flags, not here — this just gates the number once it's collected.
+    coverage: {
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
+    },
   },
 });

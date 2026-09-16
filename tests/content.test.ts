@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ADDS, CONTENT_HASH, COPY, PLATES } from '../app/src/core/content';
-import { DECKS, PILLARS, TIERS, isAvailable, type Tier } from '../app/src/core/pillars';
+import { DECKS, PILLARS, TIERS, clampLevel, isAvailable, type Tier } from '../app/src/core/pillars';
 import { DEFAULT_WEIGHTS } from '../app/src/core/pillars';
 import { rankAdds } from '../app/src/core/rank';
 import { contentHash } from '../scripts/seed';
@@ -86,5 +86,20 @@ describe('content invariants', () => {
   it('copy has the cue line and the onboarding footer verbatim', () => {
     expect(COPY.cue.line).toBe('Eat until satisfied, not until empty.');
     expect(COPY.onboarding.footer).toBe('Lauk never counts. It asks how satisfying the plate is.');
+  });
+
+  it('clampLevel: a value at or below zero clamps down to hollow (0), never negative', () => {
+    // levelsAfter only ever calls clampLevel(level + 1) where level is already 0/1/2, so this
+    // low branch never fires through the ranker — it is real defensive range-clamping on an
+    // exported pure function, exercised here directly rather than through a caller.
+    expect(clampLevel(0)).toBe(0);
+    expect(clampLevel(-1)).toBe(0);
+    expect(clampLevel(-100)).toBe(0);
+  });
+
+  it('clampLevel: mid-range values clamp to half (1), and ≥ 2 clamps to full (2)', () => {
+    expect(clampLevel(1)).toBe(1);
+    expect(clampLevel(2)).toBe(2);
+    expect(clampLevel(3)).toBe(2);
   });
 });
