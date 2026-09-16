@@ -1,0 +1,18 @@
+# gitleaks config — extends the default ruleset.
+#
+# The three AsyncStorage key NAMES in app/src/store/storage.ts trip the
+# generic-api-key rule (a constant called KEY_* assigned a string). They are
+# storage keys, not credentials. Allow-listed as exact literals rather than by
+# file path, so a real secret pasted into that file would still be caught.
+title = "lauk"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "AsyncStorage key names — identifiers, not secrets"
+regexes = [
+  '''lauk\.prefs\.v1''',
+  '''lauk\.weights\.v1''',
+  '''lauk\.log\.v1''',
+]
