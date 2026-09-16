@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Lauk",
+    "slug": "lauk",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "lauk",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#1B1917",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B1917"
+    },
+    "android": {
+      "package": "dev.edycu.lauk",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1B1917"
+      },
+      "permissions": ["VIBRATE", "com.android.vending.BILLING"],
+      "blockedPermissions": ["android.permission.SYSTEM_ALERT_WINDOW"]
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0"
+          }
+        }
+      ],
+      "expo-font",
+      "expo-localization",
+      "./plugins/withReleaseSigning"
+    ]
+  }
+}

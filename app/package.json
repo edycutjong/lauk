@@ -1,0 +1,36 @@
+{
+  "name": "lauk-app",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "prebuild": "expo prebuild --platform android --clean",
+    "typecheck": "tsc --noEmit",
+    "bundle:check": "expo export --platform android --output-dir dist --clear >/dev/null && node -e \"const fs=require('fs');const d='dist/_expo/static/js/android';const f=fs.readdirSync(d).find(x=>x.endsWith('.hbc')||x.endsWith('.js'));const b=fs.readFileSync(d+'/'+f);const s=b.toString('latin1');for(const k of ['getCurrentOfferingForPlacement','presentPaywallIfNeeded','syncAttributesAndOfferingsIfNeeded','Rice plate + one side']){if(!s.includes(k)){console.error('bundle missing: '+k);process.exit(1)}}console.log('bundle ok: '+f+' '+(b.length/1024|0)+' KB')\"",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "@expo-google-fonts/nunito": "^0.4.1",
+    "@react-native-async-storage/async-storage": "2.1.2",
+    "expo": "~53.0.0",
+    "expo-build-properties": "~0.14.8",
+    "expo-dev-client": "~5.2.4",
+    "expo-font": "~13.3.2",
+    "expo-haptics": "~14.1.4",
+    "expo-localization": "~16.1.6",
+    "expo-splash-screen": "~0.30.10",
+    "expo-status-bar": "~2.2.3",
+    "react": "19.0.0",
+    "react-native": "0.79.6",
+    "react-native-purchases": "^10.9.0",
+    "react-native-purchases-ui": "^10.9.0",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-svg": "15.11.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.0.10",
+    "typescript": "~5.8.3"
+  }
+}
