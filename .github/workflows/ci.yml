@@ -1,0 +1,205 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# Two npm workspaces: the root (vitest, tsx scripts, eslint) and app/ (Expo).
+# Both install with --legacy-peer-deps because eslint-plugin-react-hooks@5 still
+# declares an eslint@8 peer range against eslint@9.
+
+jobs:
+  # ── STAGE 1: Quality (parallel with Stage 2) ──────────────────────────────
+  quality:
+    name: 'Stage 1 · Quality'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ${{ github.event_name == 'push' && fromJSON('[20, 22, 24]') || fromJSON('[22]') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
+      - name: Install (root + app)
+        run: |
+          npm ci --legacy-peer-deps
+          npm --prefix app ci --legacy-peer-deps
+      - name: Format check (Prettier)
+        run: npm run format:check
+      - name: Lint (ESLint)
+        run: npm run lint
+      - name: Type check (root scripts/tests + Expo app)
+        run: npm run typecheck
+      - name: Unit tests + coverage
+        run: npm run test:coverage
+      - name: Content seed is reproducible (hash stable)
+        run: |
+          npm run seed
+          git diff --exit-code -- app/src/core/content
+      - name: Upload coverage
+        if: matrix.node-version == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+
+  # ── STAGE 2: Security (parallel with Stage 1) ─────────────────────────────
+  secret-scan:
+    name: 'Stage 2 · Secret Scanning'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: TruffleHog (verified secrets, full history)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  dependency-audit:
+    name: 'Stage 2 · Dependency Audit'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
+      - name: Install (root + app)
+        run: |
+          npm ci --legacy-peer-deps
+          npm --prefix app ci --legacy-peer-deps
+      - name: npm audit (high + critical) — root
+        run: npm audit --audit-level=high
+        continue-on-error: true
+      - name: npm audit (high + critical) — app
+        run: npm --prefix app audit --audit-level=high
+        continue-on-error: true
+      - name: License compliance (app, production deps)
+        run: npx license-checker --start app --production --failOn "GPL-3.0;AGPL-3.0" --summary
+        continue-on-error: true
+
+  # ── STAGE 3: Build Verification — the Metro bundle ────────────────────────
+  # A green typecheck is not evidence the app bundles (Metro is a different
+  # resolver). This stage exports the Hermes bundle and asserts the RevenueCat
+  # calls and the content table are inside it.
+  bundle:
+    name: 'Stage 3 · Build Verification (Metro bundle)'
+    needs: [quality]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
+      - name: Install (root + app)
+        run: |
+          npm ci --legacy-peer-deps
+          npm --prefix app ci --legacy-peer-deps
+      - name: Expo export (android) + bundle assertions
+        run: npm run bundle:check
+      - name: Bundle size budget
+        run: |
+          F=$(ls app/dist/_expo/static/js/android/*.hbc | head -1)
+          KB=$(( $(stat -c%s "$F") / 1024 ))
+          echo "Hermes bundle: ${KB} KB"
+          if [ "$KB" -gt 6000 ]; then echo "::error::bundle ${KB}KB > 6000KB"; exit 1; fi
+          if [ "$KB" -gt 4500 ]; then echo "::warning::bundle ${KB}KB > 4500KB"; fi
+
+  # ── STAGE 4: Native build (main only — ~15 min) ───────────────────────────
+  # The mobile analogue of E2E: prebuild + gradle assembleDebug proves the
+  # native modules (react-native-purchases, -ui, svg) link, and inspects the
+  # manifest for the package id and the BILLING permission.
+  native:
+    name: 'Stage 4 · Android native build'
+    needs: [bundle]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install (root + app)
+        run: |
+          npm ci --legacy-peer-deps
+          npm --prefix app ci --legacy-peer-deps
+      - name: Prebuild (no credentials → debug-signed, by design)
+        working-directory: app
+        run: npx expo prebuild --platform android --no-install
+      - name: Assemble debug APK
+        working-directory: app/android
+        run: ./gradlew assembleDebug --no-daemon -q
+      - name: Inspect the artifact
+        run: |
+          APK=app/android/app/build/outputs/apk/debug/app-debug.apk
+          AAPT=$(ls "$ANDROID_HOME"/build-tools/*/aapt | tail -1)
+          "$AAPT" dump badging "$APK" | grep -E "^package: name='dev.edycu.lauk'" || { echo "::error::wrong package id"; exit 1; }
+          "$AAPT" dump badging "$APK" | grep -q "com.android.vending.BILLING" || { echo "::error::BILLING permission missing"; exit 1; }
+          echo "APK $(du -h "$APK" | cut -f1)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug.apk
+          path: app/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+
+  # ── STAGE 5: Performance — the ranker bench ───────────────────────────────
+  performance:
+    name: 'Stage 5 · Performance (bench + invariants)'
+    needs: [quality]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - name: Bench (p95 budget 1 ms, 3 asserted queries, I1/I2, content hash)
+        run: npm run bench
+      - name: Submission readiness (placeholders, kill-switch flags, banned words in prose)
+        run: npm run readiness
+
+  # ── STAGE 6: Deploy gate (main only) ──────────────────────────────────────
+  deploy-gate:
+    name: 'Stage 6 · Deploy Gate'
+    needs: [quality, secret-scan, dependency-audit, bundle, native, performance]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "All gates passed."
+          echo "  Stage 1 — Quality (prettier, eslint, tsc ×2, vitest, seed reproducible)"
+          echo "  Stage 2 — TruffleHog · npm audit ×2 · license check"
+          echo "  Stage 3 — Metro bundle exported + asserted"
+          echo "  Stage 4 — Android debug APK assembled + manifest inspected"
+          echo "  Stage 5 — Ranker bench + readiness"

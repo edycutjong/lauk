@@ -41,7 +41,7 @@ for (const f of judgeFacing) {
 
 // Banned words in the prose that describes the app. The one allowed context is
 // quoting the award's own criterion, which README does inside a blockquote.
-for (const f of ['README.md', 'DEMO.md']) {
+for (const f of ['README.md', 'DEMO.md', 'JUDGE.md']) {
   const body = read(f);
   if (!body) continue;
   const prose = body

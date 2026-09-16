@@ -19,3 +19,7 @@ app/ios/
 
 .eslintcache
 .prettiercache
+
+# Coverage / CI artefacts
+coverage/
+app/dist/

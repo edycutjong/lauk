@@ -1,0 +1,38 @@
+version: 2
+updates:
+  # Root workspace (vitest, tsx, eslint, prettier)
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: ['minor', 'patch']
+    ignore:
+      # Major bumps are framework migrations, not maintenance.
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+  # The Expo app. Expo pins its own SDK-compatible ranges (~53.0.x); a bump
+  # outside them breaks the native build, so majors are ignored here too.
+  - package-ecosystem: 'npm'
+    directory: '/app'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: ['minor', 'patch']
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-native'
+      - dependency-name: 'react'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns: ['*']
