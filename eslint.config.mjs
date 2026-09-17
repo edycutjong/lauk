@@ -40,7 +40,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['scripts/**/*.ts', 'tests/**/*.ts', 'vitest.config.ts', 'eslint.config.mjs'],
+    files: ['scripts/**/*.{ts,mjs}', 'tests/**/*.ts', 'vitest.config.ts', 'eslint.config.mjs'],
     languageOptions: { ecmaVersion: 2023, sourceType: 'module', globals: { ...globals.node } },
   },
   {
