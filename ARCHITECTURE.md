@@ -98,7 +98,7 @@ which is why step 8 of the judge path (force-stop, cold start, deck still open) 
 
 - Targeting by custom attribute depends on the attribute reaching RevenueCat before offerings are fetched; the app
   calls `syncAttributesAndOfferingsIfNeeded()` right after `setAttributes` and re-reads the placement on every locked-tile
-  tap. Verified against the typings; device verification is build day 1.
+  tap. Verified against the typings; device verification is still pending (as of 2026-09-23).
 - Paywall strings live in the dashboard. They are authored and lint-checked in `docs/paywall-copy.md` first; the
-  rendered paywalls are screenshotted into `docs/proof/` once pasted.
+  paywall on the `decks` offering was published 2026-09-16; on-device screenshots are still pending.
 - Test Store purchases show no Play dialog. The published build uses the Google Play key (`EXPO_PUBLIC_RC_STORE=GOOGLE`).

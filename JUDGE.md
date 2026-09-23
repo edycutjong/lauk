@@ -4,7 +4,7 @@
 
 ## The 30-second path (no setup, no keys)
 
-1. Open the Google Play listing — _link lands here on publication (production submission 2026-09-23)._
+1. Install from Google Play — **not live yet** (production release pending review); the listing link replaces this line on publication. Until then, build it yourself (below).
 2. Onboarding → **Student housing** · Plates → **Rice plate + one side** → **Medium**.
 3. Three cards: lime wedge (free) · raw veg + chili (Rp 2,000) · fried egg (Rp 5,000). Tap the second — the ring goes from 2 of 5 lit to 4 of 5.
 4. Tap anywhere → **satisfied** → the week strip shows today's face.
@@ -39,11 +39,12 @@ There is no offline/mock/demo flag anywhere. Without a key the app runs with eve
 
 ## Honest limitations
 
-- The RevenueCat calls are verified against the SDK typings and the Metro bundle — **not yet against a live Test Store on a device.** That is build day 1 (2026-09-18); the Targeting screenshot lands in `docs/proof/`.
-- Paywall copy is dashboard-authored; it is written and lint-checked in `docs/paywall-copy.md` but not yet pasted or screenshotted.
+- As of 2026-09-23 the RevenueCat calls are verified against the SDK typings, the Metro bundle and a signed release AAB with the Play key inlined — **not yet on a physical device against live offerings.** The Targeting screenshot is added here when that run happens; until then this line stays.
+- Paywall copy is dashboard-authored: written and lint-checked in `docs/paywall-copy.md`, published on the `decks` offering in the RevenueCat dashboard (2026-09-16), but not yet screenshotted rendering on a device.
 - Prices outside Indonesia are tier ceilings ("≤ $2"), not exact — only IDR has authored reference prices.
-- The kill test (5 real budget eaters at a stall, 2026-09-20) has **no rows yet**; if fewer than 3 of 5 would buy the top card, the project is dropped, not the caveat.
+- The kill test (5 real budget eaters at a stall) has **no rows yet** (it was due 2026-09-20 and has not run); if fewer than 3 of 5 would buy the top card, the project is dropped, not the caveat.
+- Google Play: not yet published. Nothing in this repo claims a live listing.
 
 ## Links
 
-Repo · Play listing (on publication) · Demo video (2026-09-23) · [DEMO.md](DEMO.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [docs/RANKER.md](docs/RANKER.md)
+[Repo](https://github.com/edycutjong/lauk) · [Site](https://lauk.edycu.dev/) ([Pages mirror](https://edycutjong.github.io/lauk/)) · [Privacy policy](https://lauk.edycu.dev/privacy.html) · [CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml) · Play listing — _pending publication_ · Demo video — _pending_ · [DEMO.md](DEMO.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [docs/RANKER.md](docs/RANKER.md)

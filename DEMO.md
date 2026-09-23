@@ -39,31 +39,31 @@ lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 2
 
 ## 3. Receipts
 
-| Receipt                                                                                             | Status                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bench p50/p95 + invariants + content hash                                                           | ✅ `npm run bench` (section 1)                                                                                                                  |
-| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                   |
-| Signed release AAB (`bundleRelease`, upload key in `~/.config/lauk/`, signer = keystore, not debug) | ✅ 52 MB, 2026-09-16 — built with empty RC keys: proves the store-signable pipeline; the shippable one is rebuilt once the dashboard keys exist |
-| Metro bundle contains every RevenueCat call + the content                                           | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                                                  |
-| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — build day 1, 2026-09-18**, screenshot → `docs/proof/day1-targeting.png`                                                             |
-| Cold-start entitlement read-back + RevenueCat customer page                                         | **pending — build day 4, 2026-09-21**, screenshots → `docs/proof/`                                                                              |
-| Play Billing sandbox purchase (license tester)                                                      | **pending — build day 4**                                                                                                                       |
-| One real-money purchase, labelled who paid                                                          | **pending — build day 5, 2026-09-22** (fallback: builder's second Google account, labelled "self-purchase, real money")                         |
-| Play production submission                                                                          | **pending — 2026-09-23**                                                                                                                        |
-| Demo video (≤ 2 min, handheld, real table, real plate)                                              | **pending — 2026-09-23 afternoon**                                                                                                              |
+| Receipt                                                                                             | Status                                                                                                                                                                                                    |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bench p50/p95 + invariants + content hash                                                           | ✅ `npm run bench` (section 1)                                                                                                                                                                            |
+| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                                                                             |
+| Signed release AAB (`bundleRelease`, upload key in `~/.config/lauk/`, signer = keystore, not debug) | ✅ 52 MB, rebuilt 2026-09-17 with the RevenueCat Play public key inlined; `npm run verify:artifact` PASS (key present, upload-key signed, manifest = INTERNET · ACCESS_NETWORK_STATE · VIBRATE · BILLING) |
+| Metro bundle contains every RevenueCat call + the content                                           | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                                                                                                            |
+| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — not yet run (as of 2026-09-23)**; screenshot lands in `docs/proof/` when it is                                                                                                                |
+| Cold-start entitlement read-back + RevenueCat customer page                                         | **pending — not yet run (as of 2026-09-23)**                                                                                                                                                              |
+| Play Billing sandbox purchase (license tester)                                                      | **pending — not yet run (as of 2026-09-23)**                                                                                                                                                              |
+| One real-money purchase, labelled who paid                                                          | **pending** (fallback: builder's second Google account, labelled "self-purchase, real money")                                                                                                             |
+| Play production submission                                                                          | **pending** — not yet published; no live listing is claimed anywhere                                                                                                                                      |
+| Demo video (≤ 2 min, handheld, real table, real plate)                                              | **pending**                                                                                                                                                                                               |
 
 ## 4. The stall test (the killer number)
 
 The number Lauk will headline is not a benchmark. It is: **k of 5 real budget eaters, plate in front of them at a real
-stall, say they would buy the top-ranked add at that price.** The test runs on 2026-09-20; n, k, each eater's plate,
+stall, say they would buy the top-ranked add at that price.** The test was due 2026-09-20 and has not run yet; n, k, each eater's plate,
 ceiling and card, and a consenting first-name quote are appended here as rows. If k < 3 the project is dropped —
 the kill criterion applies to the idea, not to the caveat. **No rows exist yet; nothing above this line claims otherwise.**
 
 ## 5. What still breaks or is unfinished (honest list, updated per build day)
 
 - The canvas has never run on a physical device with a live RevenueCat key — the SDK calls are verified against the
-  published typings and the Metro bundle, not yet against the Test Store. That is build day 1.
-- Paywall templates are dashboard-authored; their copy is written and lint-checked in `docs/paywall-copy.md` but not yet
-  pasted, so the rendered paywalls are not yet screenshotted.
+  published typings, the Metro bundle and the signed release AAB, not yet against live offerings on a device (as of 2026-09-23).
+- Paywall templates are dashboard-authored; their copy is written and lint-checked in `docs/paywall-copy.md` and the
+  paywall on the `decks` offering was published 2026-09-16, but the rendered paywalls are not yet screenshotted on a device.
 - Currency labels beyond IDR/USD are tier ceilings, not exact prices (by design — only IDR has authored reference prices).
-- Google Play production access on the publishing account is unconfirmed (per-account gate).
+- Google Play production access on the publishing account is confirmed (2026-09-17); the production release itself is not yet published.
