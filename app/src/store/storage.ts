@@ -3,7 +3,7 @@
  *
  *   lauk.prefs.v1    { eating_context, currency, onboarded }
  *   lauk.weights.v1  five numbers in [0.5, 1.5]
- *   lauk.log.v1      ≤ 3 rows per day: plate, ceiling, add, face
+ *   lauk.log.v1      last 60 rows: plate, ceiling, add, face (one per check)
  *
  * No currency balance, no entitlement, no purchase state is ever stored
  * here — RevenueCat is the only source of truth for what the user owns.
