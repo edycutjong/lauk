@@ -23,8 +23,8 @@ jobs:
       matrix:
         node-version: ${{ github.event_name == 'push' && fromJSON('[20, 22, 24]') || fromJSON('[22]') }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -49,7 +49,7 @@ jobs:
           git diff --exit-code -- app/src/core/content
       - name: Upload coverage
         if: matrix.node-version == 22
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage/
@@ -60,7 +60,7 @@ jobs:
     name: 'Stage 2 · Secret Scanning'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: TruffleHog (verified secrets, full history)
@@ -72,8 +72,8 @@ jobs:
     name: 'Stage 2 · Dependency Audit'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -103,8 +103,8 @@ jobs:
     needs: [quality]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -135,24 +135,24 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: |
             package-lock.json
             app/package-lock.json
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: 17
       # setup-android@v3 installs `tools platform-tools` by default; the legacy
       # `tools` package no longer exists in the SDK repo and sdkmanager exits 1.
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v4
         with:
           packages: 'platform-tools'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Install (root + app)
         run: |
           npm ci --legacy-peer-deps
@@ -170,7 +170,7 @@ jobs:
           "$AAPT" dump badging "$APK" | grep -E "^package: name='dev.edycu.lauk'" || { echo "::error::wrong package id"; exit 1; }
           "$AAPT" dump badging "$APK" | grep -q "com.android.vending.BILLING" || { echo "::error::BILLING permission missing"; exit 1; }
           echo "APK $(du -h "$APK" | cut -f1)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: app-debug.apk
           path: app/android/app/build/outputs/apk/debug/app-debug.apk
@@ -182,8 +182,8 @@ jobs:
     needs: [quality]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
