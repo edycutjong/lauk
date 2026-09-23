@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/nunito": "^0.4.1",
-    "@react-native-async-storage/async-storage": "2.1.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~53.0.0",
     "expo-build-properties": "~0.14.8",
     "expo-dev-client": "~5.2.4",
@@ -24,14 +24,14 @@
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
     "react-native": "0.79.6",
-    "react-native-purchases": "^10.9.0",
-    "react-native-purchases-ui": "^10.9.0",
-    "react-native-safe-area-context": "5.4.0",
-    "react-native-svg": "15.11.2"
+    "react-native-purchases": "^10.10.0",
+    "react-native-purchases-ui": "^10.10.0",
+    "react-native-safe-area-context": "5.10.0",
+    "react-native-svg": "15.15.5"
   },
   "devDependencies": {
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.3"
   },
   "overrides": {
     "postcss": "^8.5.28",
