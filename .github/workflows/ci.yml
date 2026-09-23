@@ -147,7 +147,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+      # setup-android@v3 installs `tools platform-tools` by default; the legacy
+      # `tools` package no longer exists in the SDK repo and sdkmanager exits 1.
       - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
       - uses: gradle/actions/setup-gradle@v4
       - name: Install (root + app)
         run: |
