@@ -60,3 +60,23 @@ export function checksChip(
   if (cap === Infinity) return unlimitedLabel;
   return `${Math.min(checksToday, cap)} of ${cap}`;
 }
+
+/**
+ * What a paywall attempt means for the tap that started it. `result` is the
+ * SDK's PAYWALL_RESULT string, or null when no paywall could be shown at all
+ * (offerings failed to load, no offering, or the SDK call threw). The tile
+ * must never be a silent no-op: 'unavailable' is shown to the user.
+ *
+ *   PURCHASED · RESTORED            → 'open'
+ *   NOT_PRESENTED (IfNeeded only)   → 'open' — the entitlement is already active
+ *   CANCELLED                       → 'closed' — the user dismissed it
+ *   ERROR · null · anything else    → 'unavailable'
+ */
+export type PaywallOutcome = 'open' | 'closed' | 'unavailable';
+
+export function paywallOutcome(result: string | null, ifNeeded: boolean): PaywallOutcome {
+  if (result === 'PURCHASED' || result === 'RESTORED') return 'open';
+  if (result === 'NOT_PRESENTED') return ifNeeded ? 'open' : 'unavailable';
+  if (result === 'CANCELLED') return 'closed';
+  return 'unavailable';
+}

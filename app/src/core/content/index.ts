@@ -8,4 +8,4 @@ export const PLATES = plates as unknown as readonly Plate[];
 export const ADDS = addons as unknown as readonly Add[];
 export const COPY = copy;
 /** sha256 over the canonical JSON bytes of the three files above. */
-export const CONTENT_HASH = '6003e27b1e244a2a051fc141a519d3d2344c1079ab88f68c24baa9ccddf0c0d2';
+export const CONTENT_HASH = '5279cde5acbde76df941c89ad9836c93877ed9e870234216f773980fcd4e5f28';

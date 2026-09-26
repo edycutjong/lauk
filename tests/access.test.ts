@@ -8,6 +8,7 @@ import {
   checksChip,
   dailyCap,
   hasUnlimited,
+  paywallOutcome,
 } from '../app/src/rc/access';
 
 const info = (...ids: string[]) => ({
@@ -72,5 +73,28 @@ describe('entitlement truth table — I7', () => {
     expect(hasUnlimited(info(DECK_ENTITLEMENT.instant))).toBe(false);
     expect(hasUnlimited(info(ENT_UNLIMITED))).toBe(true);
     expect(hasUnlimited(info(ENT_UNLIMITED, DECK_ENTITLEMENT.delivery))).toBe(true);
+  });
+});
+
+describe('paywall outcome — a locked tile is never a silent no-op', () => {
+  it('purchase or restore opens; a dismissed paywall is closed', () => {
+    for (const ifNeeded of [true, false]) {
+      expect(paywallOutcome('PURCHASED', ifNeeded)).toBe('open');
+      expect(paywallOutcome('RESTORED', ifNeeded)).toBe('open');
+      expect(paywallOutcome('CANCELLED', ifNeeded)).toBe('closed');
+    }
+  });
+
+  it('NOT_PRESENTED opens only for presentPaywallIfNeeded (entitlement already active)', () => {
+    expect(paywallOutcome('NOT_PRESENTED', true)).toBe('open');
+    expect(paywallOutcome('NOT_PRESENTED', false)).toBe('unavailable');
+  });
+
+  it('an SDK error, a failed offerings load (null) or an unknown result is unavailable', () => {
+    for (const ifNeeded of [true, false]) {
+      expect(paywallOutcome('ERROR', ifNeeded)).toBe('unavailable');
+      expect(paywallOutcome(null, ifNeeded)).toBe('unavailable');
+      expect(paywallOutcome('SOMETHING_NEW', ifNeeded)).toBe('unavailable');
+    }
   });
 });

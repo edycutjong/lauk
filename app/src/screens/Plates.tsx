@@ -28,25 +28,31 @@ export function PlatesScreen({
   const [busy, setBusy] = useState(false);
   const todayCount = checksToday(log);
 
+  // The deck whose tap could not open a paywall — its row says so instead of doing nothing.
+  const [unavailable, setUnavailable] = useState<DeckId | null>(null);
+
   const tap = useCallback(
     async (plate: Plate) => {
       if (busy) return;
       setBusy(true);
+      setUnavailable(null);
       try {
         // Decide on the freshest CustomerInfo, not the closure's: a deck bought on THIS tap
         // raises the daily cap from 1 to 3, and the cap check below must see that.
         let current = info;
         if (!canUseDeck(plate.deck, current)) {
-          if (!rcConfigured) return;
-          const unlocked = await presentDeckPaywall(plate.deck, plate.name);
+          const outcome = rcConfigured
+            ? await presentDeckPaywall(plate.deck, plate.name)
+            : 'unavailable';
+          if (outcome === 'unavailable') return setUnavailable(plate.deck);
           current = (await refreshInfo()) ?? current;
-          if (!unlocked) return;
+          if (outcome !== 'open') return;
         }
         if (!canCheck(current, todayCount)) {
-          if (!rcConfigured) return;
-          const ok = await presentCapPaywall();
+          const outcome = rcConfigured ? await presentCapPaywall() : 'unavailable';
+          if (outcome === 'unavailable') return setUnavailable(plate.deck);
           current = (await refreshInfo()) ?? current;
-          if (!ok) return;
+          if (outcome !== 'open') return;
         }
         onPick(plate);
       } finally {
@@ -96,6 +102,11 @@ export function PlatesScreen({
                 />
               ))}
             </View>
+            {unavailable === deck ? (
+              <T variant="hairline" style={styles.note} accessibilityLiveRegion="polite">
+                {COPY.plates.storeUnavailable}
+              </T>
+            ) : null}
           </View>
         );
       })}
@@ -120,4 +131,5 @@ const styles = StyleSheet.create({
   deck: { marginBottom: space.md },
   deckTitle: { marginBottom: space.sm, textTransform: 'uppercase', letterSpacing: 1, fontSize: 13 },
   row: { flexDirection: 'row' },
+  note: { marginTop: space.sm, color: color.textMid },
 });

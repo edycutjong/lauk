@@ -21,7 +21,7 @@ import Purchases, {
 } from 'react-native-purchases';
 import RevenueCatUI, { CustomVariableValue, PAYWALL_RESULT } from 'react-native-purchases-ui';
 import type { DeckId } from '../core/pillars';
-import { DECK_ENTITLEMENT, ENT_UNLIMITED } from './access';
+import { DECK_ENTITLEMENT, ENT_UNLIMITED, paywallOutcome, type PaywallOutcome } from './access';
 
 export type EatingContext = 'student' | 'office' | 'road';
 
@@ -64,7 +64,7 @@ export function configurePurchases(): boolean {
  * SDK; onboarding sets the attribute once, so the throttle never bites.
  */
 export async function setEatingContext(ctx: EatingContext): Promise<PurchasesOfferings> {
-  Purchases.setAttributes({ eating_context: ctx });
+  await Purchases.setAttributes({ eating_context: ctx });
   return Purchases.syncAttributesAndOfferingsIfNeeded();
 }
 
@@ -116,30 +116,35 @@ export async function restore(): Promise<CustomerInfo> {
  * placement (5), so a student sees the Semester pass first. The paywall
  * headline names the tapped plate through a custom variable.
  */
-export async function presentDeckPaywall(deck: DeckId, plateName: string): Promise<boolean> {
-  const offering = await getSecondDeckOffering();
-  const result = await RevenueCatUI.presentPaywall({
-    offering: offering ?? undefined,
-    displayCloseButton: true,
-    customVariables: {
-      deck: CustomVariableValue.string(deck),
-      plate: CustomVariableValue.string(plateName),
-    },
-  });
-  return result === PAYWALL_RESULT.PURCHASED || result === PAYWALL_RESULT.RESTORED;
+export async function presentDeckPaywall(deck: DeckId, plateName: string): Promise<PaywallOutcome> {
+  try {
+    const offering = await getSecondDeckOffering();
+    const result: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
+      offering: offering ?? undefined,
+      displayCloseButton: true,
+      customVariables: {
+        deck: CustomVariableValue.string(deck),
+        plate: CustomVariableValue.string(plateName),
+      },
+    });
+    return paywallOutcome(result, false);
+  } catch {
+    // Offerings failed (e.g. no store products mapped yet) — the tap must say so, not no-op.
+    return 'unavailable';
+  }
 }
 
 /** 11. presentPaywallIfNeeded — the daily cap. Shows nothing if `unlimited` is already active. */
-export async function presentCapPaywall(): Promise<boolean> {
-  const result = await RevenueCatUI.presentPaywallIfNeeded({
-    requiredEntitlementIdentifier: ENT_UNLIMITED,
-    displayCloseButton: true,
-  });
-  return (
-    result === PAYWALL_RESULT.PURCHASED ||
-    result === PAYWALL_RESULT.RESTORED ||
-    result === PAYWALL_RESULT.NOT_PRESENTED
-  );
+export async function presentCapPaywall(): Promise<PaywallOutcome> {
+  try {
+    const result: PAYWALL_RESULT = await RevenueCatUI.presentPaywallIfNeeded({
+      requiredEntitlementIdentifier: ENT_UNLIMITED,
+      displayCloseButton: true,
+    });
+    return paywallOutcome(result, true);
+  } catch {
+    return 'unavailable';
+  }
 }
 
 /** 12. presentCustomerCenter — manage / cancel the subscription, from Settings. */

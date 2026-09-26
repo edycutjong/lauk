@@ -380,6 +380,7 @@ export const COPY = {
     checksToday: 'Checks today',
     unlimited: 'Unlimited',
     locked: 'Locked',
+    storeUnavailable: 'Store unavailable right now — try again later.',
     settings: 'Settings',
   },
   ceiling: {
