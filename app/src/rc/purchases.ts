@@ -137,6 +137,11 @@ export async function presentDeckPaywall(deck: DeckId, plateName: string): Promi
 /** 11. presentPaywallIfNeeded — the daily cap. Shows nothing if `unlimited` is already active. */
 export async function presentCapPaywall(): Promise<PaywallOutcome> {
   try {
+    // Check the offering first, as the deck path does. Without it RevenueCatUI
+    // loads the paywall itself and, when no store products are mapped, shows a
+    // raw "Error 23: There is an issue with your configuration" dialog.
+    const offerings = await Purchases.getOfferings();
+    if (!offerings.current) return 'unavailable';
     const result: PAYWALL_RESULT = await RevenueCatUI.presentPaywallIfNeeded({
       requiredEntitlementIdentifier: ENT_UNLIMITED,
       displayCloseButton: true,

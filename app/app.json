@@ -15,7 +15,7 @@
     },
     "android": {
       "package": "dev.edycu.lauk",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1B1917"

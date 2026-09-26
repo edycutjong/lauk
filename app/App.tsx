@@ -9,7 +9,7 @@
  * unlocks the very next check without a restart (see src/rc/purchases.ts).
  */
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, BackHandler, StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
@@ -59,6 +59,30 @@ function Root() {
     },
     [screen],
   );
+
+  // Android back walks the screen stack instead of closing the app. Without
+  // this, back from Settings (or a result) quit Lauk — found on the emulator.
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (pending) {
+        setPending(null);
+        return true;
+      }
+      switch (screen.name) {
+        case 'never':
+          setScreen({ name: 'settings' });
+          return true;
+        case 'settings':
+        case 'result':
+        case 'faces':
+          setScreen({ name: 'plates' });
+          return true;
+        default:
+          return false;
+      }
+    });
+    return () => sub.remove();
+  }, [screen.name, pending]);
 
   if (!app.prefs.onboarded)
     return <OnboardingScreen onDone={() => setScreen({ name: 'plates' })} />;
