@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands.">
+  <!-- Lauk mark: a terracotta plate ringed by five pillar segments (filling · fresh · rich · bright · crunch).
+       Hollow pillar = terracotta outline (state: the plate as bought). Met pillar = solid amber (state: sated).
+       Frozen at the landing instant: filling, fresh, rich lit · bright mid-sweep · crunch still hollow · the add-chip on the plate.
+       Carries its own charcoal plate so it survives GitHub light mode (amber on white is 1.85:1). -->
+  <defs>
+    <linearGradient id="lk-sated" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F2B441"/>
+      <stop offset="100%" stop-color="#E39A2E"/>
+    </linearGradient>
+    <linearGradient id="lk-plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C8553D"/>
+      <stop offset="100%" stop-color="#B4482F"/>
+    </linearGradient>
+    <filter id="lk-glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+  <style>
+    .lk-bg     { fill: #1B1917; }
+    .lk-hollow { fill: none; stroke: #C8553D; stroke-width: 6; stroke-linejoin: round; }
+    .lk-lit    { fill: url(#lk-sated); stroke: url(#lk-sated); stroke-width: 6; stroke-linejoin: round; }
+    .lk-sweep  { fill: none; stroke: #F2B441; stroke-width: 54; stroke-linecap: butt; }
+    .lk-chip   { fill: #F2B441; stroke: #1B1917; stroke-width: 5; }
+    .lk-trail  { fill: #F2B441; }
+    .lk-plus   { fill: #1B1917; }
+  </style>
+
+  <!-- charcoal plate (the icon's own background — mandatory for light surfaces) -->
+  <rect class="lk-bg" width="512" height="512" rx="112"/>
+  <rect x="1" y="1" width="510" height="510" rx="111" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+
+  <g transform="translate(256 256)">
+    <!-- soft amber glow under the lit segments -->
+    <g filter="url(#lk-glow)" opacity="0.32" fill="#F2B441">
+      <path d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"/>
+      <path d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"/>
+      <path d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"/>
+    </g>
+
+    <!-- the plate as bought -->
+    <circle r="118" fill="url(#lk-plate)"/>
+
+    <!-- pillar ring, clockwise from the top: filling · fresh · rich · bright · crunch -->
+    <path class="lk-lit"    d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"/>
+    <path class="lk-lit"    d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"/>
+    <path class="lk-lit"    d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"/>
+    <path class="lk-hollow" d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"/>
+    <path class="lk-sweep"  d="M-113.3 139.9 A180 180 0 0 1 -176.4 35.6"/>
+    <path class="lk-hollow" d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z"/>
+
+    <!-- the add lands: chip on the plate, trail entering through the gap at the top right -->
+    <circle class="lk-trail" cx="128" cy="-24" r="9" opacity="0.3"/>
+    <circle class="lk-trail" cx="84" cy="2" r="13" opacity="0.55"/>
+    <circle class="lk-chip" cx="34" cy="36" r="24"/>
+    <rect class="lk-plus" x="24" y="33.5" width="20" height="5" rx="2.5"/>
+    <rect class="lk-plus" x="31.5" y="26" width="5" height="20" rx="2.5"/>
+  </g>
+</svg>
