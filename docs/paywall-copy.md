@@ -2,7 +2,8 @@
 
 > RevenueCat paywalls are designed in the dashboard, so the copy-lint cannot reach them at build time.
 > Every string below is written here FIRST, lint-checked by `tests/lint.test.ts`, then pasted verbatim
-> into the two dashboard templates. The rendered paywalls are screenshotted into `docs/proof/`.
+> into the two dashboard templates. Rendered-paywall screenshots go into `docs/proof/` once they exist
+> (none yet as of 2026-09-26 — no Play products are mapped, so the Play build cannot render them).
 > Lines beginning with `>` are commentary and are excluded from the scan.
 
 ---
@@ -35,5 +36,7 @@
 - deck_instant → Instant deck
 - deck_delivery → Delivery deck
 - deck_cafeteria → Cafeteria deck
-- unlimited (monthly base plan, 7-day free trial offer) → Unlimited
-- unlimited (semester base plan, 6 months) → Semester pass
+- unlimited_monthly (P1M base plan, 7-day free-trial offer) → Unlimited
+- unlimited_semester (P6M) → Semester pass
+
+Both subscriptions grant the `unlimited` entitlement.
