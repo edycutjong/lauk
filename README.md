@@ -37,12 +37,16 @@ Rice plate + one side (nasi + 1 lauk) · Medium ≤ Rp 5k
 plate  filling ●  fresh ○  rich ◐  bright ○  crunch ○   2 of 5 lit
 
 1. Lime wedge (jeruk nipis) — Free → lifts bright
+   after  filling ●  fresh ○  rich ◐  bright ◐  crunch ○   3 of 5 lit
 2. Raw veg + chili (lalapan + sambal) — Rp 2.000 → lifts fresh + bright
    after  filling ●  fresh ◐  rich ◐  bright ◐  crunch ○   4 of 5 lit
 3. Fried egg (telur dadar / ceplok) — Rp 5.000 → lifts rich
+   after  filling ●  fresh ○  rich ●  bright ○  crunch ○   2 of 5 lit
+
+Eat until satisfied, not until empty.
 ```
 
-That is the whole product: the plate you already have goes from 2 of 5 to 4 of 5 for Rp 2,000, and no number is ever shown to the user. The terminal prints exactly what the app renders — the ranker is one pure function (`app/src/core/rank.ts`, [docs/RANKER.md](docs/RANKER.md)), deterministic across 1,000 runs, p95 under 5 µs.
+That is the whole product: the plate you already have goes from 2 of 5 to 4 of 5 for Rp 2,000, and no number is ever shown to the user. The terminal prints exactly what the app renders — the ranker is one pure function (`app/src/core/rank.ts`, [docs/RANKER.md](docs/RANKER.md)), deterministic across 1,000 runs, p95 in single-digit microseconds (`npm run bench`).
 
 In the app: **Plates → Ceiling → Ring + 3 cards → tap → cue → three faces → week strip.** The faces are the only tracking — they nudge five pillar weightings (shown as bars in Settings, resettable) so tomorrow's cards lean toward what actually satisfied you.
 

@@ -19,7 +19,7 @@ Without a phone: `npm install --legacy-peer-deps && npm run check -- rice_side 2
 | Tests                                        | **73**, < 1 s, no device, no key                                                                                        | `npm test`                 |
 | Exhaustive verification                      | **150,000** (plate, ceiling, weighting) queries — every card affordable, useful, distinct, cheapest-first; 0 violations | `tests/exhaustive.test.ts` |
 | Coverage of the pure core                    | 100 % lines                                                                                                             | `npm run test:coverage`    |
-| Ranker                                       | p50 1.8 µs · p95 4.8 µs (budget 1 ms)                                                                                   | `npm run bench`            |
+| Ranker                                       | p50 2.7 µs · p95 5.8 µs (budget 1 ms; measured 2026-09-26)                                                              | `npm run bench`            |
 | Copy-lint                                    | 22 banned words · 0 hits across content, UI strings and the paywall copy                                                | `tests/lint.test.ts`       |
 | Entitlement boundary                         | expired / purchase-record / sibling-deck / look-alike id → all locked                                                   | `tests/boundary.test.ts`   |
 | RevenueCat calls                             | 12, in one file                                                                                                         | `app/src/rc/purchases.ts`  |
@@ -39,10 +39,10 @@ There is no offline/mock/demo flag anywhere. Without a key the app runs with eve
 
 ## Honest limitations
 
-- As of 2026-09-23 the RevenueCat calls are verified against the SDK typings, the Metro bundle and a signed release AAB with the Play key inlined — **not yet on a physical device against live offerings.** The Targeting screenshot is added here when that run happens; until then this line stays.
+- As of 2026-09-26 the RevenueCat calls are verified against the SDK typings, the Metro bundle and a signed release AAB with the Play key inlined — **not yet on a physical device against live offerings.** The Targeting screenshot is added here when that run happens; until then this line stays.
 - Paywall copy is dashboard-authored: written and lint-checked in `docs/paywall-copy.md`, published on the `decks` offering in the RevenueCat dashboard (2026-09-16), but not yet screenshotted rendering on a device.
 - Prices outside Indonesia are tier ceilings ("≤ $2"), not exact — only IDR has authored reference prices.
-- The kill test (5 real budget eaters at a stall) has **no rows yet** (it was due 2026-09-20 and has not run); if fewer than 3 of 5 would buy the top card, the project is dropped, not the caveat.
+- The kill test (5 real budget eaters at a stall) has **no rows yet** (it was due 2026-09-20 and has not run as of 2026-09-26); if fewer than 3 of 5 would buy the top card, the project is dropped, not the caveat.
 - Google Play: not yet published. Nothing in this repo claims a live listing.
 
 ## Links

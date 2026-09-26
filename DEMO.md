@@ -17,13 +17,13 @@ Expected: `Tests 73 passed`, the three-card output shown in the README, and
 
 ```
 lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 28800 queries
-  p50 1.8 µs · p95 4.8 µs · p99 9.3 µs
+  p50 2.7 µs · p95 5.8 µs · p99 11.1 µs · max …
   asserted queries: 3/3 · I1 48/48 · I2 40/40
   content hash <12 hex> (matches disk)
   PASS
 ```
 
-(measured 2026-09-16 on an Apple M-series laptop, Node 22; the p95 budget the bench enforces is 1 ms.)
+(measured 2026-09-26 on an Apple M-series laptop, Node 22 — timings vary by machine and run; the p95 budget the bench enforces is 1 ms.)
 
 ## 2. The judge path on a device (dev build)
 
@@ -45,9 +45,9 @@ lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 2
 | 73 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                                                                             |
 | Signed release AAB (`bundleRelease`, upload key in `~/.config/lauk/`, signer = keystore, not debug) | ✅ 52 MB, rebuilt 2026-09-17 with the RevenueCat Play public key inlined; `npm run verify:artifact` PASS (key present, upload-key signed, manifest = INTERNET · ACCESS_NETWORK_STATE · VIBRATE · BILLING) |
 | Metro bundle contains every RevenueCat call + the content                                           | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                                                                                                            |
-| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — not yet run (as of 2026-09-23)**; screenshot lands in `docs/proof/` when it is                                                                                                                |
-| Cold-start entitlement read-back + RevenueCat customer page                                         | **pending — not yet run (as of 2026-09-23)**                                                                                                                                                              |
-| Play Billing sandbox purchase (license tester)                                                      | **pending — not yet run (as of 2026-09-23)**                                                                                                                                                              |
+| Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — not yet run (as of 2026-09-26)**; screenshot lands in `docs/proof/` when it is                                                                                                                |
+| Cold-start entitlement read-back + RevenueCat customer page                                         | **pending — not yet run (as of 2026-09-26)**                                                                                                                                                              |
+| Play Billing sandbox purchase (license tester)                                                      | **pending — not yet run (as of 2026-09-26)**                                                                                                                                                              |
 | One real-money purchase, labelled who paid                                                          | **pending** (fallback: builder's second Google account, labelled "self-purchase, real money")                                                                                                             |
 | Play production submission                                                                          | **pending** — not yet published; no live listing is claimed anywhere                                                                                                                                      |
 | Demo video (≤ 2 min, handheld, real table, real plate)                                              | **pending**                                                                                                                                                                                               |
@@ -62,7 +62,7 @@ the kill criterion applies to the idea, not to the caveat. **No rows exist yet; 
 ## 5. What still breaks or is unfinished (honest list, updated per build day)
 
 - The canvas has never run on a physical device with a live RevenueCat key — the SDK calls are verified against the
-  published typings, the Metro bundle and the signed release AAB, not yet against live offerings on a device (as of 2026-09-23).
+  published typings, the Metro bundle and the signed release AAB, not yet against live offerings on a device (as of 2026-09-26).
 - Paywall templates are dashboard-authored; their copy is written and lint-checked in `docs/paywall-copy.md` and the
   paywall on the `decks` offering was published 2026-09-16, but the rendered paywalls are not yet screenshotted on a device.
 - Currency labels beyond IDR/USD are tier ceilings, not exact prices (by design — only IDR has authored reference prices).
