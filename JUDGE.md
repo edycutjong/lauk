@@ -48,4 +48,4 @@ There is no offline/mock/demo flag anywhere. Without a key the app runs with eve
 
 ## Links
 
-[Repo](https://github.com/edycutjong/lauk) · [Site](https://edycutjong.github.io/lauk/) · [Privacy policy](https://edycutjong.github.io/lauk/privacy.html) · [CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml) · Play listing — _pending publication_ · Demo video — _pending_ · [DEMO.md](DEMO.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [docs/RANKER.md](docs/RANKER.md)
+[Repo](https://github.com/edycutjong/lauk) · [Site](https://lauk.edycu.dev/) · [Privacy policy](https://lauk.edycu.dev/privacy.html) · [CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml) · Play listing — _pending publication_ · Demo video — _pending_ · [DEMO.md](DEMO.md) · [ARCHITECTURE.md](ARCHITECTURE.md) · [docs/RANKER.md](docs/RANKER.md)

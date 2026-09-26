@@ -8,7 +8,7 @@
 
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="Lauk — The bought plate's hollow pillars, terracotta outlines, fill amber the instant one cheap add lands." />
 
-[![Site](https://img.shields.io/badge/Site-edycutjong.github.io%2Flauk-e8a33d?style=for-the-badge)](https://edycutjong.github.io/lauk/) ![Google Play — production release pending](https://img.shields.io/badge/Google_Play-release_pending-414141?style=for-the-badge&logo=googleplay&logoColor=fff) [![Shipaton 2026](https://img.shields.io/badge/Devpost-RevenueCat_Shipaton_2026-8b5cf6?style=for-the-badge)](https://revenuecat-shipaton-2026.devpost.com/)
+[![Site](https://img.shields.io/badge/Site-edycutjong.github.io%2Flauk-e8a33d?style=for-the-badge)](https://lauk.edycu.dev/) ![Google Play — production release pending](https://img.shields.io/badge/Google_Play-release_pending-414141?style=for-the-badge&logo=googleplay&logoColor=fff) [![Shipaton 2026](https://img.shields.io/badge/Devpost-RevenueCat_Shipaton_2026-8b5cf6?style=for-the-badge)](https://revenuecat-shipaton-2026.devpost.com/)
 
 [For the judge → JUDGE.md](JUDGE.md) · [The demo query](#-the-ten-second-flow) · [Run the tests](#-run-it-without-credentials) · [RevenueCat integration](#-revenuecat-is-the-engine)
 
