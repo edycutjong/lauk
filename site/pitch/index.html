@@ -1137,7 +1137,10 @@
         let i = 0;
         const fit = () => {
           if (document.body.classList.contains('grid')) return;
-          const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+          const s = Math.min(
+            (document.documentElement.clientWidth || innerWidth) / 1920,
+            (document.documentElement.clientHeight || innerHeight) / 1080,
+          );
           stage.style.transform = `scale(${s}) translate(-50%, -50%)`;
         };
         const frozen = document.getElementById('frozen');
