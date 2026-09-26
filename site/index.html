@@ -3,190 +3,1709 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lauk — one cheap add makes the meal you already bought satisfying</title>
+    <title>Lauk — your lunch is paid for. Lauk asks what it's missing.</title>
     <meta
       name="description"
-      content="Lauk is a ten-second plate check. Tap the meal in front of you and what you would still spend; get three cheap adds ranked by which hollow part of the plate they fix. No calories, no camera, no account."
+      content="Tap the plate you already bought and what you'd still spend. Lauk returns three one-add upgrades, cheapest first, scored on five pillars: filling, fresh, rich, bright, crunch. No counting, no camera, no account."
     />
+    <meta name="theme-color" content="#F4EDE1" />
+    <link rel="canonical" href="https://edycutjong.github.io/lauk/" />
     <meta property="og:site_name" content="Lauk" />
-    <meta property="og:title" content="Lauk — the plate you already bought" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://edycutjong.github.io/lauk/" />
+    <meta property="og:title" content="Your lunch is paid for. Lauk asks what it's missing." />
     <meta
       property="og:description"
-      content="Three cheap adds, cheapest first, for the meal already in front of you. No calorie counting."
+      content="Three one-add upgrades, cheapest first, for the meal already in front of you. Built for RevenueCat Shipaton 2026."
     />
-    <meta property="og:url" content="https://edycutjong.github.io/lauk/" />
     <meta property="og:image" content="https://edycutjong.github.io/lauk/og-image.png" />
     <meta property="og:image:width" content="2400" />
     <meta property="og:image:height" content="1260" />
-    <meta property="og:type" content="website" />
+    <meta
+      property="og:image:alt"
+      content="Lauk: the pillar ring around a terracotta plate, three cheap adds ranked cheapest first."
+    />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Your lunch is paid for. Lauk asks what it's missing." />
+    <meta
+      name="twitter:description"
+      content="Three one-add upgrades, cheapest first, for the meal already in front of you."
+    />
     <meta name="twitter:image" content="https://edycutjong.github.io/lauk/og-image.png" />
-    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Mono:wght@400;500&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --bg: #1b1917;
-        --card: #252220;
-        --hi: #f5f1ea;
-        --mid: #b9b0a4;
-        --sated: #e8a33d;
-        --line: #3a3531;
+        --bg: #f4ede1; /* bone-white enamel */
+        --bg-2: #fffdf8; /* order-slip paper */
+        --ink: #1b1917;
+        --muted: #5e554c;
+        --before: #c8553d; /* state: hollow pillar */
+        --after: #f2b441; /* state: lit pillar — fill only */
+        --after-deep: #e39a2e;
+        --rim: #b4482f;
+        --rule: rgba(27, 25, 23, 0.14);
+        --table: #1b1917;
+        --table-ink: #f5efe6;
+        --table-muted: #b8afa3;
+        --font-display: 'Bricolage Grotesque', 'Arial Narrow', sans-serif;
+        --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+        --font-data: 'DM Mono', ui-monospace, Menlo, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
-      body {
+      * {
+        box-sizing: border-box;
         margin: 0;
+      }
+      html,
+      body {
+        overflow-x: clip;
+      }
+      html {
         background: var(--bg);
-        color: var(--hi);
-        font-family: Nunito, Inter, system-ui, sans-serif;
-        line-height: 1.55;
+        color: var(--ink);
+        font: 400 17px/1.6 var(--font-body);
+        scroll-behavior: smooth;
+        scrollbar-color: var(--rim) var(--bg);
+        caret-color: var(--rim);
       }
-      main {
-        max-width: 860px;
+      ::selection {
+        background: var(--rim);
+        color: var(--bg-2);
+      }
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--rim);
+        border: 3px solid var(--bg);
+        border-radius: 99px;
+      }
+      /* enamel speckle — the chipped tin plate */
+      body {
+        background:
+          radial-gradient(circle at 20% 30%, rgba(27, 25, 23, 0.05) 1px, transparent 1.5px) 0 0 /
+            23px 23px,
+          radial-gradient(circle at 70% 60%, rgba(180, 72, 47, 0.06) 1px, transparent 1.6px) 0 0 /
+            37px 37px,
+          var(--bg);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--rim);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      .wrap {
+        max-width: 1240px;
         margin: 0 auto;
-        padding: 56px 20px 72px;
+        padding: 0 clamp(16px, 5vw, 64px);
       }
-      .kicker {
-        font-family:
-          ui-monospace,
-          JetBrains Mono,
-          monospace;
-        font-size: 13px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--sated);
+      .rimline {
+        height: 10px;
+        background: var(--rim);
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18);
       }
-      h1 {
-        font-size: clamp(34px, 6vw, 56px);
-        line-height: 1.05;
-        letter-spacing: -0.02em;
-        margin: 12px 0 16px;
+      .skip {
+        position: absolute;
+        left: -999px;
+        top: 12px;
+        background: var(--ink);
+        color: var(--bg);
+        padding: 8px 14px;
+        z-index: 9;
       }
-      h1 em {
-        font-style: normal;
-        color: var(--sated);
+      .skip:focus {
+        left: 12px;
       }
-      .lede {
-        font-size: 19px;
-        color: var(--mid);
-        max-width: 640px;
-      }
-      .ctas {
+
+      /* nav */
+      nav {
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin: 28px 0 40px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        gap: 20px;
       }
-      .btn {
-        display: inline-block;
-        padding: 12px 20px;
-        border-radius: 999px;
-        font-weight: 700;
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font: 800 22px var(--font-body);
         text-decoration: none;
-        border: 1px solid var(--line);
-        color: var(--hi);
+      }
+      .brand img {
+        width: 34px;
+        height: 34px;
+      }
+      .brand b {
+        color: var(--rim);
+      }
+      .brand img {
+        transition: transform 0.4s var(--ease);
+      }
+      .brand:hover img {
+        transform: rotate(-72deg);
+      }
+      .brand:active img {
+        transform: rotate(-72deg) scale(0.9);
+      }
+      .lede a {
+        text-decoration-color: var(--rim);
+        text-underline-offset: 3px;
         transition:
-          transform 0.12s ease,
-          background 0.12s ease;
+          color 0.2s,
+          text-decoration-thickness 0.2s;
+      }
+      .lede a:hover {
+        color: var(--rim);
+        text-decoration-thickness: 3px;
+      }
+      .lede a:active {
+        background: rgba(180, 72, 47, 0.12);
+      }
+      nav ul {
+        display: flex;
+        gap: 6px;
+        list-style: none;
+        padding: 0;
+        font: 500 13px var(--font-data);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      nav ul a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: var(--muted);
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      nav ul a:hover {
+        color: var(--ink);
+        background: rgba(180, 72, 47, 0.08);
+      }
+      nav ul a:active {
+        background: rgba(180, 72, 47, 0.16);
+      }
+
+      /* buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font: 800 15px var(--font-body);
+        padding: 13px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--ink);
+        border: 1.5px solid var(--ink);
+        background: transparent;
+        cursor: pointer;
+        transition:
+          transform 0.18s var(--ease),
+          box-shadow 0.18s var(--ease),
+          background 0.2s;
+      }
+      .btn svg {
+        width: 18px;
+        height: 18px;
       }
       .btn:hover {
-        transform: translateY(-1px);
-        background: var(--card);
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0 var(--ink);
+        background: var(--bg-2);
       }
-      .btn.primary {
-        background: var(--sated);
-        color: #1b1917;
-        border-color: var(--sated);
+      .btn:active {
+        transform: translate(1px, 1px);
+        box-shadow: 0 0 0 var(--ink);
       }
-      .btn[aria-disabled='true'] {
-        opacity: 0.45;
+      .btn.p {
+        background: var(--ink);
+        color: var(--bg-2);
+        box-shadow: 4px 4px 0 var(--before);
+      }
+      .btn.p:hover {
+        box-shadow: 7px 7px 0 var(--before);
+        background: #2a2622;
+      }
+      .btn.p:active {
+        box-shadow: 1px 1px 0 var(--before);
+      }
+      .btn.soon {
+        border-style: dashed;
+        color: var(--muted);
+        border-color: var(--muted);
+        cursor: default;
+      }
+      .btn.soon:hover {
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      /* hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(20px, 3vw, 48px);
+        align-items: center;
+        padding-top: 3vh;
+        padding-bottom: 6vh;
+      }
+      .tag {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font: 500 12px/1.4 var(--font-data);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border: 1.5px solid var(--ink);
+        padding: 7px 12px;
+        border-radius: 4px;
+      }
+      .tag i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--before);
+        flex: none;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-variation-settings: 'wdth' 86;
+        text-wrap: balance;
+      }
+      h1 {
+        font-size: clamp(46px, 6.2vw, 88px);
+        line-height: 0.92;
+        letter-spacing: -0.018em;
+        margin: 24px 0 26px;
+      }
+      .ringed {
+        position: relative;
+        display: inline-block;
+        color: var(--rim);
+      }
+      .ringed svg {
+        position: absolute;
+        left: -6%;
+        top: -14%;
+        width: 112%;
+        height: 128%;
+        overflow: visible;
         pointer-events: none;
       }
-      .grid {
+      .ringed path {
+        fill: none;
+        stroke: var(--rim);
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-dasharray: 900;
+        animation: draw 0.6s 0.15s var(--ease) both;
+      }
+      @keyframes draw {
+        from {
+          stroke-dashoffset: 900;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .sub {
+        max-width: 36em;
+        color: var(--muted);
+        font-size: 18px;
+      }
+      .sub strong {
+        color: var(--ink);
+        font-weight: 800;
+      }
+      .cta {
+        display: flex;
+        gap: 12px;
+        margin: 30px 0 18px;
+        flex-wrap: wrap;
+      }
+      .run {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        font: 400 13px var(--font-data);
+        color: var(--muted);
+      }
+      .copy {
+        font: 500 13px var(--font-data);
+        color: var(--ink);
+        background: var(--bg-2);
+        border: 1px solid var(--rule);
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          transform 0.15s;
+      }
+      .copy:hover {
+        border-color: var(--rim);
+      }
+      .copy:active {
+        transform: scale(0.97);
+      }
+      .copy[data-done]::after {
+        content: ' · copied';
+        color: var(--rim);
+      }
+
+      /* the counter: enamel plate + order slip */
+      .counter {
+        position: relative;
+        min-height: 640px;
+      }
+      .plate {
+        position: absolute;
+        right: 2%;
+        top: 0;
+        width: min(470px, 100%);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 35%, #fffdf8, #efe6d8 70%);
+        box-shadow:
+          0 0 0 12px var(--rim),
+          0 0 0 14px rgba(0, 0, 0, 0.12),
+          0 40px 60px -20px rgba(27, 25, 23, 0.35);
+      }
+      .plate svg {
+        position: absolute;
+        inset: 6%;
+        width: 88%;
+        height: 88%;
+      }
+      .seg {
+        stroke-width: 6;
+        stroke-linejoin: round;
+        transition: stroke 0.35s var(--ease);
+      }
+      .hollow {
+        fill: none;
+        stroke: var(--before);
+      }
+      .lit {
+        fill: var(--after);
+        stroke: var(--after-deep);
+      }
+      .half {
+        fill: none;
+        stroke: var(--after-deep);
+      }
+      .fill {
+        fill: var(--after);
+        opacity: 0;
+        transition: opacity 0.35s var(--ease);
+      }
+      .fill.on {
+        opacity: 1;
+      }
+      .slip {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 340px;
+        background: var(--bg-2);
+        padding: 20px 20px 28px;
+        font: 400 13px/1.7 var(--font-data);
+        transform: rotate(-4deg);
+        box-shadow: 0 20px 40px -12px rgba(27, 25, 23, 0.4);
+        -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100%
+          repeat-x;
+        mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100%
+          repeat-x;
+        animation: print 0.55s 0.1s var(--ease) both;
+      }
+      @keyframes print {
+        from {
+          transform: rotate(-4deg) translateY(30px);
+          opacity: 0.001;
+        }
+        to {
+          transform: rotate(-4deg);
+          opacity: 1;
+        }
+      }
+      .slip h2 {
+        font: 500 11px var(--font-data);
+        letter-spacing: 0.2em;
+        text-align: center;
+        border-bottom: 1px dashed var(--rule);
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+      }
+      .slip .r {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .slip button {
+        all: unset;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        width: calc(100% + 12px);
+        margin: 0 -6px;
+        padding: 0 6px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .slip button:hover {
+        background: rgba(242, 180, 65, 0.22);
+      }
+      .slip button:active {
+        background: rgba(242, 180, 65, 0.4);
+      }
+      .slip button:focus-visible {
+        outline: 2px solid var(--rim);
+        outline-offset: 1px;
+      }
+      .slip button[aria-pressed='true'] {
+        background: rgba(242, 180, 65, 0.3);
+      }
+      .slip button[aria-pressed='true']:hover {
+        background: rgba(242, 180, 65, 0.42);
+      }
+      .slip button[aria-pressed='true']:active {
+        background: rgba(242, 180, 65, 0.55);
+      }
+      .slip button[aria-pressed='true'] span:first-child::before {
+        content: '▸ ';
+        color: var(--rim);
+      }
+      .slip .tot {
+        border-top: 1px dashed var(--ink);
+        margin-top: 8px;
+        padding-top: 8px;
+        font-weight: 500;
+      }
+      .slip .tot b {
+        color: var(--rim);
+      }
+      .slip .pillars {
+        margin-top: 6px;
+        font-size: 11px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .slip small {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: var(--muted);
+      }
+
+      /* labels speak the world */
+      .label {
+        font: 500 12px var(--font-data);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--rim);
+      }
+      section h2 {
+        font-size: clamp(36px, 4.4vw, 60px);
+        line-height: 0.98;
+        letter-spacing: -0.015em;
+        margin: 12px 0 18px;
+        max-width: 18em;
+      }
+      .lede {
+        color: var(--muted);
+        max-width: 40em;
+      }
+      .band {
+        padding: clamp(64px, 9vw, 110px) 0;
+      }
+
+      /* receipts — a till roll */
+      .till {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-top: 34px;
+      }
+      .ticket {
+        background: var(--bg-2);
+        padding: 22px 22px 26px;
+        box-shadow: 0 16px 30px -18px rgba(27, 25, 23, 0.45);
+        -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100%
+          repeat-x;
+        mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100%
+          repeat-x;
+      }
+      .ticket:nth-child(2) {
+        transform: rotate(1deg);
+      }
+      .ticket:nth-child(3) {
+        transform: rotate(-0.8deg);
+      }
+      .ticket b {
+        display: block;
+        font: 800 clamp(44px, 4.6vw, 64px) / 1 var(--font-display);
+        font-variation-settings: 'wdth' 80;
+        font-variant-numeric: tabular-nums;
+      }
+      .ticket b em {
+        font-style: normal;
+        color: var(--rim);
+      }
+      .ticket span {
+        display: block;
+        font-weight: 800;
+        margin: 8px 0 12px;
+      }
+      .ticket code {
+        display: block;
+        font: 400 12px var(--font-data);
+        color: var(--muted);
+        border-top: 1px dashed var(--rule);
+        padding-top: 10px;
+        word-break: break-word;
+      }
+
+      /* the table — dark band holding the real screens */
+      .table {
+        background: var(--table);
+        color: var(--table-ink);
+        position: relative;
+      }
+      .table::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.06;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      }
+      .table .label {
+        color: var(--after);
+      }
+      .table .lede {
+        color: var(--table-muted);
+      }
+      .pair {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: clamp(24px, 4vw, 56px);
+        align-items: start;
+        margin-top: 36px;
+      }
+      .shots {
+        display: flex;
         gap: 14px;
       }
+      .shots figure {
+        width: 220px;
+      }
+      .shots img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 22px;
+        border: 1px solid rgba(245, 239, 230, 0.14);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+      }
+      .shots figcaption,
+      .cap {
+        font: 400 12px/1.5 var(--font-data);
+        color: var(--table-muted);
+        margin-top: 12px;
+      }
+      .term {
+        min-width: 0;
+        background: #131110;
+        border: 1px solid rgba(245, 239, 230, 0.14);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .term header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(245, 239, 230, 0.1);
+        font: 400 12px var(--font-data);
+        color: var(--table-muted);
+      }
+      .term header button {
+        font: 500 12px var(--font-data);
+        color: var(--table-ink);
+        background: transparent;
+        border: 1px solid rgba(245, 239, 230, 0.25);
+        border-radius: 6px;
+        padding: 4px 10px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.15s;
+      }
+      .term header button:hover {
+        border-color: var(--after);
+        background: rgba(242, 180, 65, 0.1);
+      }
+      .term header button:active {
+        transform: scale(0.96);
+      }
+      .term header button:focus-visible {
+        outline-color: var(--after);
+      }
+      .term pre {
+        margin: 0;
+        padding: 20px 22px 24px;
+        font: 400 14px/1.75 var(--font-data);
+        color: var(--table-muted);
+        overflow-x: auto;
+        min-height: 21em;
+      }
+      .term .c {
+        color: var(--table-ink);
+      }
+      .term .a {
+        color: var(--after);
+      }
+      .term .t {
+        color: #e0785f;
+      }
+
+      /* the flow — six real screens as order slips */
+      .slips {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 18px;
+        margin-top: 40px;
+        list-style: none;
+        padding: 0;
+      }
+      .slips li {
+        background: var(--bg-2);
+        padding: 10px 10px 14px;
+        box-shadow: 0 18px 36px -14px rgba(27, 25, 23, 0.4);
+        transition: transform 0.3s var(--ease);
+      }
+      .slips li:nth-child(odd) {
+        transform: rotate(-1.6deg);
+      }
+      .slips li:nth-child(even) {
+        transform: rotate(1.2deg) translateY(16px);
+      }
+      .slips li:hover {
+        transform: rotate(0) translateY(-6px);
+      }
+      .slips img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .slips p {
+        font: 400 12px/1.5 var(--font-data);
+        margin-top: 10px;
+      }
+      .slips p b {
+        color: var(--rim);
+        font-weight: 500;
+      }
+
+      /* bento */
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 18px;
+        margin-top: 40px;
+      }
       .card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 18px;
+        background: var(--bg-2);
+        border: 1.5px solid var(--ink);
+        border-radius: 14px;
+        padding: 26px;
+        position: relative;
+        box-shadow: 5px 5px 0 rgba(27, 25, 23, 0.9);
+      }
+      .card:nth-child(1) {
+        grid-column: span 4;
+      }
+      .card:nth-child(2) {
+        grid-column: span 2;
+      }
+      .card:nth-child(3) {
+        grid-column: span 2;
+      }
+      .card:nth-child(4) {
+        grid-column: span 2;
+      }
+      .card:nth-child(5) {
+        grid-column: span 2;
+      }
+      .card svg.ic {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 14px;
       }
       .card h3 {
-        margin: 0 0 6px;
-        font-size: 16px;
+        font-size: 26px;
+        line-height: 1.05;
+        margin-bottom: 8px;
       }
       .card p {
-        margin: 0;
-        color: var(--mid);
-        font-size: 15px;
+        color: var(--muted);
+        font-size: 16px;
       }
-      footer {
-        margin-top: 56px;
-        padding-top: 20px;
-        border-top: 1px solid var(--line);
-        color: var(--mid);
-        font-size: 14px;
+      .chip {
+        display: inline-block;
+        margin-top: 14px;
+        font: 500 12px var(--font-data);
+        background: var(--bg);
+        border: 1px solid var(--rule);
+        padding: 4px 9px;
+        border-radius: 5px;
+      }
+      .calls {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 6px;
+        margin-top: 14px;
       }
-      footer a {
-        color: var(--sated);
+      .calls code {
+        font: 400 12px var(--font-data);
+        background: var(--bg);
+        border: 1px solid var(--rule);
+        padding: 3px 7px;
+        border-radius: 4px;
+      }
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .price {
+        background: var(--bg);
+        border-radius: 8px;
+        padding: 12px 14px;
+        border-top: 4px solid var(--before);
+      }
+      .price.un {
+        border-top-color: var(--after);
+      }
+      .price strong {
+        display: block;
+        font: 800 20px/1.1 var(--font-display);
+      }
+      .price span {
+        font: 400 12px/1.5 var(--font-data);
+        color: var(--muted);
+      }
+
+      /* honest */
+      .notes {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 22px;
+        margin-top: 40px;
+      }
+      blockquote {
+        background: var(--bg-2);
+        padding: 26px 24px 22px;
+        border-left: 5px solid var(--rim);
+        box-shadow: 0 16px 30px -18px rgba(27, 25, 23, 0.45);
+        font: 700 19px/1.4 var(--font-body);
+      }
+      blockquote:nth-child(2) {
+        transform: translateY(26px);
+      }
+      blockquote footer {
+        margin-top: 14px;
+        font: 400 12px var(--font-data);
+        color: var(--muted);
+      }
+
+      /* faq */
+      .faq {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: clamp(24px, 5vw, 80px);
+        align-items: start;
+      }
+      details {
+        border-bottom: 1.5px solid var(--ink);
+      }
+      details:first-child {
+        border-top: 1.5px solid var(--ink);
+      }
+      summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 4px;
+        font: 800 21px/1.25 var(--font-display);
+        font-variation-settings: 'wdth' 90;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: '+';
+        font-family: var(--font-data);
+        color: var(--rim);
+        transition: transform 0.25s var(--ease);
+      }
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+      summary:hover {
+        color: var(--rim);
+      }
+      summary:active {
+        background: rgba(180, 72, 47, 0.08);
+      }
+      details p {
+        padding: 0 4px 20px;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+      details code {
+        font: 400 14px var(--font-data);
+        color: var(--ink);
+      }
+
+      footer.site {
+        border-top: 10px solid var(--rim);
+        background: var(--table);
+        color: var(--table-muted);
+        padding: 40px 0 50px;
+        font: 400 13px var(--font-data);
+      }
+      footer.site .wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      footer.site nav {
+        padding: 0;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      footer.site nav a {
+        color: var(--table-ink);
         text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      footer.site nav a:hover {
+        background: rgba(242, 180, 65, 0.14);
+      }
+      footer.site nav a:active {
+        background: rgba(242, 180, 65, 0.26);
+      }
+      footer.site a:focus-visible {
+        outline-color: var(--after);
+      }
+
+      @media (max-width: 1000px) {
+        .hero,
+        .pair,
+        .faq {
+          grid-template-columns: 1fr;
+        }
+        .counter {
+          min-height: 520px;
+          max-width: 520px;
+        }
+        .till {
+          grid-template-columns: 1fr 1fr;
+        }
+        .slips {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .bento {
+          grid-template-columns: 1fr 1fr;
+        }
+        .card:nth-child(n) {
+          grid-column: span 1;
+        }
+        .card:nth-child(1) {
+          grid-column: span 2;
+        }
+        .notes {
+          grid-template-columns: 1fr;
+        }
+        blockquote:nth-child(2) {
+          transform: none;
+        }
+      }
+      @media (max-width: 640px) {
+        nav ul li:not(.keep) {
+          display: none;
+        }
+        .counter {
+          min-height: 580px;
+        }
+        .plate {
+          width: min(300px, 86vw);
+          right: 4px;
+        }
+        .slip {
+          width: min(318px, 92vw);
+          font-size: 12px;
+        }
+        .slip .pillars {
+          font-size: 10px;
+        }
+        .shots figure {
+          width: 50%;
+        }
+        .slips {
+          grid-template-columns: 1fr 1fr;
+        }
+        .bento,
+        .board {
+          grid-template-columns: 1fr;
+        }
+        .card:nth-child(1) {
+          grid-column: span 1;
+        }
+        .till {
+          gap: 12px;
+        }
+        .ticket {
+          padding: 18px 14px 22px;
+        }
+        .term pre {
+          font-size: 11.5px;
+          padding: 16px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      @media print {
+        html,
+        body {
+          background: #fff;
+        }
+        .rimline,
+        nav ul,
+        .cta,
+        .run,
+        .term header button,
+        .skip {
+          display: none;
+        }
+        .table,
+        footer.site {
+          background: #fff;
+          color: #000;
+        }
+        .term {
+          background: #fff;
+          border-color: #999;
+        }
+        .term pre,
+        .term .c,
+        .term .a,
+        .term .t,
+        .table .lede,
+        .cap,
+        .shots figcaption {
+          color: #000;
+        }
+        .slip,
+        .ringed path,
+        .slips li,
+        .ticket {
+          animation: none;
+          transform: none;
+          box-shadow: none;
+        }
+        details > p {
+          display: block;
+        }
+        section,
+        .card,
+        blockquote {
+          break-inside: avoid;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <div class="kicker">
-        RevenueCat Shipaton 2026 · Influencer Award — Nutrition &amp; Healthy Eating
-      </div>
-      <h1>One cheap add makes the meal you <em>already bought</em> satisfying.</h1>
-      <p class="lede">
-        Lauk is a ten-second plate check. Tap the meal in front of you and what you would still
-        spend. Get three cheap adds, cheapest first, ranked by which hollow part of the plate they
-        fix — filling, fresh, rich, bright, crunch. Never calories.
-      </p>
-      <div class="ctas">
-        <span class="btn primary" aria-disabled="true">Google Play — coming soon</span>
-        <a class="btn" href="https://github.com/edycutjong/lauk">Source on GitHub</a>
-        <a class="btn" href="privacy.html">Privacy policy</a>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h3>Starts from the plate you have</h3>
-          <p>
-            12 universal plates across four decks — counter, instant, delivery, cafeteria. No
-            database, no camera, no typing.
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="rimline"></div>
+    <header class="wrap">
+      <nav aria-label="Primary">
+        <a class="brand" href="./" aria-label="Lauk home"
+          ><img src="assets/icon.svg" alt="" width="34" height="34" /><span>Lau<b>k</b></span></a
+        >
+        <ul>
+          <li><a href="#check">The plate check</a></li>
+          <li><a href="#revenuecat">RevenueCat</a></li>
+          <li><a href="#honest">Honest</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li class="keep"><a href="pitch/">Pitch deck</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="wrap hero" aria-labelledby="h">
+        <div>
+          <span class="tag"><i></i>RevenueCat Shipaton 2026 · Nutrition &amp; Healthy Eating</span>
+          <h1 id="h">
+            Your lunch is paid for. Lauk asks what it's
+            <span class="ringed"
+              >missing.<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
+                <path
+                  d="M40 20 C120 -4 262 4 290 48 C312 92 190 118 96 108 C24 100 -4 70 14 42 C28 22 70 12 118 10"
+                /></svg
+            ></span>
+          </h1>
+          <p class="sub">
+            Rice and one side from the stall downstairs, already bought, eaten in minutes. Tap it,
+            tap what you'd spend, and Lauk returns three one-add upgrades, cheapest first — from
+            <strong>40 hand-authored adds</strong> across <strong>12 plates</strong>. Raw veg +
+            chili takes this plate from <strong>2 of 5 to 4 of 5</strong>.
+          </p>
+          <div class="cta">
+            <a class="btn p" href="https://github.com/edycutjong/lauk"
+              ><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path
+                  d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"
+                /></svg
+              >View on GitHub</a
+            >
+            <a class="btn" href="pitch/"
+              ><svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="12" rx="2" />
+                <path d="M8 20h8M12 16v4" /></svg
+              >Pitch deck</a
+            >
+            <span class="btn soon" title="The Google Play production release is pending review"
+              >Google Play · coming soon</span
+            >
+          </div>
+          <p class="run">
+            <span>offline · no account · no backend</span>
+            <button class="copy" type="button" data-copy="npm run check -- rice_side 1">
+              $ npm run check -- rice_side 1
+            </button>
           </p>
         </div>
-        <div class="card">
-          <h3>Cheapest first, always</h3>
-          <p>
-            40 hand-authored adds you can actually get at that kind of counter. A lime wedge before
-            a fried egg.
+
+        <div class="counter" id="plate">
+          <div class="plate">
+            <svg viewBox="-215 -215 430 430" role="img" aria-labelledby="ringt">
+              <title id="ringt">
+                The pillar ring around the plate: filling lit, rich half-lit; the add you pick
+                lights more.
+              </title>
+              <defs>
+                <clipPath id="in"><circle r="180" /></clipPath>
+              </defs>
+              <circle r="118" fill="#C8553D" />
+              <path
+                class="seg lit"
+                d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"
+              />
+              <path
+                class="fill"
+                id="freshf"
+                clip-path="url(#in)"
+                d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"
+              />
+              <path
+                class="seg hollow"
+                id="fresh"
+                d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"
+              />
+              <path
+                class="fill on"
+                clip-path="url(#in)"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="seg half"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="fill"
+                id="brightf"
+                clip-path="url(#in)"
+                d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"
+              />
+              <path
+                class="seg hollow"
+                id="bright"
+                d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"
+              />
+              <path
+                class="seg hollow"
+                d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z"
+              />
+              <text
+                id="lit"
+                y="14"
+                text-anchor="middle"
+                fill="#F5EFE6"
+                style="font: 800 46px var(--font-display)"
+              >
+                2 of 5
+              </text>
+              <text
+                y="46"
+                text-anchor="middle"
+                fill="#F5EFE6"
+                style="font: 500 14px var(--font-data); letter-spacing: 0.2em"
+              >
+                LIT
+              </text>
+            </svg>
+          </div>
+          <div class="slip">
+            <h2>LAUK · ORDER SLIP</h2>
+            <div class="r"><span>Rice plate + one side</span><span>bought</span></div>
+            <div class="r"><span>ceiling · Small</span><span>≤ Rp 2k</span></div>
+            <button type="button" data-add="lime" aria-pressed="false">
+              <span>1 Lime wedge</span><span>Free</span>
+            </button>
+            <button type="button" data-add="veg" aria-pressed="false">
+              <span>2 Raw veg + chili</span><span>Rp 2.000</span>
+            </button>
+            <div class="r tot">
+              <span>plate</span><span>2 of 5 → <b id="tot">2 of 5 lit</b></span>
+            </div>
+            <div class="pillars" id="pil">filling ● fresh ○ rich ◐ bright ○ crunch ○</div>
+            <small>Eat until satisfied, not until empty.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" aria-labelledby="rung">
+        <div class="wrap">
+          <p class="label">Rung up at the counter · every number is in the repo</p>
+          <h2 id="rung">Checked before a single plate is served.</h2>
+          <div class="till">
+            <div class="ticket">
+              <b data-count="76">76</b><span>tests passing</span><code>npm test</code>
+            </div>
+            <div class="ticket">
+              <b data-count="150000">150,000</b><span>queries checked, 0 violations</span
+              ><code>tests/exhaustive.test.ts</code>
+            </div>
+            <div class="ticket">
+              <b data-count="12">12</b><span>RevenueCat calls, one file</span
+              ><code>app/src/rc/purchases.ts</code>
+            </div>
+            <div class="ticket">
+              <b><span data-count="22" style="display: inline; margin: 0">22</span> → <em>0</em></b
+              ><span>banned words found in the copy</span><code>app/src/core/lint.ts</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="table band" id="check" aria-labelledby="same">
+        <div class="wrap">
+          <p class="label">The plate check · the same answer, twice</p>
+          <h2 id="same">The app and the terminal agree — one pure function.</h2>
+          <p class="lede">
+            The ranker in <code>app/src/core/rank.ts</code> runs on the phone and in your terminal.
+            Same plate, same ceiling, same two cards, deterministic across 1,000 runs.
+          </p>
+          <div class="pair">
+            <div class="shots">
+              <figure>
+                <img
+                  src="assets/04-one-add.webp"
+                  width="720"
+                  height="1280"
+                  alt="Lauk on Android: Rice plate + one side, Small ≤ $1, 2 of 5 lit. Lime wedge, free, lifts bright; raw veg + chili, ≤ $1, lifts fresh and bright."
+                />
+                <figcaption>the cards · 2 of 5 lit</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="assets/05-lit.webp"
+                  width="720"
+                  height="1280"
+                  loading="lazy"
+                  alt="After tapping lime wedge: 3 of 5 lit, and the line: Eat until satisfied, not until empty."
+                />
+                <figcaption>tap one · 3 of 5 lit</figcaption>
+              </figure>
+            </div>
+            <div class="term">
+              <header>
+                <span>zsh — lauk</span
+                ><button type="button" id="replay" aria-label="Replay the terminal run">
+                  ↻ replay
+                </button>
+              </header>
+              <pre id="tape" tabindex="0"><span class="c">$ npm run check -- rice_side 1</span>
+
+Rice plate + one side (nasi + 1 lauk) · Small ≤ Rp 2k
+plate  filling <span class="a">●</span>  fresh <span class="t">○</span>  rich <span class="a">◐</span>  bright <span class="t">○</span>  crunch <span class="t">○</span>   2 of 5 lit
+
+1. Lime wedge (jeruk nipis) — Free → lifts bright
+   after  filling <span class="a">●</span>  fresh <span class="t">○</span>  rich <span class="a">◐</span>  bright <span class="a">◐</span>  crunch <span class="t">○</span>   3 of 5 lit
+2. Raw veg + chili (lalapan + sambal) — Rp 2.000 → lifts fresh + bright
+   after  filling <span class="a">●</span>  fresh <span class="a">◐</span>  rich <span class="a">◐</span>  bright <span class="a">◐</span>  crunch <span class="t">○</span>   <span class="a">4 of 5 lit</span>
+
+<span class="c">Eat until satisfied, not until empty.</span></pre>
+            </div>
+          </div>
+          <p class="cap">
+            Screens: signed release APK on an Android 15 emulator, 2026-09-26, USD locale. Terminal:
+            run 2026-09-26, IDR reference prices. Same tier, same two cards — outside IDR the labels
+            are tier ceilings, not exact prices.
           </p>
         </div>
-        <div class="card">
-          <h3>No calorie counting</h3>
-          <p>
-            The build fails if any of 22 diet words appears in the copy. Eat until satisfied, not
-            until empty.
+      </section>
+
+      <section class="band" aria-labelledby="flow">
+        <div class="wrap">
+          <p class="label">On the counter · six real screens, one flow</p>
+          <h2 id="flow">From the plate you bought to a face after the meal.</h2>
+          <p class="lede">
+            No search, no camera, no typing. The faces at the end are the only tracking — they nudge
+            tomorrow's cards, and empty days stay blank.
           </p>
+          <ol class="slips">
+            <li>
+              <img
+                src="assets/01-onboarding.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="Onboarding: Where do you mostly eat? Student housing, An office, On the road."
+              />
+              <p><b>Slip 1</b> · where you eat sets the offer</p>
+            </li>
+            <li>
+              <img
+                src="assets/02-plates.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="Plates: What is in front of you? Checks today 0 of 1; Counter, Instant, Delivery and Cafeteria decks."
+              />
+              <p><b>Slip 2</b> · tap the plate · 12 tiles</p>
+            </li>
+            <li>
+              <img
+                src="assets/03-budget.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="How much more would you spend? Free, Small, Medium, Treat."
+              />
+              <p><b>Slip 3</b> · tap what you'd spend</p>
+            </li>
+            <li>
+              <img
+                src="assets/04-one-add.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="One add that would help: 2 of 5 lit, lime wedge free, raw veg + chili ≤ $1."
+              />
+              <p><b>Slip 4</b> · cheapest add first</p>
+            </li>
+            <li>
+              <img
+                src="assets/05-lit.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="Lime wedge: 3 of 5 lit. Eat until satisfied, not until empty."
+              />
+              <p><b>Slip 5</b> · the ring fills</p>
+            </li>
+            <li>
+              <img
+                src="assets/06-after-meal.webp"
+                width="720"
+                height="1280"
+                loading="lazy"
+                alt="After the meal — how was it? still hungry, fine, satisfied; this week's strip."
+              />
+              <p><b>Slip 6</b> · one face, no streaks</p>
+            </li>
+          </ol>
         </div>
-        <div class="card">
-          <h3>Honest monetization</h3>
-          <p>
-            One free check a day on the Counter deck. Any one-time deck adds that deck and three
-            checks a day; Unlimited is a subscription with a 7-day trial — every deck, no cap.
-            Powered by RevenueCat.
-          </p>
+      </section>
+
+      <section class="band" id="revenuecat" aria-labelledby="how" style="padding-top: 20px">
+        <div class="wrap">
+          <p class="label">What's in the kitchen</p>
+          <h2 id="how">Five parts, one ten-second flow.</h2>
+          <div class="bento">
+            <article class="card">
+              <svg class="ic" viewBox="0 0 44 44" aria-hidden="true">
+                <rect x="3" y="3" width="38" height="38" rx="9" fill="#F2B441" />
+                <path
+                  d="M13 30 18 14h8l5 16M15.5 24h13"
+                  fill="none"
+                  stroke="#1B1917"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <h3>RevenueCat is the gate, not a tip jar</h3>
+              <p>
+                A locked deck opens a paywall named after the plate you tapped; the second check of
+                the day opens <code>presentPaywallIfNeeded</code>; a Targeting rule serves the
+                Semester pass to student housing. Remove RevenueCat and every deck but Counter stays
+                locked.
+              </p>
+              <div class="board" aria-label="Tiers">
+                <div class="price">
+                  <strong>Free</strong><span>Counter deck · 1 check a day</span>
+                </div>
+                <div class="price">
+                  <strong>Any one deck</strong><span>once · that deck + 3 checks a day</span>
+                </div>
+                <div class="price un">
+                  <strong>Unlimited</strong
+                  ><span>every deck, no cap · 7 days free once the Play products are live</span>
+                </div>
+              </div>
+              <div class="calls" aria-label="The 12 SDK calls">
+                <code>configure</code><code>setAttributes</code
+                ><code>syncAttributesAndOfferingsIfNeeded</code><code>getOfferings</code
+                ><code>getCurrentOfferingForPlacement</code><code>presentPaywall</code
+                ><code>presentPaywallIfNeeded</code><code>getCustomerInfo</code
+                ><code>addCustomerInfoUpdateListener</code><code>purchasePackage</code
+                ><code>restorePurchases</code><code>presentCustomerCenter</code>
+              </div>
+            </article>
+            <article class="card">
+              <svg class="ic" viewBox="0 0 44 44" aria-hidden="true">
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#C8553D" stroke-width="5" />
+                <path d="M22 4a18 18 0 0 1 17 12" fill="none" stroke="#F2B441" stroke-width="5" />
+                <circle cx="22" cy="22" r="9" fill="#C8553D" />
+              </svg>
+              <h3>Five pillars, never a count</h3>
+              <p>
+                Filling, fresh, rich, bright, crunch. A hollow pillar is an outline, a lit one is
+                amber. No number about the food is ever shown.
+              </p>
+              <span class="chip">core/pillars.ts</span>
+            </article>
+            <article class="card">
+              <svg class="ic" viewBox="0 0 44 44" aria-hidden="true">
+                <path
+                  d="M8 12h28M8 22h20M8 32h12"
+                  stroke="#1B1917"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+                <circle cx="36" cy="32" r="5" fill="#F2B441" />
+              </svg>
+              <h3>Cheapest first, same every time</h3>
+              <p>
+                One pure function ranks 40 adds by what they lift and what they cost. Offline,
+                deterministic across 1,000 runs.
+              </p>
+              <span class="chip">core/rank.ts · p95 6.0 µs</span>
+            </article>
+            <article class="card">
+              <svg class="ic" viewBox="0 0 44 44" aria-hidden="true">
+                <rect
+                  x="4"
+                  y="6"
+                  width="16"
+                  height="14"
+                  rx="3"
+                  fill="none"
+                  stroke="#1B1917"
+                  stroke-width="3"
+                />
+                <rect
+                  x="24"
+                  y="6"
+                  width="16"
+                  height="14"
+                  rx="3"
+                  fill="none"
+                  stroke="#1B1917"
+                  stroke-width="3"
+                />
+                <rect x="4" y="24" width="16" height="14" rx="3" fill="#F2B441" />
+                <rect
+                  x="24"
+                  y="24"
+                  width="16"
+                  height="14"
+                  rx="3"
+                  fill="none"
+                  stroke="#C8553D"
+                  stroke-width="3"
+                />
+              </svg>
+              <h3>Starts from the bought plate</h3>
+              <p>
+                12 plate tiles in four decks — Counter, Instant, Delivery, Cafeteria. Universal
+                lunches, local currency.
+              </p>
+              <span class="chip">12 plates · 4 decks</span>
+            </article>
+            <article class="card">
+              <svg class="ic" viewBox="0 0 44 44" aria-hidden="true">
+                <circle cx="9" cy="22" r="6" fill="none" stroke="#1B1917" stroke-width="3" />
+                <circle cx="22" cy="22" r="6" fill="none" stroke="#1B1917" stroke-width="3" />
+                <circle cx="35" cy="22" r="6" fill="#F2B441" stroke="#1B1917" stroke-width="3" />
+              </svg>
+              <h3>Three faces, no streaks</h3>
+              <p>
+                Still hungry, fine, satisfied. Faces nudge five pillar weights by η = 0.15;
+                resettable in Settings.
+              </p>
+              <span class="chip">core/weights.ts</span>
+            </article>
+          </div>
         </div>
-      </div>
-      <footer>
-        <span>Built solo for RevenueCat Shipaton 2026.</span
-        ><a href="https://github.com/edycutjong/lauk">GitHub</a><a href="privacy.html">Privacy</a
-        ><a href="mailto:edy.cu@live.com">Contact</a>
-      </footer>
+      </section>
+
+      <section class="band" id="honest" aria-labelledby="hon" style="padding-top: 20px">
+        <div class="wrap">
+          <p class="label">Honest by design · lifted from the repo</p>
+          <h2 id="hon">What isn't done yet, in its own words.</h2>
+          <div class="notes">
+            <blockquote>
+              “Google Play: not yet published. Nothing in this repo claims a live listing.”
+              <footer>— JUDGE.md · Honest limitations</footer>
+            </blockquote>
+            <blockquote>
+              “The release APK has run on an Android emulator (2026-09-26), not a physical device.”
+              <footer>— JUDGE.md · Honest limitations</footer>
+            </blockquote>
+            <blockquote>
+              “The test was due 2026-09-20 and has not run yet”
+              <footer>— DEMO.md · The stall test</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="faq" aria-labelledby="q">
+        <div class="wrap faq">
+          <div>
+            <p class="label">Questions a judge would ask</p>
+            <h2 id="q">Asked at the counter.</h2>
+            <p class="lede">
+              Longer answers, and the receipts behind them, live in
+              <a href="https://github.com/edycutjong/lauk/blob/main/JUDGE.md">JUDGE.md</a> and
+              <a href="https://github.com/edycutjong/lauk/blob/main/DEMO.md">DEMO.md</a>.
+            </p>
+          </div>
+          <div>
+            <details open>
+              <summary>Can I try it today?</summary>
+              <p>
+                Not from Google Play yet — the production release is pending review. The repo builds
+                it (<code>npx expo run:android</code>), and
+                <code>npm run check -- rice_side 1</code> prints the same cards in a terminal, no
+                device needed.
+              </p>
+            </details>
+            <details>
+              <summary>What does it cost?</summary>
+              <p>
+                Free: the Counter deck, 1 check a day. Any one deck, bought once: that deck plus 3
+                checks a day. Unlimited: every deck, no cap — with a 7-day free trial once the Play
+                products are live.
+              </p>
+            </details>
+            <details>
+              <summary>Is anything mocked?</summary>
+              <p>
+                No demo flag, no mock mode, no seeded user data. Without a RevenueCat key every deck
+                but Counter stays locked and the app says so.
+              </p>
+            </details>
+            <details>
+              <summary>Why no numbers about the food?</summary>
+              <p>
+                The brief asks for more satisfying meals without counting or restrictive plans. Lauk
+                ranks by five sensory pillars, and a test fails if any of 22 listed words appears in
+                the app's copy.
+              </p>
+            </details>
+            <details>
+              <summary>Does it need the internet?</summary>
+              <p>
+                The plate check doesn't: the ranker is pure TypeScript, offline, no backend, no
+                account. Buying a deck goes through Google Play via RevenueCat.
+              </p>
+            </details>
+            <details>
+              <summary>Is there a demo video?</summary>
+              <p>
+                Not yet. Until it exists, the six screens above are from the signed release build,
+                and the terminal run is reproducible from a fresh clone.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="site">
+      <div class="wrap">
+        <span>Lauk · MIT · built for RevenueCat Shipaton 2026</span>
+        <nav aria-label="Footer">
+          <a href="https://github.com/edycutjong/lauk">GitHub</a>
+          <a href="pitch/">Pitch deck</a>
+          <a href="privacy.html">Privacy policy</a>
+          <a href="https://github.com/edycutjong/lauk/blob/main/LICENSE">License</a>
+          <a href="mailto:edy.cu@live.com">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const $ = (s) => document.querySelector(s);
+        // the real CLI states for rice_side 1: as bought, + lime wedge, + raw veg & chili
+        const STATES = {
+          none: { on: [], n: '2 of 5', pil: 'filling ● fresh ○ rich ◐ bright ○ crunch ○' },
+          lime: { on: ['bright'], n: '3 of 5', pil: 'filling ● fresh ○ rich ◐ bright ◐ crunch ○' },
+          veg: {
+            on: ['fresh', 'bright'],
+            n: '4 of 5',
+            pil: 'filling ● fresh ◐ rich ◐ bright ◐ crunch ○',
+          },
+        };
+        const set = (k) => {
+          const s = STATES[k];
+          for (const id of ['fresh', 'bright']) {
+            const lit = s.on.includes(id);
+            $('#' + id).setAttribute('class', 'seg ' + (lit ? 'half' : 'hollow'));
+            $('#' + id + 'f').classList.toggle('on', lit);
+          }
+          $('#lit').textContent = s.n;
+          $('#tot').textContent = s.n + ' lit';
+          $('#pil').textContent = s.pil;
+          document
+            .querySelectorAll('[data-add]')
+            .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.add === k)));
+        };
+        document
+          .querySelectorAll('[data-add]')
+          .forEach((b) =>
+            b.addEventListener('click', () =>
+              set(b.getAttribute('aria-pressed') === 'true' ? 'none' : b.dataset.add),
+            ),
+          );
+        setTimeout(() => set('veg'), still ? 0 : 260);
+
+        // copy the run command
+        document.querySelectorAll('[data-copy]').forEach((b) =>
+          b.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(b.dataset.copy);
+              b.setAttribute('data-done', '');
+              setTimeout(() => b.removeAttribute('data-done'), 1600);
+            } catch {
+              /* clipboard blocked — the command is visible to copy by hand */
+            }
+          }),
+        );
+
+        // count-ups: final numbers are in the HTML; animate from 0 only when seen and motion is allowed
+        const fmt = (n) => n.toLocaleString('en-US');
+        const count = (el) => {
+          const to = +el.dataset.count,
+            t0 = performance.now(),
+            d = 900;
+          const tick = (t) => {
+            const p = Math.min(1, (t - t0) / d);
+            el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - p, 4))));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+
+        // terminal replay: full run is in the HTML; retype it line by line when seen
+        const tape = $('#tape');
+        const full = tape.innerHTML;
+        const lines = full.split('\n');
+        let timer;
+        const replay = () => {
+          clearTimeout(timer);
+          if (still) {
+            tape.innerHTML = full;
+            return;
+          }
+          let i = 0;
+          tape.innerHTML = '';
+          const step = () => {
+            tape.innerHTML = lines.slice(0, ++i).join('\n');
+            if (i < lines.length) timer = setTimeout(step, i === 1 ? 420 : 110);
+          };
+          step();
+        };
+        $('#replay').addEventListener('click', replay);
+
+        if ('IntersectionObserver' in window && !still) {
+          const io = new IntersectionObserver(
+            (es) =>
+              es.forEach((e) => {
+                if (!e.isIntersecting) return;
+                io.unobserve(e.target);
+                if (e.target === tape) replay();
+                else count(e.target);
+              }),
+            { threshold: 0.6 },
+          );
+          document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+          io.observe(tape);
+        }
+      })();
+    </script>
   </body>
 </html>
