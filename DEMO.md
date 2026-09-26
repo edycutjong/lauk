@@ -13,11 +13,11 @@ npm run check -- rice_side 2
 npm run bench
 ```
 
-Expected: `Tests 73 passed`, the three-card output shown in the README, and
+Expected: `Tests 76 passed`, the three-card output shown in the README, and
 
 ```
 lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 28800 queries
-  p50 2.7 µs · p95 5.8 µs · p99 11.1 µs · max …
+  p50 2.7 µs · p95 6.0 µs · p99 11.1 µs · max …
   asserted queries: 3/3 · I1 48/48 · I2 40/40
   content hash <12 hex> (matches disk)
   PASS
@@ -42,7 +42,7 @@ lauk bench — 12 plates × 4 ceilings × 3 weighting profiles × 200 rounds = 2
 | Receipt                                                                                             | Status                                                                                                                                                                                                    |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bench p50/p95 + invariants + content hash                                                           | ✅ `npm run bench` (section 1)                                                                                                                                                                            |
-| 73 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                                                                             |
+| 76 tests including the copy-lint gate and a 150,000-query exhaustive verification                   | ✅ `npm test`                                                                                                                                                                                             |
 | Signed release AAB (`bundleRelease`, upload key in `~/.config/lauk/`, signer = keystore, not debug) | ✅ 52 MB, rebuilt 2026-09-17 with the RevenueCat Play public key inlined; `npm run verify:artifact` PASS (key present, upload-key signed, manifest = INTERNET · ACCESS_NETWORK_STATE · VIBRATE · BILLING) |
 | Metro bundle contains every RevenueCat call + the content                                           | ✅ `npm run bundle:check` (3.4 MB Hermes bytecode, 2026-09-16)                                                                                                                                            |
 | Day-1 Targeting proof (`eating_context` flip changes the offering id in the SDK log)                | **pending — not yet run (as of 2026-09-26)**; screenshot lands in `docs/proof/` when it is                                                                                                                |
@@ -63,7 +63,11 @@ the kill criterion applies to the idea, not to the caveat. **No rows exist yet; 
 
 - The canvas has never run on a physical device with a live RevenueCat key — the SDK calls are verified against the
   published typings, the Metro bundle and the signed release AAB, not yet against live offerings on a device (as of 2026-09-26).
+- 2026-09-26: the release APK was run on an Android emulator. The Play app in RevenueCat has no Play products mapped to its
+  offerings yet, so offerings fail to load and a locked tile did nothing visible. Commit `0e5a1d3` makes that tap say
+  "Store unavailable right now — try again later." instead; the signed AAB (versionCode 1, built 2026-09-17) predates that
+  fix and needs a rebuild.
 - Paywall templates are dashboard-authored; their copy is written and lint-checked in `docs/paywall-copy.md` and the
   paywall on the `decks` offering was published 2026-09-16, but the rendered paywalls are not yet screenshotted on a device.
-- Currency labels beyond IDR/USD are tier ceilings, not exact prices (by design — only IDR has authored reference prices).
+- Currency labels outside IDR are tier ceilings, not exact prices (by design — only IDR has authored reference prices).
 - Google Play production access on the publishing account is confirmed (2026-09-17); the production release itself is not yet published.

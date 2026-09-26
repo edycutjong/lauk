@@ -12,7 +12,7 @@
 
 [For the judge → JUDGE.md](JUDGE.md) · [The demo query](#-the-ten-second-flow) · [Run the tests](#-run-it-without-credentials) · [RevenueCat integration](#-revenuecat-is-the-engine)
 
-![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-73_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml) [![CodeQL](https://github.com/edycutjong/lauk/actions/workflows/codeql.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/codeql.yml) [![gitleaks](https://github.com/edycutjong/lauk/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/gitleaks.yml) [![Release](https://img.shields.io/github/v/release/edycutjong/lauk)](https://github.com/edycutjong/lauk/releases)
+![Expo](https://img.shields.io/badge/Expo_53-000?logo=expo&logoColor=fff) ![React Native](https://img.shields.io/badge/React_Native_0.79-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=fff) ![RevenueCat](https://img.shields.io/badge/RevenueCat_10.9-f25a5a) ![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=googleplay&logoColor=fff) ![tests](https://img.shields.io/badge/tests-76_passing-2ea44f) [![CI](https://github.com/edycutjong/lauk/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/ci.yml) [![CodeQL](https://github.com/edycutjong/lauk/actions/workflows/codeql.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/codeql.yml) [![gitleaks](https://github.com/edycutjong/lauk/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/edycutjong/lauk/actions/workflows/gitleaks.yml) [![Release](https://img.shields.io/github/v/release/edycutjong/lauk)](https://github.com/edycutjong/lauk/releases)
 
 </div>
 
@@ -71,7 +71,7 @@ Remove RevenueCat and every deck but Counter is permanently locked, the second c
 
 ```bash
 npm install --legacy-peer-deps
-npm test                      # 73 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
+npm test                      # 76 tests: ranker, content invariants, copy-lint, weights, tiers, entitlement math
 npm run check -- rice_side 2  # the demo query, in your terminal
 npm run check -- --list       # every plate id
 npm run bench                 # p50/p95 over 12 plates × 4 ceilings × 3 weighting profiles + invariants + content hash
@@ -118,7 +118,7 @@ npm run secrets        # gitleaks over the tree (CI runs it over full history)
 | Layer                                       | Tool                                                                                   | Status                         |
 | ------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------ |
 | Code quality                                | Prettier · ESLint 9 (flat) · tsc against both tsconfigs                                | ✅                             |
-| Unit tests                                  | vitest — 73 tests, 100 % lines on `core/` + `rc/access.ts`                             | ✅                             |
+| Unit tests                                  | vitest — 76 tests, 100 % lines on `core/` + `rc/access.ts`                             | ✅                             |
 | High-signal tests                           | 150,000-case exhaustive · 6 defect-named regressions · entitlement boundary            | ✅                             |
 | Build verification                          | Metro export + bundle assertions; Android `assembleDebug` + manifest inspection (main) | ✅                             |
 | Security (SAST / SCA)                       | CodeQL · Dependabot (root, app, actions; grouped, no majors) · npm audit               | ✅                             |
@@ -136,7 +136,7 @@ app/src/rc/        purchases.ts (the 12 SDK calls) · access.ts (entitlement mat
 app/src/store/     AsyncStorage: prefs · weights · log (last 60 rows)
 app/src/screens/   Onboarding · Plates · Ceiling · Result (ring + cards + cue) · Faces · Settings · NeverDoes
 scripts/           seed · check (CLI) · bench · check-submission-readiness
-tests/             73 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
+tests/             76 tests, vitest, < 1 s (incl. 150,000-query exhaustive verification)
 docs/              RANKER.md · paywall-copy.md · assets/
 site/              landing page + privacy policy (GitHub Pages, .github/workflows/pages.yml)
 ```

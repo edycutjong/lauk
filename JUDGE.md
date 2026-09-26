@@ -8,7 +8,7 @@
 2. Onboarding → **Student housing** · Plates → **Rice plate + one side** → **Medium**.
 3. Three cards: lime wedge (free) · raw veg + chili (Rp 2,000) · fried egg (Rp 5,000). Tap the second — the ring goes from 2 of 5 lit to 4 of 5.
 4. Tap anywhere → **satisfied** → the week strip shows today's face.
-5. Tap a **Delivery** tile → the RevenueCat paywall (the Semester pass leads, because step 2 set `eating_context = student`). **Unlimited has a 7-day free trial** — that is the judge unlock.
+5. Tap a **Delivery** tile → the RevenueCat paywall (the Semester pass leads, because step 2 set `eating_context = student`). **Unlimited monthly carries a 7-day free trial** — that is the judge unlock once the Play products are live (pending as of 2026-09-26; until then the tile says "Store unavailable right now — try again later.").
 
 Without a phone: `npm install --legacy-peer-deps && npm run check -- rice_side 2` prints the same three cards.
 
@@ -16,10 +16,10 @@ Without a phone: `npm install --legacy-peer-deps && npm run check -- rice_side 2
 
 |                                              | Value                                                                                                                   | How to verify              |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| Tests                                        | **73**, < 1 s, no device, no key                                                                                        | `npm test`                 |
+| Tests                                        | **76**, < 1 s, no device, no key                                                                                        | `npm test`                 |
 | Exhaustive verification                      | **150,000** (plate, ceiling, weighting) queries — every card affordable, useful, distinct, cheapest-first; 0 violations | `tests/exhaustive.test.ts` |
 | Coverage of the pure core                    | 100 % lines                                                                                                             | `npm run test:coverage`    |
-| Ranker                                       | p50 2.7 µs · p95 5.8 µs (budget 1 ms; measured 2026-09-26)                                                              | `npm run bench`            |
+| Ranker                                       | p50 2.7 µs · p95 6.0 µs (budget 1 ms; measured 2026-09-26)                                                              | `npm run bench`            |
 | Copy-lint                                    | 22 banned words · 0 hits across content, UI strings and the paywall copy                                                | `tests/lint.test.ts`       |
 | Entitlement boundary                         | expired / purchase-record / sibling-deck / look-alike id → all locked                                                   | `tests/boundary.test.ts`   |
 | RevenueCat calls                             | 12, in one file                                                                                                         | `app/src/rc/purchases.ts`  |
@@ -43,6 +43,7 @@ There is no offline/mock/demo flag anywhere. Without a key the app runs with eve
 - Paywall copy is dashboard-authored: written and lint-checked in `docs/paywall-copy.md`, published on the `decks` offering in the RevenueCat dashboard (2026-09-16), but not yet screenshotted rendering on a device.
 - Prices outside Indonesia are tier ceilings ("≤ $2"), not exact — only IDR has authored reference prices.
 - The kill test (5 real budget eaters at a stall) has **no rows yet** (it was due 2026-09-20 and has not run as of 2026-09-26); if fewer than 3 of 5 would buy the top card, the project is dropped, not the caveat.
+- The release APK has run on an Android emulator (2026-09-26), not a physical device. The Play products are not yet mapped to the RevenueCat offerings, so on that build a locked tile reports "Store unavailable" rather than opening the paywall.
 - Google Play: not yet published. Nothing in this repo claims a live listing.
 
 ## Links
