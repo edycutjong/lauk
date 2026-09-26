@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lauk — pitch deck</title>
+    <meta
+      name="description"
+      content="Lauk pitch deck: your lunch is paid for; Lauk asks what it's missing. RevenueCat Shipaton 2026."
+    />
+    <meta property="og:site_name" content="Lauk" />
+    <meta property="og:title" content="Lauk — pitch deck" />
+    <meta property="og:url" content="https://edycutjong.github.io/lauk/pitch/" />
+    <meta property="og:image" content="https://edycutjong.github.io/lauk/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Mono:wght@400;500&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* same :root as the landing page */
+      :root {
+        --bg: #f4ede1;
+        --bg-2: #fffdf8;
+        --ink: #1b1917;
+        --muted: #5e554c;
+        --before: #c8553d; /* state: hollow pillar */
+        --after: #f2b441; /* state: lit pillar — fill only */
+        --after-deep: #e39a2e;
+        --rim: #b4482f;
+        --rule: rgba(27, 25, 23, 0.14);
+        --table: #1b1917;
+        --table-ink: #f5efe6;
+        --table-muted: #b8afa3;
+        --font-display: 'Bricolage Grotesque', 'Arial Narrow', sans-serif;
+        --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+        --font-data: 'DM Mono', ui-monospace, Menlo, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+        background: #2a2622;
+        color: var(--ink);
+        font: 400 30px/1.45 var(--font-body);
+      }
+      ::selection {
+        background: var(--rim);
+        color: var(--bg-2);
+      }
+      :focus-visible {
+        outline: 4px solid var(--rim);
+        outline-offset: 4px;
+      }
+      .stage {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 0 0;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: 110px 130px 120px;
+        background:
+          radial-gradient(circle at 20% 30%, rgba(27, 25, 23, 0.05) 1.5px, transparent 2px) 0 0 /
+            30px 30px,
+          radial-gradient(circle at 70% 60%, rgba(180, 72, 47, 0.06) 1.5px, transparent 2px) 0 0 /
+            46px 46px,
+          var(--bg);
+        border-top: 14px solid var(--rim);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.45s var(--ease),
+          visibility 0s 0.45s;
+        display: flex;
+        flex-direction: column;
+      }
+      .slide.on {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.45s var(--ease);
+      }
+      .slide.dark {
+        background: var(--table);
+        color: var(--table-ink);
+      }
+      .foot {
+        position: absolute;
+        left: 130px;
+        right: 130px;
+        bottom: 44px;
+        display: flex;
+        justify-content: space-between;
+        font: 400 18px var(--font-data);
+        color: var(--muted);
+      }
+      .dark .foot {
+        color: var(--table-muted);
+      }
+      .label {
+        font: 500 22px var(--font-data);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--rim);
+      }
+      .dark .label {
+        color: var(--after);
+      }
+      h1,
+      h2 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-variation-settings: 'wdth' 86;
+        letter-spacing: -0.018em;
+        line-height: 0.95;
+      }
+      h1 {
+        font-size: 128px;
+      }
+      h2 {
+        font-size: 92px;
+        margin: 18px 0 28px;
+        max-width: 15em;
+      }
+      .ringed {
+        position: relative;
+        display: inline-block;
+        color: var(--rim);
+      }
+      .ringed svg {
+        position: absolute;
+        left: -6%;
+        top: -14%;
+        width: 112%;
+        height: 128%;
+        overflow: visible;
+      }
+      .ringed path {
+        fill: none;
+        stroke: var(--rim);
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-dasharray: 900;
+      }
+      .on .ringed path {
+        animation: draw 0.7s 0.2s var(--ease) both;
+      }
+      @keyframes draw {
+        from {
+          stroke-dashoffset: 900;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .lede {
+        color: var(--muted);
+        max-width: 30em;
+      }
+      .dark .lede {
+        color: var(--table-muted);
+      }
+      .grow {
+        flex: 1;
+        display: grid;
+        align-items: center;
+      }
+      code,
+      .mono {
+        font-family: var(--font-data);
+      }
+
+      /* ring */
+      .seg {
+        stroke-width: 6;
+        stroke-linejoin: round;
+        transition: stroke 0.4s var(--ease);
+      }
+      .hollow {
+        fill: none;
+        stroke: var(--before);
+      }
+      .lit {
+        fill: var(--after);
+        stroke: var(--after-deep);
+      }
+      .half {
+        fill: none;
+        stroke: var(--after-deep);
+      }
+      .fill {
+        fill: var(--after);
+        opacity: 0;
+        transition: opacity 0.45s var(--ease);
+      }
+      .fill.on,
+      .fill.keep {
+        opacity: 1;
+      }
+      .plate {
+        position: relative;
+        width: 640px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 35%, #fffdf8, #efe6d8 70%);
+        box-shadow:
+          0 0 0 16px var(--rim),
+          0 0 0 19px rgba(0, 0, 0, 0.12),
+          0 50px 80px -24px rgba(27, 25, 23, 0.35);
+      }
+      .plate svg {
+        position: absolute;
+        inset: 6%;
+        width: 88%;
+        height: 88%;
+      }
+
+      /* paper */
+      .slip {
+        background: var(--bg-2);
+        padding: 30px 34px 40px;
+        font: 400 24px/1.75 var(--font-data);
+        box-shadow: 0 26px 50px -16px rgba(27, 25, 23, 0.4);
+        -webkit-mask: radial-gradient(circle 8px at 50% 100%, transparent 98%, #000) 0 0 / 20px 100%
+          repeat-x;
+        mask: radial-gradient(circle 8px at 50% 100%, transparent 98%, #000) 0 0 / 20px 100%
+          repeat-x;
+      }
+      .slip .r {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .slip .hl {
+        background: rgba(242, 180, 65, 0.32);
+        margin: 0 -8px;
+        padding: 0 8px;
+      }
+      .slip .tot {
+        border-top: 2px dashed var(--ink);
+        margin-top: 12px;
+        padding-top: 12px;
+      }
+      .slip b {
+        color: var(--rim);
+        font-weight: 500;
+      }
+      .term {
+        background: #131110;
+        color: var(--table-muted);
+        border-radius: 18px;
+        padding: 26px 30px;
+        font: 400 22px/1.7 var(--font-data);
+        white-space: pre;
+        box-shadow: 0 30px 60px -20px rgba(27, 25, 23, 0.5);
+      }
+      .term .c {
+        color: var(--table-ink);
+      }
+      .term .a {
+        color: var(--after);
+      }
+
+      /* slide-specific */
+      .cover {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 70px;
+        align-items: center;
+        flex: 1;
+      }
+      .brandline {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font: 800 44px var(--font-body);
+        margin-bottom: 36px;
+      }
+      .brandline img {
+        width: 76px;
+        height: 76px;
+      }
+      .brandline b {
+        color: var(--rim);
+      }
+      .ver {
+        font: 500 20px var(--font-data);
+        border: 2px solid var(--ink);
+        padding: 4px 12px;
+        border-radius: 6px;
+      }
+      .quote {
+        font: 800 150px/0.98 var(--font-display);
+        font-variation-settings: 'wdth' 86;
+        letter-spacing: -0.02em;
+        max-width: 13em;
+      }
+      .quote em {
+        font-style: normal;
+        color: var(--rim);
+      }
+      .src {
+        margin-top: 44px;
+        font: 400 22px var(--font-data);
+        color: var(--muted);
+      }
+      .five {
+        display: flex;
+        gap: 18px;
+        margin-top: 60px;
+      }
+      .five span {
+        font: 500 26px var(--font-data);
+        padding: 14px 26px;
+        border: 3px solid var(--before);
+        border-radius: 999px;
+        color: var(--ink);
+      }
+      .five span.l {
+        background: var(--after);
+        border-color: var(--after-deep);
+      }
+      .frozen {
+        display: grid;
+        grid-template-columns: 700px 1fr;
+        gap: 90px;
+        align-items: center;
+        flex: 1;
+      }
+      .shots {
+        display: flex;
+        gap: 34px;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+      }
+      .shots figure {
+        position: relative;
+        width: 300px;
+      }
+      .shots img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 26px;
+        box-shadow: 0 30px 60px -20px rgba(27, 25, 23, 0.55);
+      }
+      .shots figcaption {
+        font: 400 22px/1.4 var(--font-data);
+        margin-top: 16px;
+      }
+      .pin {
+        position: absolute;
+        top: -22px;
+        left: -22px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--rim);
+        color: var(--bg-2);
+        display: grid;
+        place-items: center;
+        font: 800 30px var(--font-display);
+        box-shadow: 0 8px 16px rgba(27, 25, 23, 0.3);
+      }
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        margin-top: 10px;
+      }
+      .price {
+        background: var(--bg-2);
+        border-top: 10px solid var(--before);
+        padding: 40px 36px 48px;
+        box-shadow: 0 20px 40px -20px rgba(27, 25, 23, 0.45);
+      }
+      .price.un {
+        border-top-color: var(--after);
+      }
+      .price strong {
+        display: block;
+        font: 800 72px/1 var(--font-display);
+        font-variation-settings: 'wdth' 86;
+      }
+      .price span {
+        display: block;
+        margin-top: 12px;
+        font: 400 24px/1.45 var(--font-data);
+        color: var(--muted);
+      }
+      .calls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 44px;
+      }
+      .calls code {
+        font-size: 24px;
+        background: var(--bg-2);
+        border: 1.5px solid var(--rule);
+        padding: 6px 12px;
+        border-radius: 6px;
+      }
+      .till {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        flex: 1;
+        align-items: center;
+      }
+      .ticket {
+        background: var(--bg-2);
+        padding: 44px 34px 54px;
+        box-shadow: 0 24px 44px -20px rgba(27, 25, 23, 0.45);
+        -webkit-mask: radial-gradient(circle 8px at 50% 100%, transparent 98%, #000) 0 0 / 20px 100%
+          repeat-x;
+        mask: radial-gradient(circle 8px at 50% 100%, transparent 98%, #000) 0 0 / 20px 100%
+          repeat-x;
+      }
+      .ticket:nth-child(even) {
+        transform: rotate(1.2deg) translateY(30px);
+      }
+      .ticket:nth-child(odd) {
+        transform: rotate(-1deg);
+      }
+      .ticket b {
+        display: block;
+        font: 800 104px/1 var(--font-display);
+        font-variation-settings: 'wdth' 80;
+      }
+      .ticket b em {
+        font-style: normal;
+        color: var(--rim);
+      }
+      .ticket span {
+        display: block;
+        font: 800 30px/1.25 var(--font-body);
+        margin: 18px 0 22px;
+      }
+      .ticket code {
+        display: block;
+        font-size: 20px;
+        color: var(--muted);
+        border-top: 2px dashed var(--rule);
+        padding-top: 16px;
+      }
+      .status {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        flex: 1;
+        align-content: center;
+      }
+      .status ul {
+        list-style: none;
+        padding: 0;
+        font: 700 34px/1.3 var(--font-body);
+      }
+      .status li {
+        padding: 22px 0;
+        border-bottom: 2px solid rgba(245, 239, 230, 0.14);
+        display: flex;
+        gap: 22px;
+        align-items: baseline;
+      }
+      .status li::before {
+        font: 500 26px var(--font-data);
+        flex: none;
+      }
+      .done li::before {
+        content: '✓';
+        color: var(--after);
+      }
+      .todo li::before {
+        content: '○';
+        color: #e0785f;
+      }
+      .status h3 {
+        font: 500 22px var(--font-data);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--table-muted);
+        margin-bottom: 8px;
+      }
+      .ask {
+        display: grid;
+        grid-template-columns: 1fr 460px;
+        gap: 110px;
+        align-items: center;
+        flex: 1;
+      }
+      .qr {
+        width: 460px;
+        height: 460px;
+        display: block;
+        box-shadow:
+          0 0 0 14px var(--bg-2),
+          0 0 0 17px var(--rim),
+          0 30px 60px -20px rgba(27, 25, 23, 0.45);
+      }
+      .links {
+        margin-top: 40px;
+        font: 400 30px/1.9 var(--font-data);
+      }
+      .links a {
+        color: var(--ink);
+        text-decoration-color: var(--rim);
+        text-underline-offset: 6px;
+      }
+      .links a:hover {
+        color: var(--rim);
+      }
+      .links a:active {
+        background: rgba(180, 72, 47, 0.14);
+      }
+      .links .soon {
+        color: var(--muted);
+      }
+
+      /* chrome */
+      .chrome {
+        position: fixed;
+        right: 22px;
+        bottom: 16px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        z-index: 10;
+        font: 500 14px var(--font-data);
+        color: #f5efe6;
+      }
+      .chrome button {
+        font: 500 14px var(--font-data);
+        color: #f5efe6;
+        background: rgba(27, 25, 23, 0.72);
+        border: 1px solid rgba(245, 239, 230, 0.25);
+        border-radius: 8px;
+        padding: 7px 12px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          transform 0.15s;
+      }
+      .chrome button:hover {
+        background: var(--rim);
+        border-color: var(--rim);
+      }
+      .chrome button:active {
+        transform: scale(0.95);
+      }
+      .chrome button:focus-visible {
+        outline: 3px solid var(--after);
+        outline-offset: 2px;
+      }
+      #count {
+        background: rgba(27, 25, 23, 0.72);
+        padding: 7px 12px;
+        border-radius: 8px;
+        min-width: 86px;
+        text-align: center;
+      }
+      .keys {
+        position: fixed;
+        left: 22px;
+        bottom: 20px;
+        font: 400 13px var(--font-data);
+        color: rgba(245, 239, 230, 0.6);
+        z-index: 10;
+      }
+      .speaker-notes {
+        display: none;
+      }
+      #notes {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 20vh;
+        background: rgba(27, 25, 23, 0.95);
+        color: #f5efe6;
+        font: 400 20px/1.5 var(--font-body);
+        padding: 20px 40px;
+        z-index: 9;
+        overflow: auto;
+      }
+      body.presenter #notes {
+        display: block;
+      }
+      body.presenter .keys {
+        display: none;
+      }
+      body.idle {
+        cursor: none;
+      }
+      /* overview grid */
+      body.grid .stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        padding: 30px;
+        overflow: auto;
+        max-height: 100vh;
+      }
+      body.grid {
+        overflow: auto;
+      }
+      body.grid .slide {
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        width: 1920px;
+        height: 1080px;
+        zoom: 0.2;
+        cursor: pointer;
+        outline: 12px solid transparent;
+      }
+      body.grid .slide:hover,
+      body.grid .slide.on {
+        outline-color: var(--after);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @page {
+        size: 16in 9in landscape;
+        margin: 0;
+      }
+      @media print {
+        html,
+        body {
+          overflow: visible;
+          height: auto;
+          background: #fff;
+        }
+        html,
+        body,
+        .slide {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .chrome,
+        .keys,
+        #notes,
+        .speaker-notes {
+          display: none !important;
+        }
+        .stage {
+          position: static;
+          transform: none !important;
+          width: auto;
+          height: auto;
+        }
+        .slide {
+          position: relative;
+          opacity: 1;
+          visibility: visible;
+          width: 1920px;
+          height: 1080px;
+          zoom: 0.5;
+          break-after: page;
+          page-break-after: always;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .fill.late {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage" id="stage" aria-live="polite">
+      <!-- 1 · cover -->
+      <section class="slide on" aria-label="Cover">
+        <div class="cover">
+          <div>
+            <div class="brandline">
+              <img src="../assets/icon.svg" alt="Lauk icon" width="76" height="76" /><span
+                >Lau<b>k</b></span
+              ><span class="ver">v0.1.5</span>
+            </div>
+            <h1>
+              Your lunch is paid for. Lauk asks what it's
+              <span class="ringed"
+                >missing.<svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
+                  <path
+                    d="M40 20 C120 -4 262 4 290 48 C312 92 190 118 96 108 C24 100 -4 70 14 42 C28 22 70 12 118 10"
+                  /></svg
+              ></span>
+            </h1>
+            <p class="label" style="margin-top: 40px">RevenueCat Shipaton 2026</p>
+          </div>
+          <pre class="term"><span class="c">$ npm run check -- rice_side 1</span>
+
++ Raw veg + chili   Rp 2.000
+2 of 5 → <span class="a">4 of 5 lit</span></pre>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Open on the bought plate.</aside>
+      </section>
+
+      <!-- 2 · hook -->
+      <section class="slide" aria-label="Hook">
+        <p class="label">In the app, verbatim</p>
+        <div class="grow">
+          <p class="quote">Lauk never counts. It <em>asks</em> how satisfying the plate is.</p>
+        </div>
+        <p class="src">copy.en.json</p>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Shipped copy; a test guards it.</aside>
+      </section>
+
+      <!-- 3 · problem -->
+      <section class="slide" aria-label="Problem">
+        <div class="frozen" style="grid-template-columns: 1fr 600px">
+          <div>
+            <p class="label">At the stall</p>
+            <h2>The lunch is already bought.</h2>
+            <p class="lede">Rice and one side: filling, but hollow in three of five ways.</p>
+            <div class="five" aria-label="The plate as bought">
+              <span class="l">filling</span><span>fresh</span><span class="l">rich ◐</span
+              ><span>bright</span><span>crunch</span>
+            </div>
+          </div>
+          <div class="plate" style="width: 560px">
+            <svg viewBox="-215 -215 430 430" role="img" aria-label="As bought: 2 of 5 lit">
+              <defs>
+                <clipPath id="in3"><circle r="180" /></clipPath>
+              </defs>
+              <circle r="118" fill="#C8553D" />
+              <path
+                class="seg lit"
+                d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"
+              />
+              <path
+                class="seg hollow"
+                d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"
+              />
+              <path
+                class="fill keep"
+                clip-path="url(#in3)"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="seg half"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="seg hollow"
+                d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"
+              />
+              <path
+                class="seg hollow"
+                d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z"
+              />
+              <text
+                y="14"
+                text-anchor="middle"
+                fill="#F5EFE6"
+                style="font: 800 50px var(--font-display)"
+              >
+                2 of 5
+              </text>
+            </svg>
+          </div>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Money is the constraint, not knowledge.</aside>
+      </section>
+
+      <!-- 4 · frozen moment -->
+      <section class="slide" aria-label="One add" id="frozen">
+        <div class="frozen">
+          <div class="plate">
+            <svg
+              viewBox="-215 -215 430 430"
+              role="img"
+              aria-label="The ring going from 2 of 5 to 4 of 5 lit"
+            >
+              <defs>
+                <clipPath id="in4"><circle r="180" /></clipPath>
+              </defs>
+              <circle r="118" fill="#C8553D" />
+              <path
+                class="seg lit"
+                d="M14.2 -203.5 A204 204 0 0 1 189.1 -76.4 L144.6 -58.4 A156 156 0 0 0 10.9 -155.6 Z"
+              />
+              <path
+                class="fill late"
+                clip-path="url(#in4)"
+                d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"
+              />
+              <path
+                class="seg hollow late-seg"
+                d="M197.9 -49.4 A204 204 0 0 1 131.1 156.3 L100.3 119.5 A156 156 0 0 0 151.4 -37.7 Z"
+              />
+              <path
+                class="fill keep"
+                clip-path="url(#in4)"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="seg half"
+                d="M108.1 173.0 A204 204 0 0 1 -108.1 173.0 L-82.7 132.3 A156 156 0 0 0 82.7 132.3 Z"
+              />
+              <path
+                class="fill late"
+                clip-path="url(#in4)"
+                d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"
+              />
+              <path
+                class="seg hollow late-seg"
+                d="M-131.1 156.3 A204 204 0 0 1 -197.9 -49.4 L-151.4 -37.7 A156 156 0 0 0 -100.3 119.5 Z"
+              />
+              <path
+                class="seg hollow"
+                d="M-189.1 -76.4 A204 204 0 0 1 -14.2 -203.5 L-10.9 -155.6 A156 156 0 0 0 -144.6 -58.4 Z"
+              />
+              <text
+                class="n4"
+                y="14"
+                text-anchor="middle"
+                fill="#F5EFE6"
+                style="font: 800 50px var(--font-display)"
+              >
+                4 of 5
+              </text>
+            </svg>
+          </div>
+          <div>
+            <p class="label">One add lands</p>
+            <h2 style="font-size: 96px">One Rp 2.000 add lights two.</h2>
+            <div class="slip">
+              <div class="r hl"><span>+ Raw veg + chili</span><span>Rp 2.000</span></div>
+              <div class="r tot"><span>fresh + bright</span><b>4 of 5</b></div>
+            </div>
+          </div>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Same query as the CLI.</aside>
+      </section>
+
+      <!-- 5 · how it works -->
+      <section class="slide" aria-label="How it works">
+        <p class="label">Inside the ten seconds</p>
+        <h2 style="margin-bottom: 10px">One flow, two gates.</h2>
+        <div class="grow">
+          <svg
+            viewBox="0 0 1660 480"
+            role="img"
+            aria-label="Flow: plate, ceiling, ranker, ring and cards, faces; RevenueCat gates at the locked deck and the daily cap"
+          >
+            <defs>
+              <marker
+                id="ar"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="9"
+                markerHeight="9"
+                orient="auto"
+              >
+                <path d="M0 0 10 5 0 10z" fill="#1B1917" />
+              </marker>
+            </defs>
+            <g
+              font-family="Bricolage Grotesque, Arial Narrow, sans-serif"
+              font-weight="800"
+              font-size="40"
+              fill="#1B1917"
+              text-anchor="middle"
+            >
+              <rect
+                x="0"
+                y="60"
+                width="270"
+                height="130"
+                rx="16"
+                fill="#FFFDF8"
+                stroke="#1B1917"
+                stroke-width="3"
+              />
+              <text x="135" y="138">Plate</text>
+              <rect
+                x="348"
+                y="60"
+                width="270"
+                height="130"
+                rx="16"
+                fill="#FFFDF8"
+                stroke="#1B1917"
+                stroke-width="3"
+              />
+              <text x="483" y="138">Ceiling</text>
+              <rect x="696" y="60" width="270" height="130" rx="16" fill="#1B1917" />
+              <text x="831" y="138" fill="#F2B441">rank.ts</text>
+              <rect
+                x="1044"
+                y="60"
+                width="270"
+                height="130"
+                rx="16"
+                fill="#F2B441"
+                stroke="#E39A2E"
+                stroke-width="3"
+              />
+              <text x="1179" y="138">Ring</text>
+              <rect
+                x="1390"
+                y="60"
+                width="270"
+                height="130"
+                rx="16"
+                fill="#FFFDF8"
+                stroke="#1B1917"
+                stroke-width="3"
+              />
+              <text x="1525" y="138">Faces</text>
+            </g>
+            <g stroke="#1B1917" stroke-width="3" fill="none" marker-end="url(#ar)">
+              <path d="M272 125h72" />
+              <path d="M620 125h72" />
+              <path d="M968 125h72" />
+              <path d="M1316 125h70" />
+              <path d="M135 192v120" stroke="#B4482F" stroke-dasharray="8 8" />
+              <path d="M1179 192v120" stroke="#B4482F" stroke-dasharray="8 8" />
+              <path d="M1525 192c0 90-160 250-530 250" stroke-dasharray="4 10" />
+            </g>
+            <g font-family="DM Mono, monospace" font-size="26" fill="#B4482F">
+              <rect
+                x="0"
+                y="318"
+                width="420"
+                height="92"
+                rx="12"
+                fill="#FFFDF8"
+                stroke="#B4482F"
+                stroke-width="3"
+              />
+              <text x="24" y="358">locked deck →</text>
+              <text x="24" y="394" fill="#1B1917">presentPaywall</text>
+              <rect
+                x="1000"
+                y="318"
+                width="480"
+                height="92"
+                rx="12"
+                fill="#FFFDF8"
+                stroke="#B4482F"
+                stroke-width="3"
+              />
+              <text x="1024" y="358">daily cap →</text>
+              <text x="1024" y="394" fill="#1B1917">presentPaywallIfNeeded</text>
+              <text x="560" y="450" fill="#5E554C">faces re-weight</text>
+            </g>
+          </svg>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">RevenueCat sits inside the flow, at both dead ends.</aside>
+      </section>
+
+      <!-- 6 · demo -->
+      <section class="slide" aria-label="Real screens">
+        <p class="label">Signed release APK · Android 15 emulator · 2026-09-26</p>
+        <div class="shots">
+          <figure>
+            <span class="pin">1</span
+            ><img src="../assets/02-plates.webp" width="720" height="1280" alt="Plates screen" />
+            <figcaption>tap the plate</figcaption>
+          </figure>
+          <figure>
+            <span class="pin">2</span
+            ><img src="../assets/03-budget.webp" width="720" height="1280" alt="Spend ceiling" />
+            <figcaption>tap the ceiling</figcaption>
+          </figure>
+          <figure>
+            <span class="pin">3</span
+            ><img
+              src="../assets/04-one-add.webp"
+              width="720"
+              height="1280"
+              alt="Cards, cheapest first"
+            />
+            <figcaption>cheapest first</figcaption>
+          </figure>
+          <figure>
+            <span class="pin">4</span
+            ><img src="../assets/05-lit.webp" width="720" height="1280" alt="Ring fills" />
+            <figcaption>the ring fills</figcaption>
+          </figure>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Four taps, under ten seconds, one hand.</aside>
+      </section>
+
+      <!-- 7 · revenuecat -->
+      <section class="slide" aria-label="RevenueCat">
+        <h2>Every tile asks RevenueCat.</h2>
+        <div class="grow" style="align-content: center">
+          <div>
+            <div class="board">
+              <div class="price"><strong>Free</strong><span>Counter · 1/day</span></div>
+              <div class="price"><strong>One deck</strong><span>3/day</span></div>
+              <div class="price un">
+                <strong>Unlimited</strong><span>no cap · trial once Play products exist</span>
+              </div>
+            </div>
+            <div class="calls" aria-label="The 12 calls">
+              <code>configure</code><code>setAttributes</code
+              ><code>syncAttributesAndOfferingsIfNeeded</code><code>getOfferings</code
+              ><code>getCurrentOfferingForPlacement</code><code>presentPaywall</code
+              ><code>presentPaywallIfNeeded</code><code>getCustomerInfo</code
+              ><code>addCustomerInfoUpdateListener</code><code>purchasePackage</code
+              ><code>restorePurchases</code><code>presentCustomerCenter</code>
+            </div>
+          </div>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Targeting: students see Semester first.</aside>
+      </section>
+
+      <!-- 8 · receipts -->
+      <section class="slide" aria-label="Receipts">
+        <p class="label">Rung up · all in the repo</p>
+        <div class="till">
+          <div class="ticket"><b>76</b><span>tests passing</span><code>npm test</code></div>
+          <div class="ticket">
+            <b>150,000</b><span>queries, 0 violations</span><code>exhaustive.test.ts</code>
+          </div>
+          <div class="ticket"><b>12</b><span>RevenueCat calls</span><code>purchases.ts</code></div>
+          <div class="ticket">
+            <b>22 → <em>0</em></b
+            ><span>banned words in copy</span><code>lint.ts</code>
+          </div>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Fresh clone, no key.</aside>
+      </section>
+
+      <!-- 9 · honest status -->
+      <section class="slide dark" aria-label="Status">
+        <p class="label">Honest by design</p>
+        <h2>Said first.</h2>
+        <div class="status">
+          <div class="done">
+            <h3>Shipped</h3>
+            <ul>
+              <li>Signed release build</li>
+              <li>Emulator run, six screens</li>
+              <li>Paywall copy, lint-checked</li>
+            </ul>
+          </div>
+          <div class="todo">
+            <h3>Not yet</h3>
+            <ul>
+              <li>Google Play listing</li>
+              <li>Physical-device purchase</li>
+              <li>Stall test · demo video</li>
+            </ul>
+          </div>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Nothing here claims a live listing.</aside>
+      </section>
+
+      <!-- 10 · ask -->
+      <section class="slide" aria-label="Ask">
+        <div class="ask">
+          <div>
+            <p class="label">Try it</p>
+            <h2>Scan, clone, run one command.</h2>
+            <p class="links">
+              <a href="https://edycutjong.github.io/lauk/">edycutjong.github.io/lauk</a><br /><a
+                href="https://github.com/edycutjong/lauk"
+                >github.com/edycutjong/lauk</a
+              ><br /><span class="soon">Google Play · coming soon</span>
+            </p>
+          </div>
+          <svg
+            class="qr"
+            viewBox="0 0 37 37"
+            role="img"
+            aria-label="QR code for https://edycutjong.github.io/lauk/"
+            shape-rendering="crispEdges"
+          >
+            <rect width="37" height="37" fill="#FFFDF8" />
+            <path
+              fill="#1B1917"
+              d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM16 5h1v1h-1zM19 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM24 9h1v1h-1zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM12 11h1v1h-1zM17 11h1v1h-1zM4 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM13 12h1v1h-1zM16 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM21 12h1v1h-1zM23 12h1v1h-1zM25 12h1v1h-1zM26 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM31 12h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM18 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM25 13h1v1h-1zM27 13h1v1h-1zM28 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM14 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM27 14h1v1h-1zM4 15h1v1h-1zM8 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM4 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM15 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM20 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM32 16h1v1h-1zM5 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM8 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM17 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM29 18h1v1h-1zM30 18h1v1h-1zM7 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM20 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM26 19h1v1h-1zM30 19h1v1h-1zM32 19h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM21 20h1v1h-1zM23 20h1v1h-1zM27 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM4 21h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM30 21h1v1h-1zM31 21h1v1h-1zM32 21h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM15 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM28 22h1v1h-1zM29 22h1v1h-1zM32 22h1v1h-1zM4 23h1v1h-1zM8 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM30 24h1v1h-1zM31 24h1v1h-1zM32 24h1v1h-1zM12 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM19 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM29 25h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM13 26h1v1h-1zM14 26h1v1h-1zM16 26h1v1h-1zM17 26h1v1h-1zM18 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM31 28h1v1h-1zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM7 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM22 29h1v1h-1zM24 29h1v1h-1zM25 29h1v1h-1zM29 29h1v1h-1zM30 29h1v1h-1zM32 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM19 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM14 31h1v1h-1zM16 31h1v1h-1zM17 31h1v1h-1zM25 31h1v1h-1zM27 31h1v1h-1zM28 31h1v1h-1zM29 31h1v1h-1zM30 31h1v1h-1zM32 31h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM7 32h1v1h-1zM8 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM13 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM16 32h1v1h-1zM17 32h1v1h-1zM21 32h1v1h-1zM23 32h1v1h-1zM26 32h1v1h-1zM27 32h1v1h-1zM28 32h1v1h-1zM30 32h1v1h-1z"
+            />
+          </svg>
+        </div>
+        <p class="foot"><span>Lauk · v0.1.5</span></p>
+        <aside class="speaker-notes">Ask: judge the flow at the table.</aside>
+      </section>
+    </main>
+
+    <div id="notes" aria-live="polite"></div>
+    <p class="keys">← → space · Esc grid · P notes · ⌘P PDF</p>
+    <div class="chrome">
+      <button type="button" id="prev" aria-label="Previous slide">←</button>
+      <span id="count">01 / 10</span>
+      <button type="button" id="next" aria-label="Next slide">→</button>
+      <button type="button" id="gridb" aria-label="Slide overview">Esc</button>
+      <button type="button" id="notesb" aria-label="Presenter notes">P</button>
+    </div>
+
+    <script>
+      (() => {
+        const slides = [...document.querySelectorAll('.slide')];
+        const stage = document.getElementById('stage');
+        const pad = (n) => String(n).padStart(2, '0');
+        let i = 0;
+        const fit = () => {
+          if (document.body.classList.contains('grid')) return;
+          const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+          stage.style.transform = `scale(${s}) translate(-50%, -50%)`;
+        };
+        const frozen = document.getElementById('frozen');
+        const go = (n) => {
+          i = Math.max(0, Math.min(slides.length - 1, n));
+          slides.forEach((s, k) => s.classList.toggle('on', k === i));
+          document.getElementById('count').textContent = `${pad(i + 1)} / ${pad(slides.length)}`;
+          document.getElementById('notes').textContent =
+            slides[i].querySelector('.speaker-notes')?.textContent || '';
+          // the frozen slide: fresh + bright light after arrival (as bought → + raw veg & chili)
+          const lit = slides[i] === frozen;
+          frozen.querySelectorAll('.late').forEach((p) => p.classList.remove('on'));
+          frozen
+            .querySelectorAll('.late-seg')
+            .forEach((p) => p.setAttribute('class', 'seg hollow late-seg'));
+          frozen.querySelector('.n4').textContent = '2 of 5';
+          if (lit)
+            setTimeout(() => {
+              frozen.querySelectorAll('.late').forEach((p) => p.classList.add('on'));
+              frozen
+                .querySelectorAll('.late-seg')
+                .forEach((p) => p.setAttribute('class', 'seg half late-seg'));
+              frozen.querySelector('.n4').textContent = '4 of 5';
+            }, 350);
+          if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+        };
+        const grid = (on) => {
+          document.body.classList.toggle('grid', on);
+          if (!on) fit();
+          else stage.style.transform = '';
+        };
+        addEventListener('keydown', (e) => {
+          if (e.metaKey || e.ctrlKey || e.altKey) return;
+          const k = e.key;
+          if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') {
+            e.preventDefault();
+            grid(false);
+            go(i + 1);
+          } else if (k === 'ArrowLeft' || k === 'PageUp') {
+            e.preventDefault();
+            grid(false);
+            go(i - 1);
+          } else if (k === 'Home') go(0);
+          else if (k === 'End') go(slides.length - 1);
+          else if (k === 'Escape') grid(!document.body.classList.contains('grid'));
+          else if (k === 'p' || k === 'P') document.body.classList.toggle('presenter');
+        });
+        slides.forEach((s, k) =>
+          s.addEventListener('click', () => {
+            if (document.body.classList.contains('grid')) {
+              grid(false);
+              go(k);
+            }
+          }),
+        );
+        document.getElementById('prev').onclick = () => go(i - 1);
+        document.getElementById('next').onclick = () => go(i + 1);
+        document.getElementById('gridb').onclick = () =>
+          grid(!document.body.classList.contains('grid'));
+        document.getElementById('notesb').onclick = () =>
+          document.body.classList.toggle('presenter');
+        let idle;
+        addEventListener('mousemove', () => {
+          document.body.classList.remove('idle');
+          clearTimeout(idle);
+          if (document.body.classList.contains('presenter'))
+            idle = setTimeout(() => document.body.classList.add('idle'), 2000);
+        });
+        addEventListener('resize', fit);
+        fit();
+        go(Math.max(0, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+      })();
+    </script>
+  </body>
+</html>
