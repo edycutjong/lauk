@@ -20,10 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1B1917"
       },
-      "permissions": [
-        "VIBRATE",
-        "com.android.vending.BILLING"
-      ],
+      "permissions": ["VIBRATE", "com.android.vending.BILLING"],
       "blockedPermissions": [
         "android.permission.SYSTEM_ALERT_WINDOW",
         "android.permission.READ_EXTERNAL_STORAGE",
